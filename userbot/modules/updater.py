@@ -179,15 +179,15 @@ async def upstream(ups):
         reqs_upgrade = await update_requirements()
         msg  = await ups.edit('`Successfully Updated!\n'
                        'Bot is restarting... Wait for a second!`')
-        # Spin a new instance of bot
-        args = [sys.executable, "-m", "userbot"]
-        execle(sys.executable, *args, environ)
-        
         if BOTLOG:
             await ups.client.send_message(
                 BOTLOG_CHATID,
                 f"`Your UserButtt updated successfully`",
             )
+        # Spin a new instance of bot
+        args = [sys.executable, "-m", "userbot"]
+        execle(sys.executable, *args, environ)
+        return
 
 CMD_HELP.update({
     'update':
