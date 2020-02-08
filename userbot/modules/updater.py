@@ -101,7 +101,7 @@ async def upstream(ups):
 
     if not changelog and not force_update:
         await ups.edit(
-            f'\n`Your BOT is`  **up-to-date**  `with`  **{ac_br}**\n')
+            f'\n`DilBot is`  **up-to-date**  `with`  **{ac_br}**\n')
         repo.__del__()
         return
 
@@ -127,7 +127,7 @@ async def upstream(ups):
         await ups.edit(
             '`Force-Syncing to latest stable userbot code, please wait...`')
     else:
-        await ups.edit('`Updating userbutt, please wait....`')
+        await ups.edit('`Updating DilBot, please wait....`')
     # We're in a Heroku Dyno, handle it's memez.
     if HEROKU_APIKEY is not None:
         import heroku3
@@ -178,11 +178,11 @@ async def upstream(ups):
             repo.git.reset("--hard", "FETCH_HEAD")
         reqs_upgrade = await update_requirements()
         msg  = await ups.edit('`Successfully Updated!\n'
-                       'Bot is restarting... Wait for a second!`')
+                       'DilBot is restarting... Wait for a second!`')
         if BOTLOG:
             await ups.client.send_message(
                 BOTLOG_CHATID,
-                f"`Your UserButtt updated successfully`",
+                f"`DilBot updated successfully`",
             )
         # Spin a new instance of bot
         args = [sys.executable, "-m", "userbot"]
