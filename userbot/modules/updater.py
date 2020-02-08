@@ -182,7 +182,6 @@ async def upstream(ups):
         # Spin a new instance of bot
         args = [sys.executable, "-m", "userbot"]
         execle(sys.executable, *args, environ)
-        return
         
         if BOTLOG:
             await ups.execle.send_message(
