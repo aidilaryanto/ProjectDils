@@ -177,13 +177,18 @@ async def upstream(ups):
         except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
         reqs_upgrade = await update_requirements()
-        await ups.edit('`Successfully Updated!\n'
+        msg  = await ups.edit('`Successfully Updated!\n'
                        'Bot is restarting... Wait for a second!`')
         # Spin a new instance of bot
         args = [sys.executable, "-m", "userbot"]
         execle(sys.executable, *args, environ)
         return
-
+        await ups.edit(msg)
+        if BOTLOG:
+            await ups.args.send_message(
+                BOTLOG_CHATID,
+                f"`bot updated successfully`",
+            )
 
 CMD_HELP.update({
     'update':
