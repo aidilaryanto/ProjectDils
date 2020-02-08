@@ -185,7 +185,7 @@ async def upstream(ups):
         return
         await ups.edit(msg)
         if BOTLOG:
-            await ups.reqs_upgrade.send_message(
+            await ups.client.send_message(
                 BOTLOG_CHATID,
                 f"`bot updated successfully`",
             )
