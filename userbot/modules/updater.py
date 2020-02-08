@@ -180,7 +180,7 @@ async def upstream(ups):
         msg  = await ups.edit('`Successfully Updated!\n'
                        'Bot is restarting... Wait for a second!`')
         if BOTLOG:
-            await ups.client.send_message(
+            await ups.msg.send_message(
                 BOTLOG_CHATID,
                 f"`Your UserButtt updated successfully`",
             )
