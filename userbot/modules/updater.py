@@ -183,11 +183,11 @@ async def upstream(ups):
         args = [sys.executable, "-m", "userbot"]
         execle(sys.executable, *args, environ)
         return
-        await ups.edit(msg)
+        
         if BOTLOG:
-            await ups.client.send_message(
+            await ups.msg.send_message(
                 BOTLOG_CHATID,
-                f"`bot updated successfully`",
+                f"`Your UserButtt updated successfully`",
             )
 
 CMD_HELP.update({
