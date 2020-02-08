@@ -81,7 +81,6 @@ async def set_profilepic(propic):
             await propic.edit(INVALID_MEDIA)
 
     if photo:
-      await propic.edit("`Proccessing`")
         try:
             await propic.client(
                 UploadProfilePhotoRequest(await
