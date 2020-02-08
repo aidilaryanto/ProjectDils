@@ -185,7 +185,7 @@ async def upstream(ups):
         return
         
         if BOTLOG:
-            await ups.msg.send_message(
+            await ups.execle.send_message(
                 BOTLOG_CHATID,
                 f"`Your UserButtt updated successfully`",
             )
