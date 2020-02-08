@@ -127,7 +127,7 @@ async def upstream(ups):
         await ups.edit(
             '`Force-Syncing to latest stable userbot code, please wait...`')
     else:
-        await ups.edit('`Updating userbot, please wait....`')
+        await ups.edit('`Updating userbutt, please wait....`')
     # We're in a Heroku Dyno, handle it's memez.
     if HEROKU_APIKEY is not None:
         import heroku3
@@ -184,7 +184,7 @@ async def upstream(ups):
         execle(sys.executable, *args, environ)
         
         if BOTLOG:
-            await ups.execle.send_message(
+            await ups.client.send_message(
                 BOTLOG_CHATID,
                 f"`Your UserButtt updated successfully`",
             )
