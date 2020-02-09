@@ -138,7 +138,7 @@ async def img_sampler(event):
     arguments = {
         "keywords": query,
         "limit": lim,
-        "format": "jpg",
+        "format": "jpeg",
         "no_directory": "no_directory"
     }
 
