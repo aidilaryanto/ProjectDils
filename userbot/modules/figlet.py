@@ -5,7 +5,7 @@ from userbot import CMD_HELP
 from userbot.events import register
 import sys
  
-@register(outgoing=True, pattern="^.figlet(?: |$)(.*)")
+@register(outgoing=True, pattern="^.fg(?: |$)(.*)")
 async def figlet(event):
     if event.fwd_from:
         return
@@ -33,6 +33,6 @@ async def figlet(event):
 
 CMD_HELP.update({
         "figlet": 
-        ".figlet \
+        ".fg \
           \nUsage: Enhance ur text to strip line with anvil.\n"
     })
