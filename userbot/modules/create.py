@@ -35,7 +35,6 @@ async def telegraphs(grop):
                 created_chat_id = result.chats[0].id
                 await grop.client(functions.EditAdminRequest(
                     new_rights, rank
-                    chat_id=created_chat_id,
                     user_id="@sanaTWICEbot"
                 ))
                 result = await grop.client(functions.messages.ExportChatInviteRequest(
