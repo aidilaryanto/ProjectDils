@@ -1,6 +1,6 @@
 {
-  "name": "Telegram UserButt",
-  "description": "[UserButt] A modular Telegram userbot running on Python 3.7+ with an sqlalchemy database.",
+  "name": "Telegram DilBot",
+  "description": "[DilBot] A modular Telegram userbot running on Python 3.7+ with an sqlalchemy database.",
   "logo": "https://i.ibb.co/1sPZd6M/EPpl-XY-UUAAzh-Gp.jpg",
   "keywords": [
     "telegram",
@@ -9,7 +9,7 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/keselekpermen69/userbutt",
+  "repository": "https://github.com/aidilaryanto/DilBot",
   "website": "https://telegra.ph/How-to-host-a-Telegram-Userbot-11-02",
   "success_url": "https://t.me/userbotindo",
   "stack": "container",
@@ -141,7 +141,7 @@
     },
     "DEFAULT_BIO": {
       "description": "Default profile bio.",
-      "value": "❤ ️Sana",
+      "value": "DilBot",
       "required": false
     },
     "ALIVE_NAME": {
