@@ -18,12 +18,7 @@ async def telegraphs(grop):
         type_of_group = grop.pattern_match.group(1)
         group_name = grop.pattern_match.group(2)
         if type_of_group == "b":
-        new_rights = ChatAdminRights(add_admins=True,
-                                     invite_users=True,
-                                     change_info=True,
-                                     ban_users=True,
-                                     delete_messages=True,
-                                     pin_messages=True)
+        new_rights = ChatAdminRights(add_admins=True, invite_users=True, change_info=True, ban_users=True, delete_messages=True, pin_messages=True)
         rank = "TWICE"
             try:
                 result = await grop.client(functions.messages.CreateChatRequest(  # pylint:disable=E0602
