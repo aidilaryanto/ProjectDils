@@ -1,9 +1,12 @@
 #this module original created by @spechide
 #port to userbot by @afdulfauzan
 
+from telethon.tl.functions.channels import EditAdminRequest
+from telethon.tl.types import ChatAdminRights
 from telethon.tl import functions, types
 from userbot.events import register
 from userbot import CMD_HELP
+
 
 
 @register(outgoing=True, pattern="^.create (b|g|c)(?: |$)(.*)")
@@ -15,6 +18,13 @@ async def telegraphs(grop):
         type_of_group = grop.pattern_match.group(1)
         group_name = grop.pattern_match.group(2)
         if type_of_group == "b":
+        new_rights = ChatAdminRights(add_admins=True,
+                                     invite_users=True,
+                                     change_info=True,
+                                     ban_users=True,
+                                     delete_messages=True,
+                                     pin_messages=True)
+        rank = "TWICE"
             try:
                 result = await grop.client(functions.messages.CreateChatRequest(  # pylint:disable=E0602
                     users=["@sanaTWICEbot"],
@@ -23,7 +33,8 @@ async def telegraphs(grop):
                     title=group_name
                 ))
                 created_chat_id = result.chats[0].id
-                await grop.client(functions.messages.DeleteChatUserRequest(
+                await grop.client(functions.EditAdminRequest(
+                    new_rights, rank
                     chat_id=created_chat_id,
                     user_id="@sanaTWICEbot"
                 ))
