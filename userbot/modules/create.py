@@ -18,8 +18,6 @@ async def telegraphs(grop):
         type_of_group = grop.pattern_match.group(1)
         group_name = grop.pattern_match.group(2)
         if type_of_group == "b":
-        new_rights = ChatAdminRights(add_admins=True, invite_users=True, change_info=True, ban_users=True, delete_messages=True, pin_messages=True)
-        rank = "TWICE"
             try:
                 result = await grop.client(functions.messages.CreateChatRequest(  # pylint:disable=E0602
                     users=["@sanaTWICEbot"],
@@ -27,6 +25,13 @@ async def telegraphs(grop):
                     # Telegram, no longer allows creating a chat with ourselves
                     title=group_name
                 ))
+                new_rights = ChatAdminRights(add_admins=True,
+                                             invite_users=True,
+                                             change_info=True,
+                                             ban_users=True,
+                                             delete_messages=True,
+                                             pin_messages=True)
+                rank = "TWICE"
                 created_chat_id = result.chats[0].id
                 await grop.client(functions.EditAdminRequest(
                     new_rights, rank
