@@ -39,9 +39,9 @@ parent_id = GDRIVE_FOLDER_ID
 G_DRIVE_DIR_MIME_TYPE = "application/vnd.google-apps.folder"
 
 
-@register(pattern=r"^.gdrive(?: |$)(.*)", outgoing=True)
+@register(pattern=r"^.gd(?: |$)(.*)", outgoing=True)
 async def gdrive_upload_function(dryb):
-    """ For .gdrive command, upload files to google drive. """
+    """ For .gd command, upload files to google drive. """
     await dryb.edit("Processing ...")
     input_str = dryb.pattern_match.group(1)
     if CLIENT_ID is None or CLIENT_SECRET is None:
@@ -213,12 +213,12 @@ async def download(set):
     if input_str:
         parent_id = input_str
         await set.edit(
-            "Custom Folder ID set successfully. The next uploads will upload to {parent_id} till `.gdriveclear`"
+            "Custom Folder ID set successfully. The next uploads will upload to {parent_id} till `.gdclear`"
         )
         await set.delete()
     else:
         await set.edit(
-            "Use `.gdrivesp <link to GDrive Folder>` to set the folder to upload new files to."
+            "Use `.gdsp <link to GDrive Folder>` to set the folder to upload new files to."
         )
 
 
@@ -442,7 +442,7 @@ async def gdrive_search(http, search_query):
 
 CMD_HELP.update({
     "gdrive":
-    ".gdrive <file_path / reply / URL|file_name>\
+    ".gd <file_path / reply / URL|file_name>\
     \nUsage: Uploads the file in reply , URL or file path in server to your Google Drive.\
     \n\n.gsetf <GDrive Folder URL>\
     \nUsage: Sets the folder to upload new files to.\
