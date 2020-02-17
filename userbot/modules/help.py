@@ -24,5 +24,5 @@ async def help(event):
         string = ""
         for i in CMD_HELP:
             string += "`" + str(i)
-            string += "`\t\t\t\t||\t\t\t\t "
+            string += "`\t\t\t||\t\t\t "
         await event.reply(string)
