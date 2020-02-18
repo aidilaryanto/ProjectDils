@@ -90,7 +90,7 @@ def mega_download(url: str) -> str:
     file_raw_hex = data['raw_hex']
     if exists(r'{}'.format(file_name)):
         os.remove(r'{}'.format(file_name))
-        if await wget.download(file_url, out=file_name):
+        if wget.download(file_url, out=file_name):
             encrypt_file(file_name, file_hex, file_raw_hex)
             reply += (f"`{file_name}`\n"
                       f"Size: {file_size}\n\n"
