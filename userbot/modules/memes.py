@@ -1364,7 +1364,11 @@ CMD_HELP.update({
 \n[Available Actions: (typing, contact, game, location, voice, round, video, photo, document, cancel)]\
 \nUsage: Create fake chat actions, for fun. (Default action: typing)\
 \n\nAnd many more\
+<<<<<<< HEAD
 \n.nou ; .bot ; .gey ; .gey ; .tf ; .paw ; .taco ; .nih ;\
+=======
+\n.nou ; .bot ; .gey ; .tf ; .paw ; .taco ; .nih ;\
+>>>>>>> a6ceadd8599a3b7e9aa0985deab75e12c1e1538f
 \n.fag ; .gtfo ; .stfu ; .lol ; .lool ; .fail ; .leave\
 \n.love ; .rain ; .earth ; .fuck\
 \n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for some of these."
