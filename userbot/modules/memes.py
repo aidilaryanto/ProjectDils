@@ -1300,6 +1300,7 @@ async def nou(e):
                                                                                     
 CMD_HELP.update({
     "memes":
+
 \n\n.cowsay\
 \nUsage: cow which says things.\
 \n\n:/\
