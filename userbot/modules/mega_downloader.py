@@ -32,7 +32,7 @@ from userbot import CMD_HELP
 from userbot.events import register
 
 
-async def subprocess_run(cmd):
+def subprocess_run(cmd):
     reply = ''
     subproc = Popen(cmd, stdout=PIPE, stderr=PIPE,
                     shell=True, universal_newlines=True)
@@ -79,7 +79,6 @@ def mega_download(url: str) -> str:
     result = subprocess_run(cmd)
     try:
         data = json.loads(result[0])
-        print(data)
     except json.JSONDecodeError:
         reply += "`Error: Can't extract the link`\n"
         return reply
@@ -88,19 +87,21 @@ def mega_download(url: str) -> str:
     file_url = data['url']
     file_hex = data['hex']
     file_raw_hex = data['raw_hex']
-    if exists(r'{}'.format(file_name)):
-        os.remove(r'{}'.format(file_name))
-        if wget.download(file_url, out=file_name):
+    if exists(file_name):
+        os.remove(file_name)
+    if not exists(file_name):
+        wget.download(file_url, out=file_name)
+        if exists(file_name):
             encrypt_file(file_name, file_hex, file_raw_hex)
             reply += (f"`{file_name}`\n"
                       f"Size: {file_size}\n\n"
                       "Successfully downloaded...")
-    else:
-        reply += "Failed to download..."
+        else:
+            reply += "Failed to download..."
     return reply
 
 
-async def encrypt_file(file_name, file_hex, file_raw_hex):
+def encrypt_file(file_name, file_hex, file_raw_hex):
     os.rename(file_name, r"old_{}".format(file_name))
     cmd = ("cat 'old_{}' | openssl enc -d -aes-128-ctr -K {} -iv {} > '{}'"
            .format(file_name, file_hex, file_raw_hex, file_name))
