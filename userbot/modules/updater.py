@@ -181,11 +181,7 @@ async def upstream(ups):
                        'DilBot is restarting... Wait for a second!`')
         if BOTLOG:
             await ups.client.send_message(BOTLOG_CHATID, "#UPDATE \n"
-<<<<<<< HEAD
                                           "Your DilBot was successfully updated")
-=======
-                                          "Your UserButt was successfully updated")
->>>>>>> f3028ed3c76960a4cbea085c3d4603fdb65f3caa
         # Spin a new instance of bot
         args = [sys.executable, "-m", "userbot"]
         execle(sys.executable, *args, environ)
