@@ -24,7 +24,6 @@ from wikipedia.exceptions import DisambiguationError, PageError
 from urbandict import define
 from requests import get
 from search_engine_parser import GoogleSearch
-from google_images_download import google_images_download
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from googletrans import LANGUAGES, Translator
@@ -37,10 +36,11 @@ from youtube_dl.utils import (DownloadError, ContentTooShortError,
                               MaxDownloadsReached, PostProcessingError,
                               UnavailableVideoError, XAttrMetadataError)
 from asyncio import sleep
-from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, YOUTUBE_API_KEY, CHROME_DRIVER, GOOGLE_CHROME_BIN, bot
+from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, YOUTUBE_API_KEY, CHROME_DRIVER, GOOGLE_CHROME_BIN
 from userbot.events import register
 from telethon.tl.types import DocumentAttributeAudio
 from userbot.modules.upload_download import progress, humanbytes, time_formatter
+from userbot.google_images_download import googleimagesdownload
 
 CARBONLANG = "auto"
 TTS_LANG = "en"
@@ -131,8 +131,8 @@ async def img_sampler(event):
         lim = lim.replace("lim=", "")
         query = query.replace("lim=" + lim[0], "")
     except IndexError:
-        lim = 5
-    response = google_images_download.googleimagesdownload()
+        lim = 3
+    response = googleimagesdownload()
 
     # creating list of arguments
     arguments = {
@@ -145,8 +145,8 @@ async def img_sampler(event):
     # passing the arguments to the function
     paths = response.download(arguments)
     lst = paths[0][query]
-    await bot.send_file(
-        await bot.get_input_entity(event.chat_id), lst)
+    await event.client.send_file(
+        await event.client.get_input_entity(event.chat_id), lst)
     shutil.rmtree(os.path.dirname(os.path.abspath(lst[0])))
     await event.delete()
 
@@ -194,7 +194,7 @@ async def gsearch(q_event):
     gsearch = GoogleSearch()
     gresults = await gsearch.async_search(*search_args)
     msg = ""
-    for i in range(4):
+    for i in range(10):
         try:
             title = gresults["titles"][i]
             link = gresults["links"][i]
@@ -524,7 +524,7 @@ async def youtube_search(query,
         pageToken=token,
         order=order,
         part="id,snippet",
-        maxResults=5,
+        maxResults=10,
         location=location,
         locationRadius=location_radius).execute()
 
