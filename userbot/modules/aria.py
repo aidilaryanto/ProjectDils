@@ -10,6 +10,24 @@ from userbot import LOGS, CMD_HELP
 from userbot.events import register
 from requests import get
 
+<<<<<<< HEAD
+=======
+
+def subprocess_run(cmd):
+    subproc = Popen(cmd, stdout=PIPE, stderr=PIPE,
+                    shell=True, universal_newlines=True,
+                    executable="bash")
+    talk = subproc.communicate()
+    exitCode = subproc.returncode
+    if exitCode != 0:
+        print('An error was detected while running the subprocess:\n'
+              f'exit code: {exitCode}\n'
+              f'stdout: {talk[0]}\n'
+              f'stderr: {talk[1]}')
+    return talk
+
+
+>>>>>>> a1ad85d... modules: change to use bash
 # Get best trackers for improved download speeds, thanks K-E-N-W-A-Y.
 trackers_list = get(
     'https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt'

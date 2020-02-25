@@ -18,6 +18,24 @@ from userbot import CMD_HELP
 from userbot.events import register
 
 
+<<<<<<< HEAD
+=======
+def subprocess_run(cmd):
+    subproc = Popen(cmd, stdout=PIPE, stderr=PIPE,
+                    shell=True, universal_newlines=True,
+                    executable="bash")
+    talk = subproc.communicate()
+    exitCode = subproc.returncode
+    if exitCode != 0:
+        print('An error was detected while running the subprocess:\n'
+              f'exit code: {exitCode}\n'
+              f'stdout: {talk[0]}\n'
+              f'stderr: {talk[1]}')
+    return talk
+
+
+
+>>>>>>> a1ad85d... modules: change to use bash
 @register(outgoing=True, pattern=r"^.direct(?: |$)([\s\S]*)")
 async def direct_link_generator(request):
     """ direct links generator """
