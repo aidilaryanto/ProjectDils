@@ -70,8 +70,6 @@ RUN python3 -m ensurepip \
 RUN git clone -b sql-extended https://github.com/aidilaryanto/DilBot /root/userbot
 RUN mkdir /root/userbot/bin/
 WORKDIR /root/userbot/
-# symlink bash
-RUN ln -s /usr/bin/bash /root/userbot/bin/bash
 
 #
 # Copies session and config (if it exists)
