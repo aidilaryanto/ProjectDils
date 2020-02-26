@@ -5,13 +5,11 @@
 
 import aria2p
 from asyncio import sleep
-from os import system
+from subprocess import PIPE, Popen
 from userbot import LOGS, CMD_HELP
 from userbot.events import register
 from requests import get
 
-<<<<<<< HEAD
-=======
 
 def subprocess_run(cmd):
     subproc = Popen(cmd, stdout=PIPE, stderr=PIPE,
@@ -27,7 +25,6 @@ def subprocess_run(cmd):
     return talk
 
 
->>>>>>> a1ad85d... modules: change to use bash
 # Get best trackers for improved download speeds, thanks K-E-N-W-A-Y.
 trackers_list = get(
     'https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt'
@@ -50,7 +47,7 @@ cmd = f"aria2c \
 --daemon=true \
 --allow-overwrite=true"
 
-aria2_is_running = system(cmd)
+aria2_is_running = subprocess_run(cmd)
 
 aria2 = aria2p.API(aria2p.Client(host="http://localhost", port=6800,
                                  secret=""))
@@ -114,7 +111,7 @@ async def remove_all(event):
     except:
         pass
     if not removed:  # If API returns False Try to Remove Through System Call.
-        system("aria2p remove-all")
+        subprocess_run("aria2p remove-all")
     await event.edit("`Clearing on-going downloads... `")
     await sleep(2.5)
     await event.edit("`Successfully cleared all downloads.`")
