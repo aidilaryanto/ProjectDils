@@ -956,7 +956,7 @@ async def faces(ii):
         await ii.edit("` Hilih no text given! `")
         return
 
-     reply_text = sub(r"(a|i|u|e|o)", "i", message)
+    reply_text = sub(r"(a|i|u|e|o)", "i", message)
     reply_text = sub(r"(A|I|U|E|O)", "I", reply_text)
     reply_text = sub(r"\!+", " " + choice(HILIH), reply_text)
     reply_text += " " + choice(HILIH)
