@@ -19,6 +19,14 @@ from userbot import CMD_HELP
 from userbot.events import register
 from userbot.modules.admin import get_user_from_event
 
+from os import execl
+import sys
+import os
+import io
+import json
+from userbot import BOTLOG, BOTLOG_CHATID, bot
+
+
 # ================= CONSTANT =================
 METOOSTR = [
     "Me too thanks",
@@ -962,6 +970,19 @@ async def faces(ii):
     reply_text += " " + choice(HILIH)
     await ii.edit(reply_text)
 
+@register(outgoing=True, pattern="^.hi$")
+async def sayhi(e):
+    await e.edit(
+        "\n🙋🙋🙋🙋🙋🙋🙋🙋🙋🙋🙋🙋"
+        "\n🙋🔷🙋🙋🙋🔷🙋🙋🔷🔷🔷🙋"
+        "\n🙋🔷🙋🙋🙋🔷🙋🙋🙋🔷🙋🙋"
+        "\n🙋🔷🙋🙋🙋🔷🙋🙋🙋🔷🙋🙋"
+        "\n🙋🔷🔷🔷🔷🔷🙋🙋🙋🔷🙋🙋"
+        "\n🙋🔷🙋🙋🙋🔷🙋🙋🙋🔷🙋🙋"
+        "\n🙋🔷🙋🙋🙋🔷🙋🙋🙋🔷🙋🙋"
+        "\n🙋🔷🙋🙋🙋🔷🙋🙋🔷🔷🔷🙋"
+        "\n🙋🙋🙋🙋🙋🙋🙋🙋🙋🙋🙋🙋")
+
 @register(outgoing=True, pattern="^.react$")
 async def react_meme(react):
     """ Make your userbot react to everything. """
@@ -1439,6 +1460,6 @@ CMD_HELP.update({
 \n\nAnd many more\
 \n.nou ; .bot ; .gey ; .gay ; .tf ; .paw ; .taco ; .nih ; .ii ;\
 \n.fag ; .gtfo ; .stfu ; .lol ; .lool ; .fail ; .leave\
-\n.love ; .rain ; .earth ; .fuck\
+\n.love ; .rain ; .earth ; .fuck ; .hi\
 \n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for some of these."
 })
