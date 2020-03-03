@@ -970,6 +970,7 @@ async def faces(ii):
     reply_text += " " + choice(HILIH)
     await ii.edit(reply_text)
 
+
 @register(outgoing=True, pattern="^.hi$")
 async def sayhi(e):
     await e.edit(
@@ -982,6 +983,7 @@ async def sayhi(e):
         "\n🙋🔷🙋🙋🙋🔷🙋🙋🙋🔷🙋🙋"
         "\n🙋🔷🙋🙋🙋🔷🙋🙋🔷🔷🔷🙋"
         "\n🙋🙋🙋🙋🙋🙋🙋🙋🙋🙋🙋🙋")
+
 
 @register(outgoing=True, pattern="^.react$")
 async def react_meme(react):
