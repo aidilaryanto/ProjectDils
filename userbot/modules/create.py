@@ -23,10 +23,6 @@ async def telegraphs(grop):
                     title=group_name
                 ))
                 created_chat_id = result.chats[0].id
-                await grop.client(functions.messages.DeleteChatUserRequest(
-                    chat_id=created_chat_id,
-                    user_id="@sanaTWICEbot"
-                ))
                 result = await grop.client(functions.messages.ExportChatInviteRequest(
                     peer=created_chat_id,
                 ))
