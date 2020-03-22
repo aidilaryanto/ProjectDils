@@ -47,3 +47,4 @@ coffeehouse>=2.1.0
 wget
 python-dateutil
 git+https://github.com/johnwmillr/LyricsGenius.git
+covid
