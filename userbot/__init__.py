@@ -104,6 +104,9 @@ WEATHER_DEFCITY = os.environ.get("WEATHER_DEFCITY", None)
 # Lydia API
 LYDIA_API_KEY = os.environ.get("LYDIA_API_KEY", None)
 
+# Quotes API Token
+QUOTES_API_TOKEN = os.environ.get("QUOTES_API_TOKEN", None)
+
 # Anti Spambot Config
 ANTI_SPAMBOT = sb(os.environ.get("ANTI_SPAMBOT", "False"))
 ANTI_SPAMBOT_SHOUT = sb(os.environ.get("ANTI_SPAMBOT_SHOUT", "False"))
