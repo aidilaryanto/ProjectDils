@@ -54,12 +54,10 @@ async def addcf(event):
     await event.edit("Processing...")
     reply_msg = await event.get_reply_message()
     if reply_msg:
-        session = lydia.create_session()
-        session_id = session.id
-        if reply_msg.from_id is None:
-            return await event.edit("Invalid user type.")
-        ACC_LYDIA.update({(event.chat_id & reply_msg.from_id): session})
-        await event.edit("Lydia successfully enabled for user: {} in chat: {}".format(str(reply_msg.from_id), str(event.chat_id)))
+        session = lydiaAI.create_session()
+        ACC_LYDIA.update({str(event.chat_id) + " " + str(reply_msg.from_id): session})
+        await event.edit("Lydia successfully enabled for user: {} in chat: {}"
+                         .format(str(reply_msg.from_id), str(event.chat_id)))
     else:
         await event.edit("Reply to a user to activate Lydia AI on them")
 
@@ -72,9 +70,10 @@ async def remcf(event):
     await event.edit("Processing...")
     reply_msg = await event.get_reply_message()
     try:
-        del ACC_LYDIA[event.chat_id & reply_msg.from_id]
-        await event.edit("Lydia successfully disabled for user: {} in chat: {}".format(str(reply_msg.from_id), str(event.chat_id)))
-    except Exception:
+        del ACC_LYDIA[str(event.chat_id) + " " + str(reply_msg.from_id)]
+        await event.edit("Lydia successfully disabled for user: {} in chat: {}"
+                         .format(str(reply_msg.from_id), str(event.chat_id)))
+    except KeyError:
         await event.edit("This person does not have Lydia activated on him/her.")
 
 @register(incoming=True, disable_edited=True)
@@ -103,4 +102,5 @@ CMD_HELP.update({
 \n\n.repcf <username/reply>\
 \nUsage: starts lydia repling to perticular person in the chat."
 })
+
 
