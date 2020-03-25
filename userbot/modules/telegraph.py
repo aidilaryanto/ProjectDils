@@ -45,7 +45,7 @@ async def telegraphs(graph):
                     os.remove(downloaded_file_name)
                     await graph.edit("Successfully Uploaded to [telegra.ph](https://telegra.ph{})."
                                      .format(media_urls[0], (ms + ms_two)), link_preview=True)
-            elif input_str == "text":
+            elif input_str == "t":
                 user_object = await bot.get_entity(r_message.from_id)
                 title_of_page = user_object.first_name # + " " + user_object.last_name
                 # apparently, all Users do not have last_name field
