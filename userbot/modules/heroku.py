@@ -51,7 +51,7 @@ async def variable(var):
                                f"\n\n`{val} = {heroku_var[val]}`\n")
             else:
                 await var.edit("**Config vars**:"
-                              f "\n\n`Error -> {val} not exists`")
+                               f"\n\n`Error -> {val} not exists`\n")
             return
         except IndexError:
             configs = prettyjson(heroku_var.to_dict(), indent=2)
