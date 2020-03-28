@@ -150,7 +150,7 @@ async def upstream(ups):
             )
             repo.__del__()
             return
-        await ups.edit('`[HEROKU MEMEZ]\
+        await ups.edit('`[UPDATE]\
                         \nUserbot dyno build in progress, please wait for it to complete.`'
                        )
         ups_rem.fetch(ac_br)
@@ -170,6 +170,10 @@ async def upstream(ups):
             return
         await ups.edit('`Successfully Updated!\n'
                        'Restarting, please wait...`')
+        if BOTLOG:
+            await ups.client.send_message(BOTLOG_CHATID, "#UPDATE \n"
+                                          "DilBot was successfully updated")
+
     else:
         # Classic Updater, pretty straightforward.
         try:
@@ -181,7 +185,7 @@ async def upstream(ups):
                        'DilBot is restarting... Wait for a second!`')
         if BOTLOG:
             await ups.client.send_message(BOTLOG_CHATID, "#UPDATE \n"
-                                          "Your DilBot was successfully updated")
+                                          "DilBot was successfully updated")
         # Spin a new instance of bot
         args = [sys.executable, "-m", "userbot"]
         execle(sys.executable, *args, environ)
