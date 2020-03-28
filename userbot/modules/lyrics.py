@@ -26,24 +26,22 @@ async def lyrics(lyric):
     if r"-" in lyric.text:
         pass
     else:
-        await lyric.edit("`Error: please use '-' as divider for <artist> and <song>`\n"
-                         "eg: `Nicki Minaj - Super Bass`")
-        return
+        return await lyric.edit("`Aborted: Please use '-' as divider for **<artist> "
+                                "& <song name>**`\neg: `Nicki Minaj - Super Bass`")
+
     if GApi is None:
-        await lyric.edit(
-            "`Provide genius access token to config.py or Heroku Var first kthxbye!`")
+        return await lyric.edit(
+            "`Provide genius access token to Heroku Var first kthxbye!`")
     else:
         try:
             args = lyric.text.split('.lyrics')[1].split('-')
             artist = args[0].strip(' ')
             song = args[1].strip(' ')
         except Exception:
-            await lyric.edit("`LMAO please provide artist and song names`")
-            return
+            return await lyric.edit("`LMAO please provide artist and song names`")
 
     if len(args) < 1:
-        await lyric.edit("`Please provide artist and song names`")
-        return
+        return await lyric.edit("`Please provide artist and song names`")
 
     await lyric.edit(f"`Searching lyrics for {artist} - {song}...`")
 
@@ -53,8 +51,7 @@ async def lyrics(lyric):
         songs = None
 
     if songs is None:
-        await lyric.edit(f"Song **{artist} - {song}** not found!")
-        return
+        return await lyric.edit(f"Song **{artist} - {song}** not found!")
     if len(songs.lyrics) > 4096:
         await lyric.edit("`Lyrics is too big, view the file to see it.`")
         with open("lyrics.txt", "w+") as f:
@@ -95,6 +92,6 @@ async def pressf(f):
 
 CMD_HELP.update({
     "lyrics":
-    "**Usage:** .`lyrics <artist name> - <song name>`\n"
-    "__note__: **-** is neccessary when searching the lyrics to divided artist and song"
-}) 
+    ">`.lyrics <artist name> - <song name>`"
+    "\nUsage: Get lyrics for song"
+})

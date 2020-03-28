@@ -20,10 +20,9 @@ async def randomise(items):
     """ For .random command, get a random item from the list of items. """
     itemo = (items.text[8:]).split()
     if len(itemo) < 2:
-        await items.edit(
+        return await items.edit(
             "`2 or more items are required! Check .help random for more info.`"
         )
-        return
     index = randint(1, len(itemo) - 1)
     await items.edit("**Query: **\n`" + items.text[8:] + "`\n**Output: **\n`" +
                      itemo[index] + "`")
@@ -50,7 +49,7 @@ async def sleepybot(time):
 @register(outgoing=True, pattern="^.shutdown$")
 async def killthebot(event):
     """ For .shutdown command, shut the bot down."""
-    await event.edit("`Goodbye *Windows XP shutdown sound*....`")
+    await event.edit("`Goodbye...`")
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
                                         "Bot shut down")
@@ -91,8 +90,8 @@ async def bot_support(wannahelp):
 async def creator(e):
     await e.edit(
          "Created By [TeKnoways](https://t.me/Three_Cube_TeKnoways)"
-         "\nKanged and Modified by [Mr.Miss | 사나 🧁](https://t.me/KeselekPermen69)"
-		 "\nMore About Me: @SNchant")
+         "\nKanged and Modified by [Aidil Aryanto](https://t.me/aidilaryanto)"
+         )
 
 
 @register(outgoing=True, pattern="^.readme$")
@@ -156,61 +155,28 @@ async def raw(event):
 
 
 CMD_HELP.update({
-    'random':
-    '.random <item1> <item2> ... <itemN>\
-\nUsage: Get a random item from the list of items.'
-})
-
-CMD_HELP.update({
-    'sleep':
-    '.sleep <seconds>\
-\nUsage: Userbots get tired too. Let yours snooze for a few seconds.'
-})
-
-CMD_HELP.update({
+    "random":
+    ">`.random <item1> <item2> ... <itemN>`"
+    "\nUsage: Get a random item from the list of items.",
+    "sleep":
+    ">`.sleep <seconds>`"
+    "\nUsage: Let yours snooze for a few seconds.",
     "shutdown":
-    ".shutdown\
-\nUsage: Sometimes you need to shut down your bot. Sometimes you just hope to\
-hear Windows XP shutdown sound... but you don't."
-})
-
-CMD_HELP.update(
-    {'support': ".support\
-\nUsage: If you need help, use this command."})
-
-CMD_HELP.update({
-    'community':
-    ".community\
-\nUsage: Join the awesome Paperplane userbot community !!"
-})
-
-CMD_HELP.update({
-    'repo':
-    '.repo\
-\nUsage: If you are curious what makes the userbot work, this is what you need.'
-})
-
-CMD_HELP.update({
+    ">`.shutdown`"
+    "\nUsage: Shutdown bot",
+    "repo":
+    ">`.repo`"
+    "\nUsage: Github Repo of this bot",
     "readme":
-    ".readme\
-\nUsage: Provide links to setup the userbot and it's modules."
-})
-
-CMD_HELP.update(
-    {"creator": ".creator\
-\nUsage: Know who created this awesome userbot !!"})
-
-CMD_HELP.update({
+    ">`.readme`"
+    "\nUsage: Provide links to setup the userbot and it's modules.",
     "repeat":
-    ".repeat <no.> <text>\
-\nUsage: Repeats the text for a number of times. Don't confuse this with spam tho."
-})
-
-CMD_HELP.update({"restart": ".restart\
-\nUsage: Restarts the bot !!"})
-
-CMD_HELP.update({
+    ">`.repeat <no> <text>`"
+    "\nUsage: Repeats the text for a number of times. Don't confuse this with spam tho.",
+    "restart":
+    ">`.restart`"
+    "\nUsage: Restarts the bot !!",
     "raw":
-    ".raw\
-\nUsage: Get detailed JSON-like formatted data about replied message."
+    ">`.raw`"
+    "\nUsage: Get detailed JSON-like formatted data about replied message."
 })
