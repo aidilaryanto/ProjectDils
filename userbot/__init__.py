@@ -80,6 +80,10 @@ GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN", None)
 UPSTREAM_REPO_URL = os.environ.get(
     "UPSTREAM_REPO_URL",
     "https://github.com/aidilaryanto/DilBot.git")
+# UPSTREAM_REPO_URL branch, the default is sql-extendes
+UPSTREAM_REPO_BRANCH = os.environ.get(
+    "UPSTREAM_REPO_BRANCH", "sql-extended")
+
 
 # Console verbose logging
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
