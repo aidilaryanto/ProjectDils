@@ -27,12 +27,11 @@ for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
 
-LOGS.info("You are running Userbutt [ver : Sana <3]")
+LOGS.info("You are running DilBot [v2.1]")
 
 LOGS.info(
-    "😘 Congratulations, your userbot is now running !!" 
-    "Test it by typing .ping or .alive in any chat 😘."
-    "for further assistance, head to https://t.me/userbotindo")
+    "DilBot is now running !!" 
+    "Test it by typing .on or .ping in any chat.")
 
 
 if len(argv) not in (1, 3, 4):
