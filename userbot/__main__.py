@@ -27,7 +27,7 @@ for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
 
-LOGS.info("You are running DilBot [v2.1.1]")
+LOGS.info("You are running DilBot [v2.2]")
 
 LOGS.info(
     "DilBot is now running !!" 
