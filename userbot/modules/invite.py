@@ -39,6 +39,6 @@ async def _(event):
             
 CMD_HELP.update({
     'invite':
-    '.invite <username> [or id user]\
-        \nUsage: Invite user or bots if u want.'
+    "\n\n`>.invite <username> [or id user]`"
+    "\nUsage: Invite user or bots if u want."
 })

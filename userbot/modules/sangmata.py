@@ -40,6 +40,6 @@ async def _(event):
 
 CMD_HELP.update({
         "sangmata": 
-        ".sg \
-          \nUsage: View user history.\n"
-    })
+        "`>.sg`"
+        "\nUsage: View user history."
+})

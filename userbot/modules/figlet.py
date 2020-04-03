@@ -32,7 +32,7 @@ async def figlet(event):
     await event.delete()
 
 CMD_HELP.update({
-        "figlet": 
-        ".fg \
-          \nUsage: Enhance ur text to strip line with anvil.\n"
-    })
+        "figlet":
+        "`>.fg`"
+        "\nUsage: Enhance ur text to strip line with anvil."
+})

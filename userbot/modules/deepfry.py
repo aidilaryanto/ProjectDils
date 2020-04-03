@@ -39,7 +39,7 @@ async def _(event):
              await bot.forward_messages(event.chat_id, response.message)
 
 CMD_HELP.update({
-        "deepfry": 
-        ".df \
-          \nUsage: Krispi image😂👌.\n"
-    })
+        "df":
+        "`>.df`"
+        "\nUsage: Krispi image😂👌."
+})

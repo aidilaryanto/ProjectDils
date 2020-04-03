@@ -217,6 +217,6 @@ def get_markdown(reply):
 
 CMD_HELP.update({
         "stickerchat": 
-        ".pch \
-          \nUsage: Enhance ur text to sticker like quotly."
-    })
+        "`>.pch`"
+        "\nUsage: Enhance ur text to sticker like quotly."
+})

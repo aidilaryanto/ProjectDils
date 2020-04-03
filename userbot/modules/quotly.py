@@ -39,7 +39,7 @@ async def _(event):
              await bot.forward_messages(event.chat_id, response.message)
 
 CMD_HELP.update({
-        "quotly": 
-        ".q \
-          \nUsage: Enhance ur text to sticker.\n"
-    })
+        "quotly":
+        "`>.q`"
+        "\nUsage: Enhance ur text to sticker."
+})
