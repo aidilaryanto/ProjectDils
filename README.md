@@ -10,7 +10,7 @@
 <p align="center"><a href="https://heroku.com/deploy?template=https://github.com/aidilaryanto/DilBot/tree/sql-extended"><img src="https://i.ibb.co/FKWrjZZ/dilbot-1.png" alt="EPh-Oo8-BUEAAzx-Xm" border="0" alt="Deploy to Heroku" /></a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
-<p align="center">Huge thanks to <a href="https://github.com/keselekpermen69/userbutt/graphs/contributors">everyone</a> who have helped make this userbot awesome!!</p>
+<p align="center">Huge thanks to <a href="https://github.com/aidilaryanto/DilBot/graphs/contributors">everyone</a> who have helped make this userbot awesome!!</p>
 <p align="center">A BIG thanks to <a href="https://github.com/Devp73">Dev Patel</a> who have helped make this userbot ON AGAIN with his HUGE FIX!!</p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Updates and Support</h2>
