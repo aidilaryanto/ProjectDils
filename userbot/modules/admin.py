@@ -937,6 +937,6 @@ CMD_HELP.update({
     "\nUsage: Retrieves a list of bots in the chat."
     "\n\n>`.users` or >`.users <name of member>`"
     "\nUsage: Retrieves all (or queried) users in the chat."
-    "\n\n>`.setgppic <reply to image>`"
+    "\n\n>`.setgpic <reply to image>`"
     "\nUsage: Changes the group's display picture."
 })
