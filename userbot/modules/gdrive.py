@@ -445,12 +445,13 @@ async def google_drive_managers(gdrive):
             f_id = f_name
             try:
                 f = service.files().get(fileId=f_id,
-                                        fields="mimeType").execute()
+                                        fields="name, mimeType").execute()
             except Exception as e:
                 return await gdrive.edit(
                     f"`[FILE/FOLDER - ERROR]`\n\n"
                     f" • `Status :` `{str(e)}`"
                 )
+        name = f.get('name')
         mimeType = f.get('mimeType')
         if mimeType == 'application/vnd.google-apps.folder':
             status = "[FOLDER - DELETE]"
@@ -467,6 +468,7 @@ async def google_drive_managers(gdrive):
         else:
             await gdrive.edit(
                     f"`{status}`\n\n"
+                    f" • `Name   :` `{name}`\n"
                     " • `Status :` `OK`"
             )
     elif exe == "chck":
