@@ -64,7 +64,7 @@ RUN python3 -m ensurepip \
 #
 # Clone repo and prepare working directory
 #
-RUN git clone -b sql-extended https://github.com/aidilaryanto/DilBot /root/userbot
+RUN git clone -b master https://github.com/aidilaryanto/DilBot /root/userbot
 RUN mkdir /root/userbot/bin/
 WORKDIR /root/userbot/
 
