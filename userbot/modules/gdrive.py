@@ -301,7 +301,7 @@ async def download(gdrive, service, uri=None):
         result = await upload(gdrive, service, required_file_name,
                               file_name, mimeType)
         return await gdrive.edit(
-            "`[FILE - DOWNLOAD]`\n\n"
+            "`[FILE - UPLOADED]`\n\n"
             f" • `Name     :`\n    `{file_name}`\n"
             " • `Status   :` **OK**\n"
             f" • `URL      :`\n    [{file_name}]({result[0]})\n"
