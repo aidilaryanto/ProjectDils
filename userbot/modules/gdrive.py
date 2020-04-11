@@ -786,22 +786,28 @@ async def check_progress_for_dl(gdrive, gid, previous):
                                          "Successfully downloaded...")
         except Exception as e:
             if " not found" in str(e) or "'file'" in str(e):
-                await gdrive.edit(
-                     "`[URI - DOWNLOAD]`\n\n"
-                     f" • `Name   :` `{filename}`"
-                     " • `Status :` **OK**"
-                     " • `Reason :` Download cancelled."
-                )
+                try:
+                    await gdrive.edit(
+                         "`[URI - DOWNLOAD]`\n\n"
+                         f" • `Name   :` `{filename}`\n"
+                         " • `Status :` **OK**\n"
+                         " • `Reason :` Download cancelled."
+                    )
+                except Exception:
+                    pass
                 await asyncio.sleep(2.5)
                 return await gdrive.delete()
             elif " depth exceeded" in str(e):
                 file.remove(force=True)
-                await gdrive.edit(
-                    "`[URI - DOWNLOAD]`\n\n"
-                    f" • `Name   :` `{filename}`"
-                    " • `Status :` **BAD**\n"
-                    " • `Reason :` Auto cancelled download, URI/Torrent dead."
-                )
+                try:
+                    await gdrive.edit(
+                        "`[URI - DOWNLOAD]`\n\n"
+                        f" • `Name   :` `{filename}`\n"
+                        " • `Status :` **BAD**\n"
+                        " • `Reason :` Auto cancelled download, URI/Torrent dead."
+                    )
+                except Exception:
+                    pass
 
 
 CMD_HELP.update({
