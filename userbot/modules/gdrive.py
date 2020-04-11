@@ -330,7 +330,6 @@ async def download(gdrive, service, uri=None):
         status = status.replace("DOWNLOAD]", "ERROR]")
         return await gdrive.edit(
             f"`{status}`\n\n"
-            f" • `Name   :` `{file_name}`\n"
             " • `Status :` **FAILED**\n"
             " • `Reason :` failed to upload.\n"
             f"    `{str(e)}`"
@@ -780,14 +779,20 @@ async def check_progress_for_dl(gdrive, gid, previous):
             pass
         try:
             if not complete and not file.error_message:
+                percentage = int(file.progress)
+                prog_str = "`Downloading...` | [{0}{1}] `{2}`".format(
+                    "".join(["#" for i in range(math.floor(percentage / 10))]),
+                    "".join(["**-**"
+                             for i in range(10 - math.floor(percentage / 10))]),
+                    file.progress_string())
                 msg = (
                     "`[URI - DOWNLOAD]`\n\n"
-                    f"`Name       :` `{file.name}`\n"
-                    f"`Status     :` **Downloading...**\n"
-                    f"`Speed      :` {file.download_speed_string()}\n"
-                    f"`Progress   :` {file.progress_string()}\n"
-                    f"`Total Size :` {file.total_length_string()}\n"
-                    f"`ETA        :` {file.eta_string()}\n"
+                    f"`Name :` `{file.name}`\n"
+                    f"`Status` -> **{file.status.capitalize()}**\n"
+                    f"{prog_str}\n"
+                    f"`{file.total_length_string()} "
+                    f"@ {file.download_speed_string()}`\n"
+                    f"`ETA  :` {file.eta_string()}\n"
                 )
                 if msg != previous:
                     await gdrive.edit(msg)
