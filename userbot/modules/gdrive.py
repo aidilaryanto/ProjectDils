@@ -783,7 +783,7 @@ async def check_progress_for_dl(gdrive, gid, previous):
                 msg = (
                     "`[URI - DOWNLOAD]`\n\n"
                     f"`Name       :` `{file.name}`\n"
-                    f"`Status` -> **{file.status.capitalize()}**\n"
+                    f"`Status     :` **Downloading...**\n"
                     f"`Speed      :` {file.download_speed_string()}\n"
                     f"`Progress   :` {file.progress_string()}\n"
                     f"`Total Size :` {file.total_length_string()}\n"
