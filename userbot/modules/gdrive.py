@@ -190,8 +190,8 @@ async def create_app(gdrive):
             """ - Refresh credentials - """
             creds.refresh(Request())
         else:
-            return await gdrive.edit(
-                "`Credentials is empty, please generate it...`")
+            await gdrive.edit("`Credentials is empty, please generate it...`")
+            return False
     service = build('drive', 'v3', credentials=creds, cache_discovery=False)
     return service
 
@@ -446,6 +446,8 @@ async def google_drive_managers(gdrive):
     """ - Google Drive folder/file management - """
     await gdrive.edit("`Sending information...`")
     service = await create_app(gdrive)
+    if service is False:
+        return
     f_name = gdrive.pattern_match.group(2).strip()
     exe = gdrive.pattern_match.group(1)
     """ - Only if given value are mkdir - """
@@ -602,6 +604,8 @@ async def google_drive(gdrive):
             f" • `Reason :` Confused to upload file or the replied message/media."
         )
     service = await create_app(gdrive)
+    if service is False:
+        return
     if isfile(value):
         file_path = value
         if file_path.endswith(".torrent"):
