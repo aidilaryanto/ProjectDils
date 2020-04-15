@@ -7,18 +7,13 @@
 
 """
 Lyrics Plugin Syntax:
-       .lyrics <aritst name> - <song nane>
+       .lyrics <aritst name> - <song name>
 """
 import os
 import lyricsgenius
-import random
 
 from userbot.events import register
-from userbot import CMD_HELP, LOGS, GENIUS
-
-"""Genius(lyrics) staff"""
-GApi = GENIUS
-genius = lyricsgenius.Genius(GApi)
+from userbot import CMD_HELP, GENIUS
 
 
 @register(outgoing=True, pattern="^.lyrics(?: |$)(.*)")
@@ -29,10 +24,11 @@ async def lyrics(lyric):
         return await lyric.edit("`Aborted: Please use '-' as divider for **<artist> "
                                 "& <song name>**`\neg: `Nicki Minaj - Super Bass`")
 
-    if GApi is None:
+    if GENIUS is None:
         return await lyric.edit(
             "`Provide genius access token to Heroku Var first kthxbye!`")
     else:
+        genius = lyricsgenius.Genius(GENIUS)
         try:
             args = lyric.text.split('.lyrics')[1].split('-')
             artist = args[0].strip(' ')
