@@ -1,5 +1,5 @@
-[![](https://github.com/aidilaryanto/DilBot/workflows/BugChecker/badge.svg)](https://github.com/aidilaryanto/DilBot/actions?query=workflow%3ABugChecker)
-<h1 align="center">Project DilBot</h1>
+[![](https://github.com/aidilaryanto/ProjectDils/workflows/BugChecker/badge.svg)](https://github.com/aidilaryanto/ProjectDils/actions?query=workflow%3ABugChecker)
+<h1 align="center">ProjectDils Userbot</h1>
 <h3 align="center">A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.</h3>
 <h4 align="center">Based on RaphielGang's <a href="https://github.com/RaphielGang/Telegram-UserBot">Paperplane</a> Telegram userbot...</h4>
 <h4 align="center">...or rather, it's Paperplane + insane extras from the community.</h4>
@@ -7,10 +7,10 @@
 <p align="center">&nbsp;</p>
 <h2 align="center">How To Host</h2>
 <h5 align="center">The easiest way to deploy this userbot! click on logo below! </h5>
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/aidilaryanto/DilBot/tree/master"><img src="https://i.ibb.co/FKWrjZZ/dilbot-1.png" alt="EPh-Oo8-BUEAAzx-Xm" border="0" alt="Deploy to Heroku" /></a></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/aidilaryanto/ProjectDils/tree/master"><img src="https://i.ibb.co/LR8gHDG/Project-Dils.png" alt="EPh-Oo8-BUEAAzx-Xm" border="0" alt="Deploy to Heroku" /></a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
-<p align="center">Huge thanks to <a href="https://github.com/aidilaryanto/DilBot/graphs/contributors">everyone</a> who have helped make this userbot awesome!!</p>
+<p align="center">Huge thanks to <a href="https://github.com/aidilaryanto/ProjectDils/graphs/contributors">everyone</a> who have helped make this userbot awesome!!</p>
 <p align="center">A BIG thanks to <a href="https://github.com/Devp73">Dev Patel</a> who have helped make this userbot ON AGAIN with his HUGE FIX!!</p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Updates and Support</h2>
@@ -18,4 +18,4 @@
 <p align="center">Also join our <a href="https://t.me/userbotindo">Telegram Support Group</a> for help and support!</p>
 <p align="center">&nbsp;</p>
 <h2 align="center">License</h2>
-<p align="center"><a href="https://github.com/aidilaryanto/DilBot/blob/master/LICENSE">Raphielscape Public License</a> - Version 1.c, June 2019</p>
+<p align="center"><a href="https://github.com/aidilaryanto/ProjectDils/blob/master/LICENSE">Raphielscape Public License</a> - Version 1.c, June 2019</p>

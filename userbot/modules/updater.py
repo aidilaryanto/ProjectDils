@@ -67,7 +67,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             )
             return repo.__del__()
         await event.edit('`[HEROKU]:'
-                         '\nDilBot deploy in progress, please wait...`'
+                         '\nProjectDils deploy in progress, please wait...`'
                          )
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
@@ -84,10 +84,10 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             await event.edit(f'{txt}\n`Here is the error log:\n{error}`')
             return repo.__del__()
         await event.edit('`Successfully Updated!\n'
-                         'DilBot is restarting, please wait...`')
+                         'ProjectDils is restarting, please wait...`')
         if BOTLOG:
             await event.client.send_message(BOTLOG_CHATID, "#UPDATE \n"
-                                          "DilBot was successfully updated")
+                                          "ProjectDils was successfully updated")
     else:
         await event.edit('`[HEROKU]:'
                          '\nPlease set up` **HEROKU_API_KEY** `variable.`'
@@ -102,10 +102,10 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     await event.edit('`Successfully Updated!\n'
-                     'DilBot is restarting... Wait for a second!`')
+                     'ProjectDils is restarting... Wait for a second!`')
     if BOTLOG:
        await event.client.send_message(BOTLOG_CHATID, "#UPDATE \n"
-                                    "DilBot was successfully updated")
+                                    "ProjectDils was successfully updated")
     # Spin a new instance of bot
     args = [sys.executable, "-m", "userbot"]
     execle(sys.executable, *args, environ)
@@ -164,7 +164,7 @@ async def upstream(event):
 
     if changelog == '' and force_update is False:
         await event.edit(
-            f'\n`DilBot is`  **up-to-date**  `with`  **{UPSTREAM_REPO_BRANCH}**\n')
+            f'\n`ProjectDils is`  **up-to-date**  `with`  **{UPSTREAM_REPO_BRANCH}**\n')
         return repo.__del__()
 
     if conf is None and force_update is False:
@@ -188,7 +188,7 @@ async def upstream(event):
         await event.edit(
             '`Force-Syncing to latest stable userbot code, please wait...`')
     else:
-        await event.edit('`Updating DilBot, please wait....`')
+        await event.edit('`Updating ProjectDils, please wait....`')
     if conf == "now":
         await update(event, repo, ups_rem, ac_br)
     elif conf == "deploy":

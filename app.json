@@ -1,7 +1,7 @@
 {
-  "name": "Telegram DilBot",
-  "description": "[DilBot] A modular Telegram userbot running on Python 3.7+ with an sqlalchemy database.",
-  "logo": "https://i.ibb.co/FKWrjZZ/dilbot-1.png",
+  "name": "Telegram ProjectDils",
+  "description": "[ProjectDils] A modular Telegram userbot running on Python 3.7+ with an sqlalchemy database.",
+  "logo": "https://i.ibb.co/LR8gHDG/Project-Dils.png",
   "keywords": [
     "telegram",
     "userbot",
@@ -9,7 +9,7 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/aidilaryanto/DilBot",
+  "repository": "https://github.com/aidilaryanto/ProjectDils",
   "website": "https://telegra.ph/How-to-host-a-Telegram-Userbot-11-02",
   "success_url": "https://t.me/userbotindo",
   "stack": "container",
@@ -141,7 +141,7 @@
     },
     "DEFAULT_BIO": {
       "description": "Default profile bio.",
-      "value": "DilBot",
+      "value": "ProjectDils",
       "required": false
     },
     "ALIVE_NAME": {

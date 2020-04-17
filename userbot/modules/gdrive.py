@@ -451,7 +451,7 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
         pass
     body = {
         "name": file_name,
-        "description": "Uploaded from Telegram using DilBot.",
+        "description": "Uploaded from Telegram using ProjectDils.",
         "mimeType": mimeType,
     }
     try:
