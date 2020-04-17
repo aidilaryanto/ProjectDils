@@ -1,6 +1,7 @@
 # ported on OUB by @Mayur_Karaniya
 
-# import github
+
+from github import Github
 import aiohttp
 import asyncio
 import os
@@ -8,12 +9,17 @@ import time
 from datetime import datetime
 from telethon import events
 from telethon.tl.types import DocumentAttributeVideo
+# from sample_config import Config
+# from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
 from userbot.events import register
-from userbot import CMD_HELP, GITHUB_ACCESS_TOKEN, GIT_REPO_NAME
+# from userbot.events import humanbytes, progress, time_formatter
+from userbot import CMD_HELP, GITHUB_ACCESS_TOKEN, GIT_REPO_NAME, bot
 
 
 GIT_TEMP_DIR = "./userbot/temp/"
-@register(pattern=r".commit (.*)", outgoing=True)
+# @borg.on(admin_cmd(pattern="commit ?(.*)", allow_sudo=True))
+@register(outgoing=True, pattern="^.gcommit(?: |$)(.*)")
+# @register(pattern=r".commit (.*)", outgoing=True)
 async def download(event):
     if event.fwd_from:
         return	
@@ -68,7 +74,7 @@ async def git_commit(file_name,mone):
         file_name = file_name.replace("./userbot/temp/","")
         print(file_name)
         try:
-            repo.create_file(file_name, "Uploaded New Plugin", commit_data, branch="master")
+            repo.create_file(file_name, "Modules: Add new plugin", commit_data, branch="master")
             print("Committed File")
             ccess = GIT_REPO_NAME
             ccess = ccess.strip()
@@ -82,6 +88,6 @@ async def git_commit(file_name,mone):
 
 CMD_HELP.update({
     "commit":
-    "`>.commit`"
+    "`>.gcommit`"
     "\nUsage: GITHUB File Uploader Plugin for userbot. Heroku Automation should be Enabled. Else u r not that lazy , For lazy people"
 })
