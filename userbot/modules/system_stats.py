@@ -123,12 +123,12 @@ async def pipcheck(pip):
 async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
     await alive.edit("`"
-                     "ProjectDils is running....\n"
-                     f"================================\n"
+                     "PROJECTDILS IS RUNNING\n"
+                     f"==================================\n"
                      f"•  User     : {DEFAULTUSER}\n"
                      f"•  Python   : v{python_version()}\n"
                      f"•  Telethon : v{version.__version__}\n"
-                     f"================================\n"
+                     f"==================================\n"
                      "`")
 
 
