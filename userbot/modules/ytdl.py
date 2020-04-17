@@ -259,12 +259,11 @@ async def download_video(v_url):
                         await v_url.client.send_file(
                             v_url.chat_id,
                             single_file,
-                            caption=f"`{ytdl_data_name_audio}`" + "\n" + f"Size👉 {song_size}",
+                            caption=f"`{ytdl_data_name_audio}`" + "\n",
                             force_document=force_document,
                             supports_streaming=supports_streaming,
                             allow_cache=False,
-                            thumb = thumb,
-                            reply_to=v_url.message.id,
+                            thumb = thumb,                            
                             attributes=document_attributes,
                             progress_callback=lambda d, t: asyncio.get_event_loop(
                                 ).create_task(
@@ -278,8 +277,7 @@ async def download_video(v_url):
                         )
                         continue
                     os.remove(single_file)
-                    await asyncio.sleep(DELETE_TIMEOUT)
-                    # await v_url.delete()
+                    return await v_url.delete()
         shutil.rmtree(out_folder)
 
     if flac:
@@ -313,11 +311,10 @@ async def download_video(v_url):
                         await v_url.client.send_file(
                             v_url.chat_id,
                             single_file,
-                            caption=f"`{ytdl_data_name_audio}`" + "\n" + f"Size👉 {song_size}",
+                            caption=f"`{ytdl_data_name_audio}`" + "\n",
                             force_document=force_document,
                             supports_streaming=supports_streaming,
-                            allow_cache=False,
-                            reply_to=v_url.message.id,
+                            allow_cache=False,                            
                             attributes=document_attributes,
                             progress_callback=lambda d, t: asyncio.get_event_loop(
                                 ).create_task(
@@ -331,8 +328,7 @@ async def download_video(v_url):
                         )
                         continue
                     os.remove(single_file)
-                    await asyncio.sleep(DELETE_TIMEOUT)
-                    # await v_url.delete()
+                    return await v_url.delete()
         shutil.rmtree(out_folder)
     if video:
         for single_file in filename:
@@ -373,12 +369,11 @@ async def download_video(v_url):
                         await v_url.client.send_file(
                             v_url.chat_id,
                             single_file,
-                            caption=f"`{ytdl_data_name_video}`" + "\n" + f"Size👉 {video_size}",
+                            caption=f"`{ytdl_data_name_video}`" + "\n",
                             force_document=force_document,
                             supports_streaming=supports_streaming,
                         #    thumb = thumb,
                             allow_cache=False,
-                            reply_to=v_url.message.id,
                             attributes=document_attributes,
                             progress_callback=lambda d, t: asyncio.get_event_loop(
                                 ).create_task(
@@ -392,8 +387,7 @@ async def download_video(v_url):
                         )
                         continue
                     os.remove(single_file)
-                    await asyncio.sleep(DELETE_TIMEOUT)
-                    # await v_url.delete()
+                    return await v_url.delete()
         shutil.rmtree(out_folder)
 
 
