@@ -918,7 +918,7 @@ async def zal(zgfy):
     await zgfy.edit("".join(reply_text))
 
 
-@register(outgoing=True, pattern="^.hi$")
+@register(outgoing=True, pattern="^.hello$")
 async def hoi(hello):
     """ Greet everyone! """
     await hello.edit(choice(HELLOSTR))
@@ -1373,7 +1373,31 @@ async def nou(e):
                      "`\n┃┈▋┈▋┃\n┃┈╭▋━╮━╮\n┃┈┈╭╰╯╰╯╮`"
                      "`\n┫┈┈  NoU\n┃┈╰╰━━━━╯`"
                      "`\n┗━━┻━┛`")
-
+                     
+                     
+@register(outgoing=True, pattern="^.koc$")  
+async def koc(e):
+   if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
+        await e.edit("8✊===D")
+        await e.edit("8=✊==D")
+        await e.edit("8==✊=D")
+        await e.edit("8===✊D")
+        await e.edit("8==✊=D")
+        await e.edit("8=✊==D")
+        await e.edit("8✊===D")
+        await e.edit("8=✊==D")
+        await e.edit("8==✊=D")
+        await e.edit("8===✊D")
+        await e.edit("8==✊=D")
+        await e.edit("8=✊==D")
+        await e.edit("8✊===D")
+        await e.edit("8=✊==D")
+        await e.edit("8==✊=D")
+        await e.edit("8===✊D")
+        await e.edit("8===✊D💦")
+        await e.edit("8====D💦💦")
+        await e.edit(choice(FACEREACTS))
+                     
 
 @register(outgoing=True, pattern=r"^\.(?:penis|dick)\s?(.)?")
 async def emoji_penis(e):
@@ -1454,6 +1478,6 @@ CMD_HELP.update({
     "\nAnd Many More..."
     "\n.nou ; .bot ; .gey ; .gay ; .tf ; .paw ; .taco ; .nih ; .ii ;"
     "\n.fag ; .gtfo ; .stfu ; .lol ; .lool ; .fail ; .leave"
-    "\n.love ; .rain ; .earth ; .fuck"
+    "\n.love ; .rain ; .earth ; .fuck ; .penis ; .koc"
     "\n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for some of these."
 })
