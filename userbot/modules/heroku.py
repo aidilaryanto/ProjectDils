@@ -9,6 +9,8 @@ import asyncio
 import requests
 import math
 
+from operator import itemgetter
+
 from userbot import HEROKU_APP_NAME, HEROKU_API_KEY
 from userbot.events import register
 
@@ -109,10 +111,21 @@ async def dyno_manage(dyno):
 
         """ - Used per/App Usage - """
         Apps = result['apps']
-        msg = "**Dyno Usage Applications**:\n\n"
+        """ - Sort from larger usage to lower usage - """
+        Apps = sorted(Apps, key=itemgetter('quota_used'), reverse=True)
+        apps = Heroku.apps()
+        msg = "**Dyno Usage**:\n\n"
+        try:
+            Apps[0]
+        except IndexError:
+            msg += (" -> `No quota used for any of your Apps`:\n")
+            for App in apps:
+                msg += f"     •  **{App.name}**.\n"
         for App in Apps:
+            AppName = '~~Deleted or transferred app~~'
+            ID = App.get('app_uuid')
             try:
-                AppQuota = App['quota_used']
+                AppQuota = App.get('quota_used')
                 AppQuotaUsed = AppQuota / 60
                 AppPercentage = math.floor(AppQuota * 100 / quota)
             except IndexError:
@@ -121,16 +134,19 @@ async def dyno_manage(dyno):
             finally:
                 AppHours = math.floor(AppQuotaUsed / 60)
                 AppMinutes = math.floor(AppQuotaUsed % 60)
+                for names in apps:
+                    if ID == names.id:
+                        AppName = f"**{names.name}**"
+                        break
+                    else:
+                        continue
                 msg += (
+                    f" -> `Dyno usage for`  {AppName}:\n"
                     f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
-                    f"**|**  [`{AppPercentage}`**%**]\n"
+                    f"**|**  [`{AppPercentage}`**%**]\n\n"
                 )
-        if not msg:
-            msg = (" -> `No quota used for any of your Apps`:\n")
-            for App in Heroku.apps():
-                msg += f"     •  ⬢**{App.name}**.\n"
         return await dyno.edit(
-            f"{msg}\n"
+            f"{msg}"
             " -> `Dyno hours quota remaining this month`:\n"
             f"     •  `{hours}`**h**  `{minutes}`**m**  "
             f"**|**  [`{percentage}`**%**]"
