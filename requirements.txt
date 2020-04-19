@@ -5,6 +5,7 @@ bs4
 cowpy
 cffi
 covid
+cryptg
 dnspython
 emoji
 gitpython
