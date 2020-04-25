@@ -23,7 +23,7 @@ useragent = ('Mozilla/5.0 (Linux; Android 10; SM-G975F) '
 
 
 @register(outgoing=True,
-          pattern="^.dyno (on|restart|shutdown|usage|help)(?: |$)")
+          pattern="^.dyno (on|restart|off|usage|help)(?: |$)")
 async def dyno_manage(dyno):
     """ - Restart/Kill dyno - """
     await dyno.edit("`Sending information...`")
@@ -72,7 +72,7 @@ async def dyno_manage(dyno):
                 sleep += 1
             await dyno.respond(f"⬢**{HEROKU_APP_NAME}** `restarted...`")
             return await dyno.delete()
-    elif exe == "shutdown":
+    elif exe == "off":
         """ - Complete shutdown - """
         app.scale_formation_process("worker", 0)
         text = f"`Shutdown` ⬢**{HEROKU_APP_NAME}**"
@@ -161,7 +161,7 @@ async def dyno_manage(dyno):
             "\nUsage: Turn on your main dyno application."
             "\n\n>`.dyno restart`"
             "\nUsage: Restart your dyno application."
-            "\n\n>`.dyno shutdown`"
+            "\n\n>`.dyno off`"
             "\nUsage: Shutdown dyno completly."
             "\n\n>`.dyno help`"
             "\nUsage: print this help."
