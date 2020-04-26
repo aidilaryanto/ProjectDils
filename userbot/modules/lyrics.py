@@ -70,6 +70,7 @@ async def current_lyrics(lyric):
     playing = User(LASTFM_USERNAME, lastfm).get_now_playing()
     song = playing.get_title()
     artist = playing.get_artist()
+    await lyric.edit(f"`Searching lyrics for {artist} - {song}...`")
     try:
         songs = genius.search_song(song, artist)
     except TypeError:
