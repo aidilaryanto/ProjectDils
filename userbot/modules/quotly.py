@@ -37,6 +37,7 @@ async def _(event):
           else: 
              await event.delete()   
              await bot.forward_messages(event.chat_id, response.message)
+             await bot.send_read_acknowledge(event.chat_id)
 
 CMD_HELP.update({
         "quotly":
