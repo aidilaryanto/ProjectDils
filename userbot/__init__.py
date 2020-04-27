@@ -121,9 +121,6 @@ YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
 # Telegraph 
 TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", None)
 
-# Default .alive name
-ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
-
 # Time & Date - Country and Time Zone
 COUNTRY = str(os.environ.get("COUNTRY", ""))
 TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
