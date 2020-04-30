@@ -208,7 +208,7 @@ async def dyno_manage(dyno):
             )
             return
         await dyno.edit(
-            '`[HEROKU - MAIN]`:\n'
+            '`[HEROKU - MAIN]`\n'
             '`ProjectDils deploy in progress, please wait...`'
         )
         os.chdir('deploy')
