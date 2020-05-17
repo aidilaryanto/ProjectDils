@@ -41,7 +41,6 @@ from userbot.utils import progress, chrome, googleimagesdownload
 CARBONLANG = "auto"
 TTS_LANG = "en"
 TRT_LANG = "en"
-TEMP_DOWNLOAD_DIRECTORY = "/root/userbot/.bin"
 
 
 @register(outgoing=True, pattern="^.crblang (.*)")
@@ -107,7 +106,7 @@ async def img_sampler(event):
         lim = lim.replace("lim=", "")
         query = query.replace("lim=" + lim[0], "")
     except IndexError:
-        lim = 6
+        lim = 7
     response = googleimagesdownload()
 
     # creating list of arguments
@@ -169,7 +168,7 @@ async def gsearch(q_event):
     gsearch = GoogleSearch()
     gresults = await gsearch.async_search(*search_args)
     msg = ""
-    for i in range(5):
+    for i in range(10):
         try:
             title = gresults["titles"][i]
             link = gresults["links"][i]
