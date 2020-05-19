@@ -2,7 +2,7 @@
 [![](https://github.com/aidilaryanto/ProjectDils/workflows/BugChecker/badge.svg)](https://github.com/aidilaryanto/ProjectDils/actions?query=workflow%3ABugChecker)
 
 
-![logo](https://i.ibb.co/LR8gHDG/Project-Dils.png)
+![logo](https://telegra.ph/file/29e9cfe7094e15c8caa51.png)
 
 ```
 #include <std/disclaimer.h>
