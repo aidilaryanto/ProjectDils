@@ -18,7 +18,7 @@ from userbot import CMD_HELP, GITHUB_ACCESS_TOKEN, GIT_REPO_NAME, bot
 
 GIT_TEMP_DIR = "./userbot/temp/"
 # @borg.on(admin_cmd(pattern="commit ?(.*)", allow_sudo=True))
-@register(outgoing=True, pattern="^.gcommit(?: |$)(.*)")
+@register(outgoing=True, pattern="^.commit(?: |$)(.*)")
 # @register(pattern=r".commit (.*)", outgoing=True)
 async def download(event):
     if event.fwd_from:
@@ -74,20 +74,20 @@ async def git_commit(file_name,mone):
         file_name = file_name.replace("./userbot/temp/","")
         print(file_name)
         try:
-            repo.create_file(file_name, "Modules: Add new plugin", commit_data, branch="master")
+            repo.create_file(file_name, "ProjectDils: Add new module", commit_data, branch="master")
             print("Committed File")
             ccess = GIT_REPO_NAME
             ccess = ccess.strip()
-            await mone.edit(f"`Commited On Your Github Repo`\n\n[Your Modules](https://github.com/{ccess}/tree/master/userbot/modules/)")
+            await mone.edit(f"`Commited On ProjectDils Repo`\n\n[Your Modules](https://github.com/{ccess}/tree/master/{file_name})")
         except:    
-            print("Cannot Create Plugin")
-            await mone.edit("Cannot Upload Plugin")
+            print("Cannot Create Module")
+            await mone.edit("Cannot Upload Module")
     else:
         return await mone.edit("`Committed Suicide`")
 
 
 CMD_HELP.update({
     "commit":
-    "`>.gcommit`"
-    "\nUsage: GITHUB File Uploader Plugin for userbot. Heroku Automation should be Enabled. Else u r not that lazy , For lazy people"
+    "`>.commit`"
+    "\nUsage: GITHUB File Uploader Module for userbot. Heroku Automation should be Enabled. Else u r not that lazy , For lazy people"
 })
