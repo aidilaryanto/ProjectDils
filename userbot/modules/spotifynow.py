@@ -25,9 +25,13 @@ async def _(event):
             return
         if response.text.startswith("You're"):
             await event.edit("`You're not listening to anything on Spotify at the moment`")
+            await event.client.delete_messages(conv.chat_id,
+                                               [msg.id, response.id])
             return
         if response.text.startswith("Ads."):
             await event.edit("`You're listening to those annoying ads.`")
+            await event.client.delete_messages(conv.chat_id,
+                                               [msg.id, response.id])
             return
         else:
             downloaded_file_name = await event.client.download_media(
