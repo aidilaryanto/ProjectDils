@@ -26,6 +26,9 @@ async def _(event):
         if response.text.startswith("You're"):
             await event.edit("`You're not listening to anything on Spotify at the moment`")
             return
+        if response.text.startswith("Ads."):
+            await event.edit("`You're listening to those annoying ads.`")
+            return
         else:
             downloaded_file_name = await event.client.download_media(
                                  response.media,
