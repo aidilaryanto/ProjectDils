@@ -27,7 +27,7 @@ for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
 
-LOGS.info("You are running ProjectDils [v2.5]")
+LOGS.info("You are running ProjectDils [v2.6]")
 
 LOGS.info(
     "ProjectDils is now running !!" 
