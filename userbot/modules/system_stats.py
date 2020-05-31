@@ -12,7 +12,7 @@ from shutil import which
 from os import remove
 from telethon import version
 
-from userbot import bot, CMD_HELP, ALIVE_NAME
+from userbot import bot, CMD_HELP, ALIVE_NAME, ALIVE_LOGO
 from userbot.events import register
 
 # ================= CONSTANT =================
@@ -131,7 +131,7 @@ async def pipcheck(pip):
 @register(outgoing=True, pattern=r"^\.(?:alive|on)\s?(.)?")
 async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
-    logo = "https://telegra.ph/file/a23496e2c6ac4df79243f.png"
+    logo = ALIVE_LOGO
     output = ("`"
              "ProjectDils is running...\n"
              f"====================================\n"
