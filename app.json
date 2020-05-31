@@ -163,10 +163,6 @@
       "description": "Set this in order to make the gitupload work. you can look https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line to assist you.",
       "required": false
     },
-    "GENIUS_API_TOKEN": {
-      "description": "Get this value from https://genius.com/developers.",
-      "required": false 
-    },
     "IMG_LIMIT": {
       "description": "Set limit for .img module",
       "value": "6",
