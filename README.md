@@ -1,5 +1,5 @@
 # ProjecDils Userbot
-[![](https://github.com/aidilaryanto/ProjectDils/workflows/BugChecker/badge.svg)](https://github.com/aidilaryanto/ProjectDils/actions?query=workflow%3ABugChecker)
+[![](https://github.com/aidilaryanto/ProjectDils/workflows/BugChecker/badge.svg)](https://github.com/aidilaryanto/ProjectDils/actions?query=workflow%3ABugChecker) ![Last Commit](https://img.shields.io/github/last-commit/aidilaryanto/ProjectDils/master)
 
 
 ![logo](https://telegra.ph/file/29e9cfe7094e15c8caa51.png)
