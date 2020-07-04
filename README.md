@@ -36,7 +36,7 @@ For further guide you can head to [Groups and Support](https://github.com/Kesele
 ## Generate String Session
 Generate string session on Repl.it:
 
-<p align="center"><a href="http://string.projectdils.repl.run"> <img src="https://telegra.ph/file/d4c2755134aa5271f6bca.png" alt="Generate String Session" /></a></p>
+<p align="center"><a href="http://string.projectdils.repl.run"> <img src="https://telegra.ph/file/7193be9fb5f9caa50bae8.png" alt="Generate String Session" /></a></p>
 
 
 ## Groups and Support
