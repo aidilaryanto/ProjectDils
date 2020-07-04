@@ -30,8 +30,6 @@ Deploy ProjectDils to Heroku:
 
 <p align="center"><a href="https://heroku.com/deploy?template=https://github.com/aidilaryanto/ProjectDils/tree/master"> <img src="https://telegra.ph/file/4190890cae105d17d461e.png" alt="Deploy to Heroku" /></a></p>
 
-For further guide you can head to [Groups and Support](https://github.com/KeselekPermen69/UserButt#Groups-and-support) or read this [guide](https://telegra.ph/Host-a-Telegram-Userbot-05-07)
-
 
 ## Generate String Session
 Generate string session on Repl.it:
@@ -39,9 +37,13 @@ Generate string session on Repl.it:
 <p align="center"><a href="http://string.projectdils.repl.run"> <img src="https://telegra.ph/file/7193be9fb5f9caa50bae8.png" alt="Generate String Session" /></a></p>
 
 
-## Groups and Support
-Join [Userbot Indonesia Channel](https://t.me/userbotindocloud) for update notifications or announcement.
+## Google Drive Setup
+Google Drive setup tutorial:
 
+<p align="center"><a href="https://telegra.ph/How-To-Setup-Google-Drive-04-03"> <img src="https://telegra.ph/file/e09b75dbf75f3f43f2cb3.png" alt="Google Drive Setup" /></a></p>
+
+
+## Groups and Support
 Join [Userbotindo Support Group](https://t.me/userbotindo) for discussion, bug reporting, and help.
 
 
