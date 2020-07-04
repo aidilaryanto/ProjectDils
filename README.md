@@ -26,11 +26,17 @@ Based on RaphielGang's [Telegram-Paperplane](https://github.com/RaphielGang/Tele
 
 
 ## How To Host
-The easiest way to deploy this userbot
+Deploy ProjectDils to Heroku:
 
-<p><a href="https://heroku.com/deploy?template=https://github.com/aidilaryanto/ProjectDils/tree/master"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/aidilaryanto/ProjectDils/tree/master"> <img src="https://telegra.ph/file/4190890cae105d17d461e.png" alt="Deploy to Heroku" /></a></p>
 
 For further guide you can head to [Groups and Support](https://github.com/KeselekPermen69/UserButt#Groups-and-support) or read this [guide](https://telegra.ph/Host-a-Telegram-Userbot-05-07)
+
+
+## Generate String Session
+Generate string session on Repl.it:
+
+<p align="center"><a href="http://string.projectdils.repl.run"> <img src="https://telegra.ph/file/d4c2755134aa5271f6bca.png" alt="Generate String Session" /></a></p>
 
 
 ## Groups and Support
