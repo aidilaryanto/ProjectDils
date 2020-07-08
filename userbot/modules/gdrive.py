@@ -463,7 +463,7 @@ async def download_gdrive(gdrive, service, uri):
             return False
         file_path = TEMP_DOWNLOAD_DIRECTORY + file_name
         request = service.files().get_media(fileId=file_Id,
-                                            supportsTeamDrives=True)
+                                            supportsAllDrives=True)
         with io.FileIO(file_path, 'wb') as df:
             downloader = MediaIoBaseDownload(df, request)
             complete = False
@@ -554,19 +554,17 @@ async def download_gdrive(gdrive, service, uri):
 async def change_permission(service, Id):
     permission = {
         "role": "reader",
-        "type": "anyone",
-        "allowFileDiscovery": True,
-        "value": None,
+        "type": "anyone"
     }
     service.permissions().create(fileId=Id, body=permission,
-                                 supportsTeamDrives=True).execute()
+                                 supportsAllDrives=True).execute()
     return
 
 
 async def get_information(service, Id):
     r = service.files().get(fileId=Id, fields="name, id, size, mimeType, "
                             "webViewLink, webContentLink,"
-                            "description", supportsTeamDrives=True).execute()
+                            "description", supportsAllDrives=True).execute()
     return r
  
  
@@ -586,7 +584,7 @@ async def create_dir(service, folder_name):
         """ - Override G_DRIVE_FOLDER_ID because parent_Id not empty - """
         metadata['parents'] = [parent_Id]
     folder = service.files().create(
-           body=metadata, fields="id, webViewLink", supportsTeamDrives=True
+           body=metadata, fields="id, webViewLink", supportsAllDrives=True
            ).execute()
     await change_permission(service, folder.get('id'))
     return folder
@@ -620,7 +618,7 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
     """ - Start upload process - """
     file = service.files().create(body=body, media_body=media_body,
                                   fields="id, size, webContentLink",
-                                  supportsTeamDrives=True)
+                                  supportsAllDrives=True)
     global is_cancelled
     current_time = time.time()
     response = None
@@ -751,7 +749,7 @@ async def lists(gdrive):
     while True:
         try:
             response = service.files().list(
-                supportsTeamDrives=True,
+                supportsAllDrives=True,
                 includeTeamDriveItems=True,
                 q=query,
                 spaces='drive',
@@ -849,7 +847,7 @@ async def google_drive_managers(gdrive):
                 'nextPageToken, files(parents, name, id, size, '
                 'mimeType, webViewLink, webContentLink, description)'
             ),
-            supportsTeamDrives=True,
+            supportsAllDrives=True,
             pageToken=page_token
         ).execute()
         if exe == "mkdir":
@@ -898,7 +896,7 @@ async def google_drive_managers(gdrive):
             else:
                 status = "[FILE - DELETE]"
             try:
-                service.files().delete(fileId=f_id, supportsTeamDrives=True
+                service.files().delete(fileId=f_id, supportsAllDrives=True
                                        ).execute()
             except HttpError as e:
                 status.replace("DELETE]", "ERROR]")
