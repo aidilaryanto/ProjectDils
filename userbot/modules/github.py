@@ -9,7 +9,7 @@ from telethon.tl.types import DocumentAttributeVideo
 from userbot.events import register
 from userbot import CMD_HELP, GITHUB_ACCESS_TOKEN, GIT_REPO_NAME, bot
 
-GIT_TEMP_DIR = "./projectdils/temp/"
+GIT_TEMP_DIR = "/projectdils/temp/"
 
 @register(pattern=r".git (.*)", outgoing=True)
 async def github(event):
@@ -103,7 +103,7 @@ async def git_commit(file_name,mone):
             create_file = False
     file_name = "userbot/modules/" + file_name		
     if create_file == True:
-        file_name = file_name.replace("./projectdils/temp/","")
+        file_name = file_name.replace(GIT_TEMP_DIR,"")
         print(file_name)
         try:
             repo.create_file(file_name, "ProjectDils: Add new module", commit_data, branch="master")
