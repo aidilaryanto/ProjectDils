@@ -27,10 +27,10 @@ async def lst(event):
         return
     if isdir(path):
         if cat:
-            msg = "Folders and Files in `{}` :\n".format(path)
+            msg = "**PATH:** `{}`\n\n".format(path)
             lists = os.listdir(path)
         else:
-            msg = "Folders and Files in Current Directory :\n"
+            msg = "• **File Manager** •\n\n"
             lists = os.listdir(path)
         files = ""
         folders = ""
