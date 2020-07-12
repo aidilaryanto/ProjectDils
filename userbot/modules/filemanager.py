@@ -39,23 +39,23 @@ async def lst(event):
             if not isdir(catpath):
                 size = os.stat(catpath).st_size
                 if contents.endswith((".mp3", ".flac", ".wav", ".m4a")):
-                    files += "🎵" + f"`{contents}`\n"
+                    files += "🎵 " + f"`{contents}`\n"
                 if contents.endswith((".opus")):
-                    files += "🎙" + f"`{contents}`\n"
+                    files += "🎙 " + f"`{contents}`\n"
                 elif contents.endswith(
                     (".mkv", ".mp4", ".webm", ".avi", ".mov", ".flv")
                 ):
-                    files += "🎞" + f"`{contents}`\n"
+                    files += "🎞 " + f"`{contents}`\n"
                 elif contents.endswith((".zip", ".tar", ".tar.gz", ".rar")):
-                    files += "🗜" + f"`{contents}`\n"
+                    files += "🗜 " + f"`{contents}`\n"
                 elif contents.endswith(
                     (".jpg", ".jpeg", ".png", ".gif", ".bmp", ".ico")
                 ):
-                    files += "🖼" + f"`{contents}`\n"
+                    files += "🖼 " + f"`{contents}`\n"
                 else:
-                    files += "📄" + f"`{contents}`\n"
+                    files += "📄 " + f"`{contents}`\n"
             else:
-                folders += f"📁`{contents}`\n"
+                folders += f"📁 `{contents}`\n"
         if files or folders:
             msg = msg + folders + files
         else:
@@ -64,17 +64,17 @@ async def lst(event):
         size = os.stat(path).st_size
         msg = f"The details of given file :\n"
         if path.endswith((".mp3", ".flac", ".wav", ".m4a")):
-            mode = "🎵"
+            mode = "🎵 "
         if path.endswith((".opus")):
-            mode = "🎙"
+            mode = "🎙 "
         elif path.endswith((".mkv", ".mp4", ".webm", ".avi", ".mov", ".flv")):
-            mode = "🎞"
+            mode = "🎞 "
         elif path.endswith((".zip", ".tar", ".tar.gz", ".rar")):
-            mode = "🗜"
+            mode = "🗜 "
         elif path.endswith((".jpg", ".jpeg", ".png", ".gif", ".bmp", ".ico")):
-            mode = "🖼"
+            mode = "🖼 "
         else:
-            mode = "📄"
+            mode = "📄 "
         time.ctime(os.path.getctime(path))
         time2 = time.ctime(os.path.getmtime(path))
         time3 = time.ctime(os.path.getatime(path))
