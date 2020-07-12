@@ -40,14 +40,14 @@ async def torrent(event):
     tsfileloc = f"{TEMP_DOWNLOAD_DIRECTORY}/{query}.txt"
     with open(tsfileloc, "w+", encoding="utf8") as out_file:
         out_file.write(str(listdata))
-    caption = f"Torrents for:` {query}`"
-    await event.client.send_file(
-        event.chat_id,
-        tsfileloc,
-        caption=caption,
-        force_document=False)
+    fd = codecs.open(tsfileloc, "r", encoding="utf-8")
+    data = fd.read()
+    key = (requests.post("https://nekobin.com/api/documents",
+                         json={"content": data}) .json() .get("result") .get("key"))
+    url = f"https://nekobin.com/raw/{key}"
+    caption = f"`Here the results for the query: {query}`\n\nPasted to: [Nekobin]({url})"
     os.remove(tsfileloc)
-    await event.delete()
+    await e.edit(caption, link_preview=False)
 
 
 def dogbin(magnets):
@@ -137,7 +137,7 @@ CMD_HELP.update(
     {
         "torrent": ">`.ts` Search query."
         "\nUsage: Search for torrent query and post to dogbin.\n"
-        ">`.tos` Search query.\n"
+        ">`.tos` Search query."
         "\nUsage: Search for torrent magnet from query."
     }
 )
