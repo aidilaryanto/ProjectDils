@@ -19,6 +19,7 @@ from telethon.tl.types import DocumentAttributeVideo
 from userbot.events import register
 from pylast import User
 
+
 # For getvideosong
 def getmusicvideo(cat):
     search = cat
@@ -154,17 +155,17 @@ async def _(event):
     reply = await event.get_reply_message()
     if event.pattern_match.group(1):
         query = event.pattern_match.group(1)
-        await event.edit("Wait..! I am finding your videosong..")
+        await event.edit("`Wait..! I am finding your videosong..`")
     elif reply.message:
         query = reply.message
-        await event.edit("Wait..! I am finding your videosong..")
+        await event.edit("`Wait..! I am finding your videosong..`")
     else:
-        await event.edit("What I am Supposed to find")
+        await event.edit("`What I am Supposed to find?`")
         return
     getmusicvideo(query)
     l = glob.glob(("*.mp4")) + glob.glob(("*.mkv")) + glob.glob(("*.webm"))
     if l:
-        await event.edit("Yeah..! i found something..")
+        await event.edit("`Yeah..! i found something..`")
     else:
         await event.edit(f"Sorry..! i can't find anything with `{query}`")
     loa = l[0]
@@ -178,6 +179,7 @@ async def _(event):
         width = metadata.get("width")
     if metadata.has("height"):
         height = metadata.get("height")
+    await event.edit("`Uploading video.. Please wait..`")
     await event.client.send_file(
         event.chat_id,
         loa,
