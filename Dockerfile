@@ -1,4 +1,4 @@
-FROM zainarbani/dockerub:one4u-alpine
+FROM aidilaryanto/projectdils:alpine
 
 RUN mkdir /ProjectDils && chmod 777 /ProjectDils
 ENV PATH="/ProjectDils/bin:$PATH"
