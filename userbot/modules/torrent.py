@@ -47,7 +47,7 @@ async def torrent(event):
     url = f"https://nekobin.com/raw/{key}"
     caption = f"`Here the results for the query: {query}`\n\nPasted to: [Nekobin]({url})"
     os.remove(tsfileloc)
-    await e.edit(caption, link_preview=False)
+    await event.edit(caption, link_preview=False)
 
 
 def dogbin(magnets):
