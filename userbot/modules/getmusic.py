@@ -1,9 +1,12 @@
 # Copyright (C) 2020 Aidil Aryanto.
 # All rights reserved.
 
+import glob
+import os
 import datetime
 import asyncio
 import requests
+import time
 from bs4 import BeautifulSoup
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
@@ -13,7 +16,7 @@ from userbot import bot, CMD_HELP, lastfm, LASTFM_USERNAME
 from telethon.tl.types import DocumentAttributeVideo
 from userbot.events import register
 from pylast import User
-
+from userbot.utils import progress
 
 # For getvideosong
 def getmusicvideo(cat):
@@ -175,6 +178,7 @@ async def _(event):
     if metadata.has("height"):
         height = metadata.get("height")
     await event.edit("`Uploading video.. Please wait..`")
+    c_time = time.time()
     await event.client.send_file(
         event.chat_id,
         loa,
@@ -192,6 +196,9 @@ async def _(event):
                 supports_streaming=True,
             )
         ],
+        progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+            progress(d, t, event, c_time, "[UPLOAD]", loa)
+        ),
     )
     await event.delete()
     os.system("rm -rf *.mkv")
