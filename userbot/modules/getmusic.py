@@ -209,15 +209,15 @@ async def _(event):
 CMD_HELP.update({
     "getmusic":
     ">`.songn <Artist - Song Title>`"
-    "\nUsage: Download music by name"
+    "\nUsage: Download music by name (@WooMaiBot)"
     "\n\n>`.songl <Spotify/Deezer Link>`"
-    "\nUsage: Download music by link"
+    "\nUsage: Download music by link (@MusicHuntersBot)"
     "\n\n>`.songf <Artist - Song Title>`"
-    "\nUsage: Download music by name (fallback)"
+    "\nUsage: Download music by name (@SpotifyMusicDownloaderBot)"
     "\n\n>`.songn now`"
-    "\nUsage: Download current LastFM scrobble"
+    "\nUsage: Download current LastFM scrobble with @WooMaiBot"
     "\n\n>`.songf now`"
-    "\nUsage: Download current LastFM scrobble (fallback)"
+    "\nUsage: Download current LastFM scrobble with @SpotifyMusicDownloaderBot"
     "\n\n>`.vsong` <Artist - Song Title>"
     "\nUsage: Finding and uploading videoclip.\n"
 
