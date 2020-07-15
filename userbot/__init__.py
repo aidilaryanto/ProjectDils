@@ -77,6 +77,9 @@ ALIVE_LOGO = (
     os.environ.get("ALIVE_LOGO") or "https://telegra.ph/file/36df725e1554826a2dfda.png"
 )
 
+# ProjectDils Version
+PROJECTDILS_VERSION = os.environ.get("PROJECTDILS_VERSION") or "2.7"
+
 # Bleep Blop, this is a bot ;)
 PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN") or "False")
 

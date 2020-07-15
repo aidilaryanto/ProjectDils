@@ -12,7 +12,7 @@ from shutil import which
 from os import remove
 from telethon import version
 
-from userbot import bot, CMD_HELP, ALIVE_NAME, ALIVE_LOGO
+from userbot import bot, CMD_HELP, ALIVE_NAME, ALIVE_LOGO, PROJECTDILS_VERSION
 from userbot.events import register
 
 # ================= CONSTANT =================
@@ -134,9 +134,10 @@ async def amireallyalive(alive):
     logo = ALIVE_LOGO
     output = ("`ProjectDils is running...`\n"
              f"`•••••••••••••••••••••••••••••••••••••`\n"
-             f"👤 `User     :`  {DEFAULTUSER}\n"
-             f"🐍 `Python   : v{python_version()}`\n"
-             f"⚙️ `Telethon : v{version.__version__}`\n"
+             f"👤 `User        :`  {DEFAULTUSER}\n"
+             f"🐍 `Python      : v{python_version()}`\n"
+             f"⚙️ `Telethon    : v{version.__version__}`\n"
+             f"🤖 `ProjectDils : v{PROJECTDILS_VERSION}`\n"
              f"`•••••••••••••••••••••••••••••••••••••`\n")
     await bot.send_file(alive.chat_id, logo, caption=output)
     await alive.delete()
