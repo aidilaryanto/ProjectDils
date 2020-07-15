@@ -35,7 +35,7 @@ def getmusicvideo(cat):
             video_link = link.get("href")
             break
     video_link = "http://www.youtube.com/" + video_link
-    command = 'youtube-dl -f "[filesize<20M]" ' + video_link
+    command = 'youtube-dl -f "[filesize<50M]" ' + video_link
     os.system(command)
 
 
