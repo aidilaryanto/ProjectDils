@@ -58,11 +58,11 @@ async def device_info(request):
         device = textx.text
     else:
         return await request.edit("`Usage: .device <codename> / <model>`")
-    try:
-        found = get(DEVICES_DATA).json()[device]
-    except KeyError:
-        reply = f"`Couldn't find info about {device}!`\n"
-    else:
+    found = [
+        i for i in get(DEVICES_DATA).json()
+        if device in (i['device'], i['model'])
+    ]
+    if found:
         reply = f'Search results for {device}:\n\n'
         for item in found:
             brand = item['brand']
