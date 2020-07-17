@@ -139,8 +139,6 @@ async def promote(promt):
         await promt.client(
             EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
         await promt.edit("`Promoted Successfully!`")
-        await sleep(5)
-        await promt.delete()
 
     # If Telethon spit BadRequestError, assume
     # we don't have Promote permission
@@ -193,8 +191,6 @@ async def demote(dmod):
     except BadRequestError:
         return await dmod.edit(NO_PERM)
     await dmod.edit("`Demoted Successfully!`")
-    await sleep(5)
-    await dmod.delete()
 
     # Announce to the logging group if we have demoted successfully
     if BOTLOG:
@@ -242,9 +238,12 @@ async def ban(bon):
     # is done gracefully
     # Shout out the ID, so that fedadmins can fban later
     if reason:
-        await bon.edit(f"`{str(user.id)}` was banned !!\nReason: {reason}")
+        await bon.edit(f"{user.first_name} was banned !!\
+        \nID: `{str(user.id)}`\
+        \nReason: {reason}")
     else:
-        await bon.edit(f"`{str(user.id)}` was banned !!")
+        await bon.edit(f"{user.first_name} was banned !!\
+        \nID: `{str(user.id)}`")
     # Announce to the logging group if we have banned the person
     # successfully!
     if BOTLOG:
@@ -280,9 +279,7 @@ async def nothanos(unbon):
         await unbon.client(
             EditBannedRequest(unbon.chat_id, user.id, UNBAN_RIGHTS))
         await unbon.edit("```Unbanned Successfully```")
-        await sleep(3)
-        await unbon.delete()	
-
+        
         if BOTLOG:
             await unbon.client.send_message(
                 BOTLOG_CHATID, "#UNBAN\n"
@@ -338,7 +335,7 @@ async def spider(spdr):
                 await spdr.edit(f"`Safely taped !!`\nReason: {reason}")
             else:
                 await spdr.edit("`Safely taped !!`")
-
+            
             # Announce to logging group
             if BOTLOG:
                 await spdr.client.send_message(
@@ -384,8 +381,7 @@ async def unmoot(unmot):
             await unmot.client(
                 EditBannedRequest(unmot.chat_id, user.id, UNBAN_RIGHTS))
             await unmot.edit("```Unmuted Successfully```")
-            await sleep(3)
-            await unmot.delete()
+            
         except UserIdInvalidError:
             return await unmot.edit("`Uh oh my unmute logic broke!`")
 
@@ -642,8 +638,6 @@ async def pin(msg):
         return await msg.edit(NO_PERM)
 
     await msg.edit("`Pinned Successfully!`")
-    await sleep(2)
-    await msg.delete()
 
     user = await get_user_from_id(msg.from_id, msg)
 
@@ -676,7 +670,7 @@ async def kick(usr):
 
     try:
         await usr.client.kick_participant(usr.chat_id, user.id)
-        await sleep(.5)
+        await sleep(1)
     except Exception as e:
         return await usr.edit(NO_PERM + f"\n{str(e)}")
 
@@ -687,8 +681,6 @@ async def kick(usr):
     else:
         await usr.edit(
             f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
-        await sleep(5)
-        await usr.delete()
 
     if BOTLOG:
         await usr.client.send_message(
