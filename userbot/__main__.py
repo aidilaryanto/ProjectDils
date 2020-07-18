@@ -30,7 +30,7 @@ for module_name in ALL_MODULES:
 LOGS.info("You are running ProjectDils [v2.7]")
 
 LOGS.info(
-    "ProjectDils is now running !!" 
+    "ProjectDils is now running !!"
     "Test it by typing .on or .ping in any chat.")
 
 

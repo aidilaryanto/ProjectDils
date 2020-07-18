@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 #
 # Multifunction memes
-# 
+#
 # Based code + improve from AdekMaulana and aidilaryanto
 
 from PIL import Image
@@ -13,35 +13,24 @@ import re
 import random
 import io
 from random import randint, uniform
-import time
-from datetime import datetime
 from logging import Logger as logger
 from telethon import events
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
-from pySmartDL import SmartDL
 from PIL import Image, ImageEnhance, ImageOps
-import datetime
-from collections import defaultdict
-import math
 import os
 import requests
-import zipfile
 import requests
 import base64
 import json
 import telethon
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from telethon.tl.types import DocumentAttributeVideo
-from telethon.errors.rpcerrorlist import StickersetInvalidError
-from telethon.errors import MessageNotModifiedError
-from telethon.tl.functions.messages import GetStickerSetRequest
-from telethon.tl.types import (DocumentAttributeFilename, DocumentAttributeSticker,
-                               InputMediaUploadedDocument, InputPeerNotifySettings,
-                               InputStickerSetID, InputStickerSetShortName,
-                               MessageMediaPhoto)
-from userbot.utils import progress, humanbytes, time_formatter
+from telethon.tl.types import (
+    DocumentAttributeFilename,
+    DocumentAttributeSticker,
+    InputMediaUploadedDocument,
+    InputPeerNotifySettings,
+    InputStickerSetID,
+    InputStickerSetShortName,
+    MessageMediaPhoto)
 from userbot import bot, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, QUOTES_API_TOKEN
 from userbot.events import register
 
@@ -89,136 +78,145 @@ EMOJI_PATTERN = re.compile(
 
 @register(outgoing=True, pattern="^.pch(?: |$)(.*)")
 async def quotecmd(message):  # noqa: C901
-        if QUOTES_API_TOKEN is None:
-            await message.edit("Provide QUOTES_API_TOKEN from http://antiddos.systems/login in config.py or heroku vars first!!")
-            return
-        await message.edit("`Processing...`")
-        args = message.raw_text.split(" ")[1:]
-        if args == []:
-            args = ["default"]
-        reply = await message.get_reply_message()
+    if QUOTES_API_TOKEN is None:
+        await message.edit("Provide QUOTES_API_TOKEN from http://antiddos.systems/login in config.py or heroku vars first!!")
+        return
+    await message.edit("`Processing...`")
+    args = message.raw_text.split(" ")[1:]
+    if args == []:
+        args = ["default"]
+    reply = await message.get_reply_message()
 
-        if not reply:
-            return await message.edit(strings["no_reply"])
+    if not reply:
+        return await message.edit(strings["no_reply"])
 
-        if not args:
-            return await message.edit(strings["no_template"])
+    if not args:
+        return await message.edit(strings["no_template"])
 
-        username_color = username = admintitle = user_id = None
-        profile_photo_url = reply.from_id
+    username_color = username = admintitle = user_id = None
+    profile_photo_url = reply.from_id
 
-        admintitle = ""
-        if isinstance(message.to_id, telethon.tl.types.PeerChannel):
-            try:
-                user = await bot(telethon.tl.functions.channels.GetParticipantRequest(message.chat_id,
-                                                                                              reply.from_id))
-                if isinstance(user.participant, telethon.tl.types.ChannelParticipantCreator):
-                    admintitle = user.participant.rank or strings["creator"]
-                elif isinstance(user.participant, telethon.tl.types.ChannelParticipantAdmin):
-                    admintitle = user.participant.rank or strings["admin"]
-                user = user.users[0]
-            except telethon.errors.rpcerrorlist.UserNotParticipantError:
-                user = await reply.get_sender()
-        elif isinstance(message.to_id, telethon.tl.types.PeerChat):
-            chat = await bot(telethon.tl.functions.messages.GetFullChatRequest(reply.to_id))
-            participants = chat.full_chat.participants.participants
-            participant = next(filter(lambda x: x.user_id == reply.from_id, participants), None)
-            if isinstance(participant, telethon.tl.types.ChatParticipantCreator):
-                admintitle = strings["creator"]
-            elif isinstance(participant, telethon.tl.types.ChatParticipantAdmin):
-                admintitle = strings["admin"]
+    admintitle = ""
+    if isinstance(message.to_id, telethon.tl.types.PeerChannel):
+        try:
+            user = await bot(telethon.tl.functions.channels.GetParticipantRequest(message.chat_id,
+                                                                                  reply.from_id))
+            if isinstance(
+                    user.participant,
+                    telethon.tl.types.ChannelParticipantCreator):
+                admintitle = user.participant.rank or strings["creator"]
+            elif isinstance(user.participant, telethon.tl.types.ChannelParticipantAdmin):
+                admintitle = user.participant.rank or strings["admin"]
+            user = user.users[0]
+        except telethon.errors.rpcerrorlist.UserNotParticipantError:
             user = await reply.get_sender()
+    elif isinstance(message.to_id, telethon.tl.types.PeerChat):
+        chat = await bot(telethon.tl.functions.messages.GetFullChatRequest(reply.to_id))
+        participants = chat.full_chat.participants.participants
+        participant = next(
+            filter(
+                lambda x: x.user_id == reply.from_id,
+                participants),
+            None)
+        if isinstance(participant, telethon.tl.types.ChatParticipantCreator):
+            admintitle = strings["creator"]
+        elif isinstance(participant, telethon.tl.types.ChatParticipantAdmin):
+            admintitle = strings["admin"]
+        user = await reply.get_sender()
+    else:
+        user = await reply.get_sender()
+
+    username = telethon.utils.get_display_name(user)
+    user_id = reply.from_id
+
+    if reply.fwd_from:
+        if reply.fwd_from.saved_from_peer:
+            username = telethon.utils.get_display_name(reply.forward.chat)
+            profile_photo_url = reply.forward.chat
+            admintitle = strings["channel"]
+        elif reply.fwd_from.from_name:
+            username = reply.fwd_from.from_name
+        elif reply.forward.sender:
+            username = telethon.utils.get_display_name(reply.forward.sender)
+        elif reply.forward.chat:
+            username = telethon.utils.get_display_name(reply.forward.chat)
+
+    pfp = await bot.download_profile_photo(profile_photo_url, bytes)
+    if pfp is not None:
+        profile_photo_url = "data:image/png;base64, " + \
+            base64.b64encode(pfp).decode()
+
+    if user_id is not None:
+        username_color = config["username_colors"][user_id % 7]
+    else:
+        username_color = config["default_username_color"]
+
+    request = json.dumps({
+        "ProfilePhotoURL": profile_photo_url,
+        "usernameColor": username_color,
+        "username": username,
+        "adminTitle": admintitle,
+        "Text": reply.message,
+        "Markdown": get_markdown(reply),
+        "Template": args[0],
+        "APIKey": QUOTES_API_TOKEN
+    })
+
+    resp = requests.post(config["api_url"] + "/api/v2/quote", data=request)
+    resp.raise_for_status()
+    resp = resp.json()
+
+    if resp["status"] == 500:
+        return await message.edit(strings["server_error"])
+    elif resp["status"] == 401:
+        if resp["message"] == "ERROR_TOKEN_INVALID":
+            return await message.edit(strings["invalid_token"])
         else:
-            user = await reply.get_sender()
-
-        username = telethon.utils.get_display_name(user)
-        user_id = reply.from_id
-
-        if reply.fwd_from:
-            if reply.fwd_from.saved_from_peer:
-                username = telethon.utils.get_display_name(reply.forward.chat)
-                profile_photo_url = reply.forward.chat
-                admintitle = strings["channel"]
-            elif reply.fwd_from.from_name:
-                username = reply.fwd_from.from_name
-            elif reply.forward.sender:
-                username = telethon.utils.get_display_name(reply.forward.sender)
-            elif reply.forward.chat:
-                username = telethon.utils.get_display_name(reply.forward.chat)
-
-        pfp = await bot.download_profile_photo(profile_photo_url, bytes)
-        if pfp is not None:
-            profile_photo_url = "data:image/png;base64, " + base64.b64encode(pfp).decode()
-
-        if user_id is not None:
-            username_color = config["username_colors"][user_id % 7]
+            raise ValueError("Invalid response from server", resp)
+    elif resp["status"] == 403:
+        if resp["message"] == "ERROR_UNAUTHORIZED":
+            return await message.edit(strings["unauthorized"])
         else:
-            username_color = config["default_username_color"]
+            raise ValueError("Invalid response from server", resp)
+    elif resp["status"] == 404:
+        if resp["message"] == "ERROR_TEMPLATE_NOT_FOUND":
+            newreq = requests.post(
+                config["api_url"] +
+                "/api/v1/getalltemplates",
+                data={
+                    "token": QUOTES_API_TOKEN})
+            newreq = newreq.json()
 
-        request = json.dumps({
-            "ProfilePhotoURL": profile_photo_url,
-            "usernameColor": username_color,
-            "username": username,
-            "adminTitle": admintitle,
-            "Text": reply.message,
-            "Markdown": get_markdown(reply),
-            "Template": args[0],
-            "APIKey": QUOTES_API_TOKEN
-        })
-
-        resp = requests.post(config["api_url"] + "/api/v2/quote", data=request)
-        resp.raise_for_status()
-        resp = resp.json()
-
-        if resp["status"] == 500:
-            return await message.edit(strings["server_error"])
-        elif resp["status"] == 401:
-            if resp["message"] == "ERROR_TOKEN_INVALID":
+            if newreq["status"] == "NOT_ENOUGH_PERMISSIONS":
+                return await message.edit(strings["not_enough_permissions"])
+            elif newreq["status"] == "SUCCESS":
+                templates = strings["delimiter"].join(newreq["message"])
+                return await message.edit(strings["templates"].format(templates))
+            elif newreq["status"] == "INVALID_TOKEN":
                 return await message.edit(strings["invalid_token"])
             else:
-                raise ValueError("Invalid response from server", resp)
-        elif resp["status"] == 403:
-            if resp["message"] == "ERROR_UNAUTHORIZED":
-                return await message.edit(strings["unauthorized"])
-            else:
-                raise ValueError("Invalid response from server", resp)
-        elif resp["status"] == 404:
-            if resp["message"] == "ERROR_TEMPLATE_NOT_FOUND":
-                newreq = requests.post(config["api_url"] + "/api/v1/getalltemplates", data={
-                    "token": QUOTES_API_TOKEN
-                })
-                newreq = newreq.json()
-
-                if newreq["status"] == "NOT_ENOUGH_PERMISSIONS":
-                    return await message.edit(strings["not_enough_permissions"])
-                elif newreq["status"] == "SUCCESS":
-                    templates = strings["delimiter"].join(newreq["message"])
-                    return await message.edit(strings["templates"].format(templates))
-                elif newreq["status"] == "INVALID_TOKEN":
-                    return await message.edit(strings["invalid_token"])
-                else:
-                    raise ValueError("Invalid response from server", newreq)
-            else:
-                raise ValueError("Invalid response from server", resp)
-        elif resp["status"] != 200:
+                raise ValueError("Invalid response from server", newreq)
+        else:
             raise ValueError("Invalid response from server", resp)
+    elif resp["status"] != 200:
+        raise ValueError("Invalid response from server", resp)
 
-        req = requests.get(config["api_url"] + "/cdn/" + resp["message"])
-        req.raise_for_status()
-        file = BytesIO(req.content)
-        file.seek(0)
+    req = requests.get(config["api_url"] + "/cdn/" + resp["message"])
+    req.raise_for_status()
+    file = BytesIO(req.content)
+    file.seek(0)
 
-        img = Image.open(file)
-        with BytesIO() as sticker:
-            img.save(sticker, "webp")
-            sticker.name = "sticker.webp"
-            sticker.seek(0)
-            try:
-                await message.delete()
-                await reply.reply(file=sticker)
-            except telethon.errors.rpcerrorlist.ChatSendStickersForbiddenError:
-                await message.edit(strings["cannot_send_stickers"])
-            file.close()
+    img = Image.open(file)
+    with BytesIO() as sticker:
+        img.save(sticker, "webp")
+        sticker.name = "sticker.webp"
+        sticker.seek(0)
+        try:
+            await message.delete()
+            await reply.reply(file=sticker)
+        except telethon.errors.rpcerrorlist.ChatSendStickersForbiddenError:
+            await message.edit(strings["cannot_send_stickers"])
+        file.close()
 
 
 def get_markdown(reply):
@@ -300,7 +298,8 @@ async def mim(event):
             if event.reply_to_msg_id:
                 file_name = "meme.png"
                 reply_message = await event.get_reply_message()
-                downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, file_name)
+                downloaded_file_name = os.path.join(
+                    TEMP_DOWNLOAD_DIRECTORY, file_name)
                 downloaded_file_name = await bot.download_media(
                     reply_message, downloaded_file_name,
                 )
@@ -317,7 +316,8 @@ async def mim(event):
                     await event.edit("File Not Found {}".format(input_str))
             response = await bot_conv.get_response()
             files_name = "memes.webp"
-            download_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, files_name)
+            download_file_name = os.path.join(
+                TEMP_DOWNLOAD_DIRECTORY, files_name)
             await bot.download_media(
                 response.media, download_file_name,
             )
@@ -347,7 +347,8 @@ def is_message_image(message):
                 return True
         return False
     return False
-    
+
+
 async def silently_send_message(conv, text):
     await conv.send_message(text)
     response = await conv.get_response()
@@ -358,39 +359,42 @@ async def silently_send_message(conv, text):
 @register(outgoing=True, pattern="^.q(?: |$)(.*)")
 async def quotess(qotli):
     if qotli.fwd_from:
-        return 
+        return
     if not qotli.reply_to_msg_id:
-       await qotli.edit("```Reply to any user message.```")
-       return
-    reply_message = await qotli.get_reply_message() 
+        await qotli.edit("```Reply to any user message.```")
+        return
+    reply_message = await qotli.get_reply_message()
     if not reply_message.text:
-       await qotli.edit("```Reply to text message```")
-       return
+        await qotli.edit("```Reply to text message```")
+        return
     chat = "@QuotLyBot"
-    sender = reply_message.sender
+    reply_message.sender
     if reply_message.sender.bot:
-       await qotli.edit("```Reply to actual users message.```")
-       return
+        await qotli.edit("```Reply to actual users message.```")
+        return
     await qotli.edit("```Making a Quote```")
     async with bot.conversation(chat) as conv:
-          try:     
-              response = conv.wait_event(events.NewMessage(incoming=True,from_users=1031952739))
-              msg = await bot.forward_messages(chat, reply_message)
-              response = await response 
-              """ - don't spam notif - """
-              await bot.send_read_acknowledge(conv.chat_id)
-          except YouBlockedUserError: 
-              await qotli.reply("```Please unblock @QuotLyBot and try again```")
-              return
-          if response.text.startswith("Hi!"):
-             await qotli.edit("```Can you kindly disable your forward privacy settings for good?```")
-          else: 
-             await qotli.delete()   
-             await bot.forward_messages(qotli.chat_id, response.message)
-             await bot.send_read_acknowledge(qotli.chat_id)
-             """ - cleanup chat after completed - """
-             await qotli.client.delete_messages(conv.chat_id,
-                                                [msg.id, response.id])
+        try:
+            response = conv.wait_event(
+                events.NewMessage(
+                    incoming=True,
+                    from_users=1031952739))
+            msg = await bot.forward_messages(chat, reply_message)
+            response = await response
+            """ - don't spam notif - """
+            await bot.send_read_acknowledge(conv.chat_id)
+        except YouBlockedUserError:
+            await qotli.reply("```Please unblock @QuotLyBot and try again```")
+            return
+        if response.text.startswith("Hi!"):
+            await qotli.edit("```Can you kindly disable your forward privacy settings for good?```")
+        else:
+            await qotli.delete()
+            await bot.forward_messages(qotli.chat_id, response.message)
+            await bot.send_read_acknowledge(qotli.chat_id)
+            """ - cleanup chat after completed - """
+            await qotli.client.delete_messages(conv.chat_id,
+                                               [msg.id, response.id])
 
 
 @register(outgoing=True, pattern=r'^.hz(:? |$)(.*)?')
@@ -419,15 +423,15 @@ async def hazz(hazmat):
             if level:
                 m = f"/hazmat {level}"
                 msg_reply = await conv.send_message(
-                          m,
-                          reply_to=msg.id)
+                    m,
+                    reply_to=msg.id)
                 r = await conv.get_response()
                 response = await conv.get_response()
             elif reply_message.gif:
                 m = f"/hazmat"
                 msg_reply = await conv.send_message(
-                          m,
-                          reply_to=msg.id)
+                    m,
+                    reply_to=msg.id)
                 r = await conv.get_response()
                 response = await conv.get_response()
             else:
@@ -445,8 +449,8 @@ async def hazz(hazmat):
             return
         else:
             downloaded_file_name = await hazmat.client.download_media(
-                                 response.media,
-                                 TEMP_DOWNLOAD_DIRECTORY
+                response.media,
+                TEMP_DOWNLOAD_DIRECTORY
             )
             await hazmat.client.send_file(
                 hazmat.chat_id,
@@ -461,7 +465,7 @@ async def hazz(hazmat):
                     [msg.id, msg_reply.id, r.id, response.id])
             else:
                 await hazmat.client.delete_messages(conv.chat_id,
-                                                 [msg.id, response.id])
+                                                    [msg.id, response.id])
     await hazmat.delete()
     return os.remove(downloaded_file_name)
 
@@ -490,8 +494,8 @@ async def fryerrr(fry):
             if level:
                 m = f"/deepfry {level}"
                 msg_level = await conv.send_message(
-                          m,
-                          reply_to=msg.id)
+                    m,
+                    reply_to=msg.id)
                 r = await conv.get_response()
                 response = await conv.get_response()
             else:
@@ -505,8 +509,8 @@ async def fryerrr(fry):
             await fry.edit("`Please disable your forward privacy setting...`")
         else:
             downloaded_file_name = await fry.client.download_media(
-                                 response.media,
-                                 TEMP_DOWNLOAD_DIRECTORY
+                response.media,
+                TEMP_DOWNLOAD_DIRECTORY
             )
             await fry.client.send_file(
                 fry.chat_id,
@@ -527,7 +531,8 @@ async def fryerrr(fry):
     await fry.delete()
     return os.remove(downloaded_file_name)
 
-@register(pattern="^.deepfry(?: |$)(.*)", outgoing=True) 
+
+@register(pattern="^.deepfry(?: |$)(.*)", outgoing=True)
 async def deepfryer(event):
     try:
         frycount = int(event.pattern_match.group(1))
@@ -577,9 +582,12 @@ async def deepfry(img: Image) -> Image:
     # Crush image to hell and back
     img = img.convert("RGB")
     width, height = img.width, img.height
-    img = img.resize((int(width ** uniform(0.8, 0.9)), int(height ** uniform(0.8, 0.9))), resample=Image.LANCZOS)
-    img = img.resize((int(width ** uniform(0.85, 0.95)), int(height ** uniform(0.85, 0.95))), resample=Image.BILINEAR)
-    img = img.resize((int(width ** uniform(0.89, 0.98)), int(height ** uniform(0.89, 0.98))), resample=Image.BICUBIC)
+    img = img.resize((int(width ** uniform(0.8, 0.9)),
+                      int(height ** uniform(0.8, 0.9))), resample=Image.LANCZOS)
+    img = img.resize((int(width ** uniform(0.85, 0.95)),
+                      int(height ** uniform(0.85, 0.95))), resample=Image.BILINEAR)
+    img = img.resize((int(width ** uniform(0.89, 0.98)),
+                      int(height ** uniform(0.89, 0.98))), resample=Image.BICUBIC)
     img = img.resize((width, height), resample=Image.BICUBIC)
     img = ImageOps.posterize(img, randint(3, 7))
 
@@ -602,7 +610,8 @@ async def check_media(reply_message):
         if reply_message.photo:
             data = reply_message.photo
         elif reply_message.document:
-            if DocumentAttributeFilename(file_name='AnimatedSticker.tgs') in reply_message.media.document.attributes:
+            if DocumentAttributeFilename(
+                    file_name='AnimatedSticker.tgs') in reply_message.media.document.attributes:
                 return False
             if reply_message.gif or reply_message.video or reply_message.audio or reply_message.voice:
                 return False
@@ -617,35 +626,39 @@ async def check_media(reply_message):
     else:
         return data
 
+
 @register(outgoing=True, pattern="^.sg(?: |$)(.*)")
 async def lastname(steal):
     if steal.fwd_from:
-        return 
+        return
     if not steal.reply_to_msg_id:
-       await steal.edit("```Reply to any user message.```")
-       return
-    reply_message = await steal.get_reply_message() 
+        await steal.edit("```Reply to any user message.```")
+        return
+    reply_message = await steal.get_reply_message()
     if not reply_message.text:
-       await steal.edit("```reply to text message```")
-       return
+        await steal.edit("```reply to text message```")
+        return
     chat = "@SangMataInfo_bot"
-    sender = reply_message.sender
+    reply_message.sender
     if reply_message.sender.bot:
-       await steal.edit("```Reply to actual users message.```")
-       return
+        await steal.edit("```Reply to actual users message.```")
+        return
     await steal.edit("```Sit tight while I steal some data from NASA```")
     async with bot.conversation(chat) as conv:
-          try:     
-              response = conv.wait_event(events.NewMessage(incoming=True,from_users=461843263))
-              await bot.forward_messages(chat, reply_message)
-              response = await response 
-          except YouBlockedUserError: 
-              await steal.reply("```Please unblock @sangmatainfo_bot and try again```")
-              return
-          if response.text.startswith("Forward"):
-             await steal.edit("```can you kindly disable your forward privacy settings for good?```")
-          else: 
-             await steal.edit(f"{response.message.message}")
+        try:
+            response = conv.wait_event(
+                events.NewMessage(
+                    incoming=True,
+                    from_users=461843263))
+            await bot.forward_messages(chat, reply_message)
+            response = await response
+        except YouBlockedUserError:
+            await steal.reply("```Please unblock @sangmatainfo_bot and try again```")
+            return
+        if response.text.startswith("Forward"):
+            await steal.edit("```can you kindly disable your forward privacy settings for good?```")
+        else:
+            await steal.edit(f"{response.message.message}")
 
 
 @register(outgoing=True, pattern="^.waifu(?: |$)(.*)")
@@ -666,56 +679,56 @@ async def waifu(animu):
                             hide_via=True)
     await animu.delete()
 
+
 def deEmojify(inputString: str) -> str:
     return re.sub(EMOJI_PATTERN, '', inputString)
 
 
 CMD_HELP.update({
-        "memify": 
+    "memify":
         ">`.mmf texttop ; textbottom`"
         "\nUsage: Reply a sticker/image/gif and send with cmd."
-    })
+})
 
 CMD_HELP.update({
-        "quotly": 
+    "quotly":
         ">`.q`"
         "\nUsage: Enhance ur text to sticker."
-    })
+})
 
 CMD_HELP.update({
-        "hazmat":
+    "hazmat":
         ">`.hz or .hz [flip, x2, rotate (degree), background (number), black]`"
         "\nUsage: Reply to a image / sticker to suit up!"
         "\n@hazmat_suit_bot"
-    })
+})
 
 CMD_HELP.update({
-        "quote": 
+    "quote":
         ">`.pch`"
         "\nUsage: Same as quotly, enhance ur text to sticker."
-    })
+})
 
 CMD_HELP.update({
-        "deepfry":
+    "deepfry":
         ">`.df or .df [level(1-8)]`"
         "\nUsage: deepfry image/sticker from the reply."
         "\n@image_deepfrybot"
         "\n\n>`.deepfry`"
         "\nUsage: krispi image"
-    })
+})
 
 
 CMD_HELP.update({
-        "sangmata": 
+    "sangmata":
         ".sg \
           \nUsage: Steal ur or friend name."
-    })
+})
 
 
 CMD_HELP.update({
-        "waifu": 
+    "waifu":
         ">`.waifu`"
         "\nUsage: Enchance your text with beautiful anime girl templates."
         "\n@StickerizerBot"
-    })
-
+})

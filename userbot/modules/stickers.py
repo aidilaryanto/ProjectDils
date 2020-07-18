@@ -31,8 +31,8 @@ KANGING_STR = [
     "Roses are red\nviolets are blue\nkanging this sticker\nso my pack looks cool",
     "Imprisoning this sticker...\nit'll look good in my pack",
     "I'm is stealing this sticker...\nhehehehehe... ",
-	"May i kang this?\nI'll do it anyway even you says no!",
-	"Seems gud if i kang this...",
+    "May i kang this?\nI'll do it anyway even you says no!",
+    "Seems gud if i kang this...",
 ]
 
 

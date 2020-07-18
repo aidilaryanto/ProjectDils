@@ -3,7 +3,6 @@
 
 import glob
 import os
-import datetime
 import asyncio
 import requests
 import time
@@ -19,6 +18,8 @@ from pylast import User
 from userbot.utils import progress
 
 # For getvideosong
+
+
 def getmusicvideo(cat):
     search = cat
     headers = {
@@ -60,23 +61,24 @@ async def _(event):
     link = f"/netease {track}"
     await event.edit("`Searching...`")
     async with bot.conversation(chat) as conv:
-          await asyncio.sleep(2)
-          await event.edit("`Downloading...Please wait`")
-          try:
-              msg = await conv.send_message(link)
-              response = await conv.get_response()
-              respond = await conv.get_response()
-              """ - don't spam notif - """
-              await bot.send_read_acknowledge(conv.chat_id)
-          except YouBlockedUserError:
-              await event.reply("```Please unblock @WooMaiBot and try again```")
-              return
-          await event.edit("`Sending Your Music...`")
-          await asyncio.sleep(3)
-          await bot.send_file(event.chat_id, respond)
+        await asyncio.sleep(2)
+        await event.edit("`Downloading...Please wait`")
+        try:
+            msg = await conv.send_message(link)
+            response = await conv.get_response()
+            respond = await conv.get_response()
+            """ - don't spam notif - """
+            await bot.send_read_acknowledge(conv.chat_id)
+        except YouBlockedUserError:
+            await event.reply("```Please unblock @WooMaiBot and try again```")
+            return
+        await event.edit("`Sending Your Music...`")
+        await asyncio.sleep(3)
+        await bot.send_file(event.chat_id, respond)
     await event.client.delete_messages(conv.chat_id,
                                        [msg.id, response.id, respond.id])
     await event.delete()
+
 
 @register(outgoing=True, pattern=r"^\.songl(?: |$)(.*)")
 async def _(event):
@@ -104,6 +106,7 @@ async def _(event):
         await event.client.delete_messages(conv.chat_id,
                                            [msg_start.id, response.id, msg.id, details.id, song.id])
         await event.delete()
+
 
 @register(outgoing=True, pattern=r"^\.songf (?:(now)|(.*) - (.*))")
 async def _(event):
@@ -144,6 +147,7 @@ async def _(event):
     await event.client.delete_messages(conv.chat_id,
                                        [msg.id, r.id, respond.id])
     await event.delete()
+
 
 @register(outgoing=True, pattern=r"^\.vsong(?: |$)(.*)")
 async def _(event):

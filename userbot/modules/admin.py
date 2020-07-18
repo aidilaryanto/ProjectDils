@@ -279,7 +279,7 @@ async def nothanos(unbon):
         await unbon.client(
             EditBannedRequest(unbon.chat_id, user.id, UNBAN_RIGHTS))
         await unbon.edit("```Unbanned Successfully```")
-        
+
         if BOTLOG:
             await unbon.client.send_message(
                 BOTLOG_CHATID, "#UNBAN\n"
@@ -335,7 +335,7 @@ async def spider(spdr):
                 await spdr.edit(f"`Safely taped !!`\nReason: {reason}")
             else:
                 await spdr.edit("`Safely taped !!`")
-            
+
             # Announce to logging group
             if BOTLOG:
                 await spdr.client.send_message(
@@ -381,7 +381,7 @@ async def unmoot(unmot):
             await unmot.client(
                 EditBannedRequest(unmot.chat_id, user.id, UNBAN_RIGHTS))
             await unmot.edit("```Unmuted Successfully```")
-            
+
         except UserIdInvalidError:
             return await unmot.edit("`Uh oh my unmute logic broke!`")
 
@@ -526,8 +526,7 @@ async def rm_deletedacc(show):
         if del_u > 0:
             del_status = (
                 f"`Found` **{del_u}** `ghost/deleted/zombie account(s) in this group,"
-                "\nclean them by using .zombies clean`"
-            )
+                "\nclean them by using .zombies clean`")
         return await show.edit(del_status)
 
     # Here laying the sanity check
@@ -563,7 +562,7 @@ async def rm_deletedacc(show):
     if del_a > 0:
         del_status = (f"Cleaned **{del_u}** deleted account(s) "
                       f"\n**{del_a}** deleted admin accounts are not removed"
-        )
+                      )
     await show.edit(del_status)
     await sleep(2)
     await show.delete()
@@ -573,6 +572,7 @@ async def rm_deletedacc(show):
             BOTLOG_CHATID, "#CLEANUP\n"
             f"Cleaned **{del_u}** deleted account(s) !!"
             f"\nCHAT: {show.chat.title}(`{show.chat_id}`)")
+
 
 @register(outgoing=True, pattern="^.all$")
 async def tagaso(event):
@@ -666,7 +666,6 @@ async def kick(usr):
         return await usr.edit("`Couldn't fetch user.`")
 
     await usr.edit("`Kicking...`")
-
 
     try:
         await usr.client.kick_participant(usr.chat_id, user.id)
@@ -775,7 +774,7 @@ async def get_user_from_id(user, event):
 
     return user_obj
 
-  
+
 @register(outgoing=True, pattern="^.usersdel ?(.*)")
 async def get_usersdel(show):
     """ For .usersdel command, list all of the deleted users in a chat. """
@@ -792,7 +791,7 @@ async def get_usersdel(show):
         else:
             searchq = show.pattern_match.group(1)
             async for user in show.client.iter_participants(
-                   show.chat_id, search=f'{searchq}'):
+                    show.chat_id, search=f'{searchq}'):
                 if not user.deleted:
                     mentions += f"\n[{user.first_name}](tg://user?id={user.id}) `{user.id}`"
          #       else:

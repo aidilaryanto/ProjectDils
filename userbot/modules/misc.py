@@ -81,15 +81,15 @@ async def bot_support(wannahelp):
     """ For .support command, just returns the group link. """
     await wannahelp.edit(
         "Join the UserButt Chat: @userbotindo"
-        )
+    )
 
 
 @register(outgoing=True, pattern="^.creator$")
 async def creator(e):
     await e.edit(
-         "Created By [TeKnoways](https://t.me/Three_Cube_TeKnoways)"
-         "\nKanged and Modified by [Aidil Aryanto](https://t.me/aidilaryanto)"
-         )
+        "Created By [TeKnoways](https://t.me/Three_Cube_TeKnoways)"
+        "\nKanged and Modified by [Aidil Aryanto](https://t.me/aidilaryanto)"
+    )
 
 
 @register(outgoing=True, pattern="^.readme$")
@@ -103,7 +103,7 @@ async def reedme(e):
         "\n[Setup Guide - From MiHub with Pict](https://www.mihub.my.id/2020/05/jadiuserbot.html)"
         "\n[Setup Guide - In Indonesian Language](https://telegra.ph/UserIndoBot-05-21-3)"
         "\n[Easy Way - Generate String Session](https://string.projectdils.repl.run)")
-    
+
 
 # Copyright (c) Gegham Zakaryan | 2019
 @register(outgoing=True, pattern="^.repeat (.*)")

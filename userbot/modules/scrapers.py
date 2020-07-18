@@ -38,7 +38,7 @@ from userbot import (bot, CMD_HELP,
                      GOOGLE_CHROME_BIN, TEMP_DOWNLOAD_DIRECTORY, IMG_LIMIT)
 from userbot.events import register
 from telethon.tl.types import DocumentAttributeAudio
-from userbot.utils import progress, chrome, googleimagesdownload
+from userbot.utils import googleimagesdownload, progress
 
 CARBONLANG = "auto"
 TTS_LANG = "en"
@@ -91,7 +91,7 @@ async def carbon_api(e):
             'downloadPath': TEMP_DOWNLOAD_DIRECTORY
         }
     }
-    command_result = driver.execute("send_command", params)
+    driver.execute("send_command", params)
     driver.find_element_by_xpath("//button[contains(text(),'Export')]").click()
    # driver.find_element_by_xpath("//button[contains(text(),'4x')]").click()
    # driver.find_element_by_xpath("//button[contains(text(),'PNG')]").click()
@@ -100,7 +100,7 @@ async def carbon_api(e):
     while not os.path.isfile(TEMP_DOWNLOAD_DIRECTORY + "/carbon.png"):
         await sleep(0.5)
     await e.edit("`Processing..\n100%`")
-    file = TEMP_DOWNLOAD_DIRECTORY + "/carbon.png"
+    TEMP_DOWNLOAD_DIRECTORY + "/carbon.png"
     await e.edit("`Uploading..`")
     await e.client.send_file(
         e.chat_id,
