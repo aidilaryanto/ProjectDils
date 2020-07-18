@@ -71,12 +71,6 @@ config = {"api_url": "http://api.antiddos.systems",
                               "#62d4e3", "#65bdf3", "#ff5694"],
           "default_username_color": "#b48bf2"}
 
-    config = dict({"api_url": "http://api.antiddos.systems",
-                                          "username_colors": ["#fb6169", "#faa357", "#b48bf2", "#85de85",
-                                                              "#62d4e3", "#65bdf3", "#ff5694"],
-                                          "default_username_color": "#b48bf2"})
-
-
 EMOJI_PATTERN = re.compile(
     "["
     "\U0001F1E0-\U0001F1FF"  # flags (iOS)
