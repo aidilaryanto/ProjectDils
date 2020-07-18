@@ -1,6 +1,5 @@
 # ProjecDils Userbot
-[![](https://github.com/aidilaryanto/ProjectDils/workflows/BugChecker/badge.svg)](https://github.com/aidilaryanto/ProjectDils/actions?query=workflow%3ABugChecker) ![Last Commit](https://img.shields.io/github/last-commit/aidilaryanto/ProjectDils/master)
-
+![FailCheck](https://github.com/aidilaryanto/ProjectDils/workflows/FailCheck/badge.svg) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/5684cba0343d405c94dfd921600a7bfa)](https://www.codacy.com/manual/aidilaryanto/ProjectDils?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=aidilaryanto/ProjectDils&amp;utm_campaign=Badge_Grade) ![Last Commit](https://img.shields.io/github/last-commit/aidilaryanto/ProjectDils/master)
 
 ![logo](https://telegra.ph/file/29e9cfe7094e15c8caa51.png)
 
