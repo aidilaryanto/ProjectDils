@@ -342,10 +342,11 @@ def is_message_image(message):
     if message.media:
         if isinstance(message.media, MessageMediaPhoto):
             return True
-        if message.media.document:
-            if message.media.document.mime_type.split("/")[0] == "image":
-                return True
-        return False
+        return bool(
+            message.media.document
+            and message.media.document.mime_type.split("/")[0] == "image"
+        )
+
     return False
 
 
@@ -426,16 +427,13 @@ async def hazz(hazmat):
                     m,
                     reply_to=msg.id)
                 r = await conv.get_response()
-                response = await conv.get_response()
             elif reply_message.gif:
                 m = f"/hazmat"
                 msg_reply = await conv.send_message(
                     m,
                     reply_to=msg.id)
                 r = await conv.get_response()
-                response = await conv.get_response()
-            else:
-                response = await conv.get_response()
+            response = await conv.get_response()
             """ - don't spam notif - """
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
@@ -497,9 +495,7 @@ async def fryerrr(fry):
                     m,
                     reply_to=msg.id)
                 r = await conv.get_response()
-                response = await conv.get_response()
-            else:
-                response = await conv.get_response()
+            response = await conv.get_response()
             """ - don't spam notif - """
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:

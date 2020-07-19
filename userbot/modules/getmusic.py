@@ -52,11 +52,10 @@ async def _(event):
             )
         artist = playing.get_artist()
         song = playing.get_title()
-        track = str(artist) + " - " + str(song)
     else:
         artist = event.pattern_match.group(2)
         song = event.pattern_match.group(3)
-        track = str(artist) + " - " + str(song)
+    track = str(artist) + " - " + str(song)
     chat = "@WooMaiBot"
     link = f"/netease {track}"
     await event.edit("`Searching...`")
@@ -120,11 +119,10 @@ async def _(event):
             )
         artist = playing.get_artist()
         song = playing.get_title()
-        track = str(artist) + " - " + str(song)
     else:
         artist = event.pattern_match.group(2)
         song = event.pattern_match.group(3)
-        track = str(artist) + " - " + str(song)
+    track = str(artist) + " - " + str(song)
     chat = "@SpotifyMusicDownloaderBot"
     await event.edit("```Getting Your Music```")
     async with bot.conversation(chat) as conv:

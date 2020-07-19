@@ -25,7 +25,7 @@ if cur_version >= version:  # If the Current Version of Python is 3.0 or above
     from urllib.request import URLError, HTTPError
     from urllib.parse import quote
     import http.client
-    from http.client import IncompleteRead, BadStatusLine
+    from http.client import BadStatusLine
 
     http.client._MAXHEADERS = 1000
 else:  # If the Current Version of Python is 2.x
@@ -34,7 +34,7 @@ else:  # If the Current Version of Python is 2.x
     from urllib2 import URLError, HTTPError
     from urllib import quote
     import httplib
-    from httplib import IncompleteRead, BadStatusLine
+    from httplib import BadStatusLine
 
     httplib._MAXHEADERS = 1000
 
@@ -99,11 +99,9 @@ def user_input():
     records = []
     if object_check['config_file'] != '':
         json_file = json.load(open(config_file_check[0].config_file))
-        for record in range(0, len(json_file['Records'])):
-            arguments = {}
-            for i in args_list:
-                arguments[i] = None
-            for key, value in json_file['Records'][record].items():
+        for item in json_file['Records']:
+            arguments = {i: None for i in args_list}
+            for key, value in item.items():
                 arguments[key] = value
             records.append(arguments)
         len(records)
@@ -502,9 +500,9 @@ class googleimagesdownload:
         cur_version = sys.version_info
         if cur_version >= version:  # If the Current Version of Python is 3.0 or above
             try:
-                headers = {}
-                headers[
-                    'User-Agent'] = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+                headers = {
+                    'User-Agent': "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"}
+
                 req = urllib.request.Request(url, headers=headers)
                 resp = urllib.request.urlopen(req)
                 respData = str(resp.read())
@@ -517,9 +515,9 @@ class googleimagesdownload:
                 sys.exit()
         else:  # If the Current Version of Python is 2.x
             try:
-                headers = {}
-                headers[
-                    'User-Agent'] = "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"
+                headers = {
+                    'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"}
+
                 req = urllib2.Request(url, headers=headers)
                 try:
                     response = urllib2.urlopen(req)
@@ -701,8 +699,8 @@ class googleimagesdownload:
             formatted_object['image_height'] = main[2]
             formatted_object['image_width'] = main[1]
             formatted_object['image_link'] = main[0]
-            formatted_object['image_format'] = main[0][-1 *
-                                                       (len(main[0]) - main[0].rfind(".") - 1):]
+            formatted_object['image_format'] = main[0][-1 * \
+                (len(main[0]) - main[0].rfind(".") - 1):]
             formatted_object['image_description'] = info['2003'][3]
             formatted_object['image_host'] = info['183836587'][0]
             formatted_object['image_source'] = info['2003'][2]
@@ -1133,12 +1131,11 @@ class googleimagesdownload:
             thumbnail_only,
             format,
             ignore_urls):
-        if not silent_mode:
-            if print_urls or no_download:
-                print("Image URL: " + image_url)
-        if ignore_urls:
-            if any(url in image_url for url in ignore_urls.split(',')):
-                return "fail", "Image ignored due to 'ignore url' parameter", None, image_url
+        if not silent_mode and (print_urls or no_download):
+            print("Image URL: " + image_url)
+        if ignore_urls and any(
+                url in image_url for url in ignore_urls.split(',')):
+            return "fail", "Image ignored due to 'ignore url' parameter", None, image_url
         if thumbnail_only:
             return "success", "Skipping image download...", str(
                 image_url[(image_url.rfind('/')) + 1:]), image_url
@@ -1164,7 +1161,7 @@ class googleimagesdownload:
                 image_name = str(image_url[slash:qmark]).lower()
 
                 type = info.get_content_type()
-                if type == "image/jpeg" or type == "image/jpg":
+                if type in ["image/jpeg", "image/jpg"]:
                     if not image_name.endswith(
                             ".jpg") and not image_name.endswith(".jpeg"):
                         image_name += ".jpg"
@@ -1177,10 +1174,10 @@ class googleimagesdownload:
                 elif type == "image/gif":
                     if not image_name.endswith(".gif"):
                         image_name += ".gif"
-                elif type == "image/bmp" or type == "image/x-windows-bmp":
+                elif type in ["image/bmp", "image/x-windows-bmp"]:
                     if not image_name.endswith(".bmp"):
                         image_name += ".bmp"
-                elif type == "image/x-icon" or type == "image/vnd.microsoft.icon":
+                elif type in ["image/x-icon", "image/vnd.microsoft.icon"]:
                     if not image_name.endswith(".ico"):
                         image_name += ".ico"
                 elif type == "image/svg+xml":
@@ -1278,13 +1275,6 @@ class googleimagesdownload:
             return_image_name = ''
             absolute_path = ''
 
-        except IncompleteRead as e:
-            download_status = 'fail'
-            download_message = "IncompleteReadError on an image...trying next one..." + \
-                " Error: " + str(e)
-            return_image_name = ''
-            absolute_path = ''
-
         return download_status, download_message, return_image_name, absolute_path
 
     def _get_all_items(
@@ -1306,9 +1296,8 @@ class googleimagesdownload:
             else:
                 # format the item for readability
                 object = self.format_object(image_objects[i])
-                if arguments['metadata']:
-                    if not arguments["silent_mode"]:
-                        print("\nImage Metadata: " + str(object))
+                if arguments['metadata'] and not arguments["silent_mode"]:
+                    print("\nImage Metadata: " + str(object))
 
                 # download the images
                 download_status, download_message, return_image_name, absolute_path = self.download_image(
@@ -1481,8 +1470,8 @@ class googleimagesdownload:
         total_errors = 0
         for pky in prefix_keywords:  # 1.for every prefix keywords
             for sky in suffix_keywords:  # 2.for every suffix keywords
-                i = 0
-                while i < len(search_keyword):  # 3.for every main keyword
+                for i in range(
+                        len(search_keyword)):  # 3.for every main keyword
                     iteration = "\n" + "Item no.: " + \
                         str(i + 1) + " -->" + " Item name = " + (pky) + (search_keyword[i]) + (sky)
                     if not arguments["silent_mode"]:
@@ -1568,8 +1557,7 @@ class googleimagesdownload:
                             self._get_all_items(
                                 images, main_directory, search_term + " - " + key, limit, arguments)
 
-                    i += 1
-                    total_errors = total_errors + errorCount
+                    total_errors += errorCount
                     if not arguments["silent_mode"]:
                         print("\nErrors: " + str(errorCount) + "\n")
         return paths, total_errors
@@ -1589,7 +1577,7 @@ def main():
             response = googleimagesdownload()
             # wrapping response in a variable just for consistency
             paths, errors = response.download(arguments)
-            total_errors = total_errors + errors
+            total_errors += errors
 
         t1 = time.time()  # stop the timer
         # Calculating the total time required to crawl, find and download all

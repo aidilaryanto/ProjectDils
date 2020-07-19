@@ -17,7 +17,7 @@ async def torrent(event):
     response = requests.get(
         f"https://sjprojectsapi.herokuapp.com/torrent/?query={query}")
     ts = json.loads(response.text)
-    if not ts == response.json():
+    if ts != response.json():
         await event.edit("`Error: Try again later.`")
         return
     listdata = ""
@@ -28,7 +28,7 @@ async def torrent(event):
             r1 = ts[run]
             list1 = "<-----{}----->\nName: {}\nSeeders: {}\nSize: {}\nAge: {}\n<--Magnet Below-->\n{}\n\n\n".format(
                 run, r1['name'], r1['seeder'], r1['size'], r1['age'], r1['magnet'])
-            listdata = listdata + list1
+            listdata += list1
         except BaseException:
             break
 
@@ -58,7 +58,7 @@ def dogbin(magnets):
         r = requests.post(url, data=message.encode("UTF-8")).json()
         url = f"https://del.dog/raw/{r['key']}"
         urls.append(url)
-        counter = counter + 1
+        counter += 1
     return urls
 
 
@@ -107,7 +107,7 @@ async def tor_search(event):
             pass
         if counter == 11:
             break
-        counter = counter + 1
+        counter += 1
     if not urls:
         await event.edit("Either the Keyword was restricted or not found..")
         return
@@ -137,7 +137,7 @@ async def tor_search(event):
     while counter != len(titles):
         msg = msg + "⁍ [{}]".format(titles[counter]) + \
             "({})".format(shorted_links[counter]) + "\n\n"
-        counter = counter + 1
+        counter += 1
     await event.edit(msg, link_preview=False)
 
 
