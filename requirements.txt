@@ -52,3 +52,4 @@ wget
 python-dateutil
 git+https://github.com/johnwmillr/LyricsGenius.git
 PyGithub
+youtube_search
