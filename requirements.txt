@@ -30,7 +30,7 @@ justwatch
 lyricsgenius
 lxml
 oauth2client
-pendulum==2.0.5
+pendulum
 Pillow
 psycopg2
 psycopg2-binary
@@ -55,6 +55,7 @@ telethon>=1.10.6
 telethon-session-sqlalchemy>=0.2.6
 telegraph
 urbandict
+validators
 wget
 wikipedia>=1.4.0
 youtube_search
