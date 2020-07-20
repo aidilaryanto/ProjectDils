@@ -1,5 +1,14 @@
 # ProjecDils Userbot
-![FailCheck](https://github.com/aidilaryanto/ProjectDils/workflows/FailCheck/badge.svg) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/5684cba0343d405c94dfd921600a7bfa)](https://www.codacy.com/manual/aidilaryanto/ProjectDils?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=aidilaryanto/ProjectDils&amp;utm_campaign=Badge_Grade) ![Last Commit](https://img.shields.io/github/last-commit/aidilaryanto/ProjectDils/master)
+
+<p align="center">
+    <a href="https://github.com/aidilaryanto/ProjectDils/actions?query=workflow%3AFailCheck" > <img src="https://img.shields.io/github/workflow/status/aidilaryanto/ProjectDils/FailCheck/master?style=for-the-badge&logo=github-actions&logoColor=white" alt="Failcheck" /></a>
+    <a href="https://github.com/aidilaryanto/ProjectDils/actions?query=workflow%3Apylint"> <img src="https://img.shields.io/github/workflow/status/aidilaryanto/ProjectDils/pylint/master?label=pylint&style=for-the-badge&logo=github-actions&logoColor=white" alt="Pylint" /></a>
+    <a href="https://www.codacy.com/manual/aidilaryanto/ProjectDils?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=aidilaryanto/ProjectDils&amp;utm_campaign=Badge_Grade"><img src="https://img.shields.io/codacy/grade/5684cba0343d405c94dfd921600a7bfa?style=for-the-badge&logo=codacy" alt="codacy badge" /></a></br>
+    <a href="https://github.com/aidilaryanto/ProjectDils/commits/master"><img src="https://img.shields.io/github/last-commit/aidilaryanto/ProjectDils/master?style=for-the-badge&logo=github" alt="commit" /></a>
+    <a href=""><img src="https://img.shields.io/github/repo-size/aidilaryanto/ProjectDils?style=for-the-badge&logo=github" alt="size" /></a>
+    <a herf=""> <img src="https://img.shields.io/docker/image-size/aidilaryanto/projectdils/alpine?color=red&label=Docker%20Size&style=for-the-badge&logo=docker&logoColor=white" alt="docker" /></a></br>
+    <a href="https://t.me/userbotindo"> <img src="https://img.shields.io/badge/telegram-Support_Group-blue?style=social&logo=telegram" alt="support" /></a>
+</p>
 
 ![logo](https://telegra.ph/file/29e9cfe7094e15c8caa51.png)
 
