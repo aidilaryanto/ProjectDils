@@ -6,6 +6,7 @@
 """Userbot module for getting information about the server."""
 import platform
 import sys
+import time
 from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from datetime import datetime
@@ -16,13 +17,41 @@ from shutil import which
 import psutil
 from telethon import __version__, version
 
-from userbot import bot, CMD_HELP, ALIVE_NAME, ALIVE_LOGO, PROJECTDILS_VERSION
+from userbot import bot, CMD_HELP, ALIVE_NAME, ALIVE_LOGO, PROJECTDILS_VERSION, StartTime
 from userbot.events import register
 
 # ================= CONSTANT =================
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 modules = CMD_HELP
 # ============================================
+
+
+async def get_readable_time(seconds: int) -> str:
+    count = 0
+    up_time = ""
+    time_list = []
+    time_suffix_list = ["s", "m", "h", "days"]
+
+    while count < 4:
+        count += 1
+        if count < 3:
+            remainder, result = divmod(seconds, 60)
+        else:
+            remainder, result = divmod(seconds, 24)
+        if seconds == 0 and remainder == 0:
+            break
+        time_list.append(int(result))
+        seconds = int(remainder)
+
+    for x in range(len(time_list)):
+        time_list[x] = str(time_list[x]) + time_suffix_list[x]
+    if len(time_list) == 4:
+        up_time += time_list.pop() + ", "
+
+    time_list.reverse()
+    up_time += ":".join(time_list)
+
+    return up_time
 
 
 @register(outgoing=True, pattern=r"^\.spc")
@@ -194,13 +223,15 @@ async def pipcheck(pip):
 @register(outgoing=True, pattern=r"^\.(alive|on)$")
 async def amireallyalive(alive):
     """For .alive command, check if the bot is running."""
+    uptime = await get_readable_time((time.time() - StartTime))
     output = ("`ProjectDils is running...`\n"
               f"`•••••••••••••••••••••••••••••••••••••`\n"
-              f"👤 `User        :`  {DEFAULTUSER}\n"
-              f"🐍 `Python      : v{python_version()}`\n"
-              f"⚙️ `Telethon    : v{version.__version__}`\n"
-              f"🤖 `ProjectDils : v{PROJECTDILS_VERSION}`\n"
-              f"🧩 `Modules     :`  {len(modules)} `modules loaded`\n"
+              f"👤 `User           :`  {DEFAULTUSER}\n"
+              f"🐍 `Python         : v{python_version()}`\n"
+              f"⚙️ `Telethon       : v{version.__version__}`\n"
+              f"🤖 `ProjectDils    : v{PROJECTDILS_VERSION}`\n"
+              f"🧩 `Loaded Modules : {len(modules)}`\n"
+              f"🕒 `Bot Uptime     : {uptime} `\n"
               f"`•••••••••••••••••••••••••••••••••••••`\n")
     if ALIVE_LOGO:
         try:
