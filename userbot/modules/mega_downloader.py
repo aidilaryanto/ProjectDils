@@ -18,9 +18,6 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from asyncio import create_subprocess_shell as asyncSubprocess
-from asyncio.subprocess import PIPE as asyncPIPE
-
 import asyncio
 import re
 import json
@@ -30,9 +27,10 @@ import errno
 import math
 import time
 
+from asyncio import create_subprocess_shell as asyncSubprocess
+from asyncio.subprocess import PIPE as asyncPIPE
 from pySmartDL import SmartDL
 from urllib.error import HTTPError
-
 from userbot import CMD_HELP, LOGS, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 from userbot.utils import humanbytes, time_formatter
@@ -90,8 +88,8 @@ async def mega_downloader(megadl):
     hex_key = data["hex_key"]
     hex_raw_key = data["hex_raw_key"]
     temp_file_name = file_name + ".temp"
-    temp_file_path = TEMP_DOWNLOAD_DIRECTORY + temp_file_name
-    file_path = TEMP_DOWNLOAD_DIRECTORY + file_name
+    temp_file_path = os.path.join(TEMP_DOWNLOAD_DIRECTORY, temp_file_name)
+    file_path = os.path.join(TEMP_DOWNLOAD_DIRECTORY, file_name)
     if os.path.isfile(file_path):
         try:
             raise FileExistsError(
