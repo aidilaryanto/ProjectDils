@@ -22,10 +22,13 @@ hachoir
 # heroku
 heroku3
 httplib2
+html_telegraph_poster
 humanize
+jikanpy
 lyricsgenius
 lxml
 oauth2client
+pendulum==2.0.5
 Pillow
 psycopg2
 psycopg2-binary
