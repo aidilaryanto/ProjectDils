@@ -108,7 +108,7 @@ async def check_creds(token_file, event):
     return False, None
 
 
-@register(outgoing=True, pattern=r"^\.gpupload( -- (.*))?")
+@register(outgoing=True, pattern=r"^\.gp( -- (.*))?")
 async def upload_google_photos(event):
     if event.fwd_from:
         return
@@ -272,7 +272,7 @@ CMD_HELP.update(
     {
         "photo": ">`.gpsetup`"
         "\nUsage: Setup auth for Google Photos.\n\n"
-        ">`.gpupload` Reply to photo or video"
+        ">`.gp` Reply to photo or video"
         "\nUsage: Upload photo or video to Google.",
     }
 )
