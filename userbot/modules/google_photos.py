@@ -254,7 +254,7 @@ async def upload_google_photos(event):
             .get("productUrl")
         )
         # url = print(photo_url)
-        await event.edit(photo_url)
+        await event.edit(f"`Successfully uploaded!`\n\n[View File]({photo_url})")
     except Exception as e:
         await event.edit(str(e))
 
