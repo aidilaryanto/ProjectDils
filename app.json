@@ -185,6 +185,11 @@
     "G_PHOTOS_CLIENT_SECRET": {
       "description": "get the client secret from https://j.mp/39lWQQm",
       "required": false
+    },
+    "WATCH_COUNTRY": {
+      "description": "Country code for justwatch.com",
+      "value": "ID",
+      "required": false
     }
   },
   "addons": [

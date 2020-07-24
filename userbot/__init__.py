@@ -184,6 +184,9 @@ GENIUS = os.environ.get("GENIUS_ACCESS_TOKEN") or None
 # IMG Stuff
 IMG_LIMIT = os.environ.get("IMG_LIMIT") or None
 
+# JustWatch Country
+WATCH_COUNTRY = os.environ.get("WATCH_COUNTRY") or None
+
 
 # Setting Up CloudMail.ru and MEGA.nz extractor binaries,
 # and giving them correct perms to work properly.

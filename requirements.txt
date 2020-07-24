@@ -26,6 +26,7 @@ httplib2
 html_telegraph_poster
 humanize
 jikanpy
+justwatch
 lyricsgenius
 lxml
 oauth2client
