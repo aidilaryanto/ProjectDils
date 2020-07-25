@@ -36,19 +36,19 @@ Based on RaphielGang's [Telegram-Paperplane](https://github.com/RaphielGang/Tele
 ## How To Host
 Deploy ProjectDils to Heroku:
 
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/aidilaryanto/ProjectDils/tree/master"> <img src="https://telegra.ph/file/4190890cae105d17d461e.png" alt="Deploy to Heroku" /></a></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/aidilaryanto/ProjectDils/tree/master"> <img src="https://telegra.ph/file/3d5baaff9cbb43c5a525e.png" alt="Deploy to Heroku" width="200" height="33.33"/></a></p>
 
 
 ## Generate String Session
 Generate string session on Repl.it:
 
-<p align="center"><a href="http://string.projectdils.repl.run"> <img src="https://telegra.ph/file/7193be9fb5f9caa50bae8.png" alt="Generate String Session" /></a></p>
+<p align="center"><a href="http://string.projectdils.repl.run"> <img src="https://telegra.ph/file/3ef54caa322b1c5feadb9.png" alt="Generate String Session" width="200" height="33.33"/></a></p>
 
 
 ## Google Drive Setup
 Google Drive setup tutorial:
 
-<p align="center"><a href="https://telegra.ph/How-To-Setup-Google-Drive-04-03"> <img src="https://telegra.ph/file/e09b75dbf75f3f43f2cb3.png" alt="Google Drive Setup" /></a></p>
+<p align="center"><a href="https://telegra.ph/How-To-Setup-Google-Drive-04-03"> <img src="https://telegra.ph/file/9a6727fa0a8c631caf294.png" alt="Google Drive Setup" width="200" height="33.33"/></a></p>
 
 
 ## Groups and Support
