@@ -178,7 +178,7 @@ async def get_wtr(wtr):
         desc = weather["weatherDesc"][0]["value"]
 
     text = (
-        f"**Weather for:** `{CITY}`"
+        f"**Weather for:** `{CITY}` is "
         + f"**{desc}**\n\n"
         + f"**Temperature:** `{tempC}°C | {tempF}°F`\n"
         + f"**Min. Temp.:** `{mintempC}°C | {mintempF}°F`\n"
