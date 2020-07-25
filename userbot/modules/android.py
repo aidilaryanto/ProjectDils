@@ -24,7 +24,7 @@ from userbot.utils import (
 GITHUB = 'https://github.com'
 
 
-@register(outgoing=True, pattern="^\.magisk$")
+@register(outgoing=True, pattern=r"^\.magisk$")
 async def magisk(request):
     """ magisk latest releases """
     magisk_dict = {
@@ -112,7 +112,7 @@ async def codename_info(request):
     await request.edit(reply)
 
 
-@register(outgoing=True, pattern="^\.pixeldl(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.pixeldl(?: |$)(.*)")
 async def download_api(dl):
     await dl.edit("`Collecting information...`")
     URL = dl.pattern_match.group(1)

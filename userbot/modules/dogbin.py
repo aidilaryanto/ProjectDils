@@ -72,7 +72,7 @@ async def paste(pstl):
         )
 
 
-@register(outgoing=True, pattern="^\.getpaste(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.getpaste(?: |$)(.*)")
 async def get_dogbin_content(dog_url):
     """ For .getpaste command, fetches the content of a dogbin URL. """
     textx = await dog_url.get_reply_message()

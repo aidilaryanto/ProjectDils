@@ -10,7 +10,7 @@ from userbot.events import register
 from asyncio import sleep
 
 
-@register(outgoing=True, pattern="^\.notes$")
+@register(outgoing=True, pattern=r"^\.notes$")
 async def notes_active(svd):
     """ For .notes command, list all of the notes saved in a chat. """
     try:
@@ -111,7 +111,7 @@ async def incom_note(getnt):
         pass
 
 
-@register(outgoing=True, pattern="^\.rmbotnotes (.*)")
+@register(outgoing=True, pattern=r"^\.rmbotnotes (.*)")
 async def kick_marie_notes(kick):
     """ For .rmbotnotes command, allows you to kick all \
         Marie(or her clones) notes from a chat. """

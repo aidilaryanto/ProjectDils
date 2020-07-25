@@ -45,7 +45,7 @@ EMOJI_PATTERN = re.compile(
     "]+")
 
 
-@register(outgoing=True, pattern="^\.mmf(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.mmf(?: |$)(.*)")
 async def mim(event):
     if event.fwd_from:
         return
@@ -150,7 +150,7 @@ async def silently_send_message(conv, text):
     return response
 
 
-@register(outgoing=True, pattern="^\.q(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.q(?: |$)(.*)")
 async def quotess(qotli):
     if qotli.fwd_from:
         return
@@ -321,7 +321,7 @@ async def fryerrr(fry):
     return os.remove(downloaded_file_name)
 
 
-@register(pattern="^\.deepfry(?: |$)(.*)", outgoing=True)
+@register(pattern=r"^\.deepfry(?: |$)(.*)", outgoing=True)
 async def deepfryer(event):
     try:
         frycount = int(event.pattern_match.group(1))
@@ -416,7 +416,7 @@ async def check_media(reply_message):
         return data
 
 
-@register(outgoing=True, pattern="^\.sg(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.sg(?: |$)(.*)")
 async def lastname(steal):
     if steal.fwd_from:
         return
@@ -450,7 +450,7 @@ async def lastname(steal):
             await steal.edit(f"{response.message.message}")
 
 
-@register(outgoing=True, pattern="^\.waifu(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.waifu(?: |$)(.*)")
 async def waifu(animu):
     text = animu.pattern_match.group(1)
     if not text:

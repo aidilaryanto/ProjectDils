@@ -50,7 +50,7 @@ async def github(event):
                 await event.edit(REPLY)
 
 
-@register(outgoing=True, pattern="^\.commit(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.commit(?: |$)(.*)")
 async def download(event):
     if event.fwd_from:
         return

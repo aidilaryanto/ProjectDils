@@ -99,7 +99,7 @@ logger.setLevel(logging.ERROR)
 # =========================================================== #
 
 
-@register(pattern="^\.gdauth(?: |$)", outgoing=True)
+@register(pattern=r"^\.gdauth(?: |$)", outgoing=True)
 async def generate_credentials(gdrive):
     """ - Only generate once for long run - """
     if helper.get_credentials(str(gdrive.from_id)) is not None:
@@ -186,7 +186,7 @@ async def create_app(gdrive):
     return build('drive', 'v3', credentials=creds, cache_discovery=False)
 
 
-@register(pattern="^\.gdreset(?: |$)", outgoing=True)
+@register(pattern=r"^\.gdreset(?: |$)", outgoing=True)
 async def reset_credentials(gdrive):
     """ - Reset credentials or change account - """
     await gdrive.edit("`Resetting information...`")
@@ -810,7 +810,7 @@ async def lists(gdrive):
     return
 
 
-@register(pattern="^\.gdf (mkdir|rm|chck) (.*)", outgoing=True)
+@register(pattern=r"^\.gdf (mkdir|rm|chck) (.*)", outgoing=True)
 async def google_drive_managers(gdrive):
     """ - Google Drive folder/file management - """
     await gdrive.edit("`Sending information...`")
@@ -957,7 +957,7 @@ async def google_drive_managers(gdrive):
     return
 
 
-@register(pattern="^\.gdabort(?: |$)", outgoing=True)
+@register(pattern=r"^\.gdabort(?: |$)", outgoing=True)
 async def cancel_process(gdrive):
     """
        Abort process for download and upload
@@ -973,7 +973,7 @@ async def cancel_process(gdrive):
     await gdrive.delete()
 
 
-@register(pattern="^\.gd(?: |$)(.*)", outgoing=True)
+@register(pattern=r"^\.gd(?: |$)(.*)", outgoing=True)
 async def google_drive(gdrive):
     reply = ''
     """ - Parsing all google drive function - """
@@ -1146,7 +1146,7 @@ async def google_drive(gdrive):
     return
 
 
-@register(pattern="^\.gdfset (put|rm)(?: |$)(.*)", outgoing=True)
+@register(pattern=r"^\.gdfset (put|rm)(?: |$)(.*)", outgoing=True)
 async def set_upload_folder(gdrive):
     """ - Set parents dir for upload/check/makedir/remove - """
     await gdrive.edit("`Sending information...`")
