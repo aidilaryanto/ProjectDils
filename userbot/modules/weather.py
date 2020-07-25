@@ -118,18 +118,26 @@ async def get_weather(weather):
 
     await weather.edit(
         f"**Temperature:** `{celsius(curtemp)}°C | {fahrenheit(curtemp)}°F`\n"
-        +
-        f"**Min. Temp.:** `{celsius(min_temp)}°C | {fahrenheit(min_temp)}°F`\n"
-        +
-        f"**Max. Temp.:** `{celsius(max_temp)}°C | {fahrenheit(max_temp)}°F`\n"
-        + f"**Humidity:** `{humidity}%`\n" +
-        f"**Wind:** `{kmph[0]} kmh | {mph[0]} mph, {findir}`\n" +
-        f"**Sunrise:** `{sun(sunrise)}`\n" +
-        f"**Sunset:** `{sun(sunset)}`\n\n" + f"**{desc}**\n" +
-        f"`{cityname}, {fullc_n}`\n" + f"`{time}`")
+        + f"**Min. Temp.:** `{celsius(min_temp)}°C | {fahrenheit(min_temp)}°F`\n"
+        + f"**Max. Temp.:** `{celsius(max_temp)}°C | {fahrenheit(max_temp)}°F`\n"
+        + f"**Humidity:** `{humidity}%`\n"
+        + f"**Wind:** `{kmph[0]} kmh | {mph[0]} mph, {findir}`\n"
+        + f"**Sunrise:** `{sun(sunrise)}`\n"
+        + f"**Sunset:** `{sun(sunset)}`\n\n"
+        + f"**{desc}**\n"
+        + f"`{cityname}, {fullc_n}`\n"
+        + f"`{time}`"
+    )
 
 
-@register(outgoing=True, pattern="^.wtr(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.wtlang (.*)")
+async def setlang(wlang):
+    global DEFLANG
+    DEFLANG = wlang.pattern_match.group(1)
+    await wlang.edit(f"Language for weather set to {DEFLANG}")
+
+
+@register(outgoing=True, pattern=r"^\.wtr(?: |$)(.*)")
 async def get_wtr(wtr):
     """ For .wtr command, gets the current weather of a city. """
 
@@ -170,7 +178,8 @@ async def get_wtr(wtr):
         desc = weather["weatherDesc"][0]["value"]
 
     text = (
-        f"**{desc}**\n\n"
+        f"**Weather for:** `{CITY}`"
+        + f"**{desc}**\n\n"
         + f"**Temperature:** `{tempC}°C | {tempF}°F`\n"
         + f"**Min. Temp.:** `{mintempC}°C | {mintempF}°F`\n"
         + f"**Max. Temp.:** `{maxtempC}°C | {maxtempF}°F`\n"
@@ -191,5 +200,6 @@ CMD_HELP.update({
     "\nUsage: Gets the weather of a city."
     "\n\n>`.wtr <city>` or `.wtr <city>, <country name/code>`"
     "\nUsage: Gets the weather of a city."
-
+    "\n\n>`.wtlang` <language code>"
+    "\nUsage: Set Default language for `.wtr`"
 })
