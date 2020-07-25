@@ -1,17 +1,11 @@
-FROM aidilaryanto/projectdils:alpine
+FROM aidilaryanto/projectdils:slim-buster
 
-RUN mkdir /ProjectDils && chmod 777 /ProjectDils
-ENV PATH="/ProjectDils/bin:$PATH"
-WORKDIR /ProjectDils
+# Clone Repo
+RUN git clone -b master https://github.com/aidilaryanto/ProjectDils /home/ProjectDils/
 
-RUN git clone https://github.com/aidilaryanto/ProjectDils -b master /ProjectDils
+# Set Working Directory
+RUN mkdir /home/ProjectDils/bin/
+WORKDIR /home/ProjectDils/
 
-#
-# Copies session and config(if it exists)
-#
-COPY ./sample_config.env ./userbot.session* ./config.env* /ProjectDils/
-
-#
 # Finalization
-#
 CMD ["python3","-m","userbot"]
