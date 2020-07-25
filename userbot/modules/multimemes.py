@@ -13,14 +13,9 @@ import re
 import random
 import io
 from random import randint, uniform
-from logging import Logger as logger
 from telethon import events
 from PIL import Image, ImageEnhance, ImageOps
 import os
-import requests
-import base64
-import json
-import telethon
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.types import (
     DocumentAttributeFilename,
