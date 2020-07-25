@@ -222,6 +222,7 @@ async def devices_specifications(request):
     textx = await request.get_reply_message()
     brand = request.pattern_match.group(1).lower()
     device = request.pattern_match.group(2).lower()
+    await request.edit(f"`Searching for device specification...`")
     if brand and device:
         pass
     elif textx:
