@@ -36,8 +36,8 @@
       "value": ""
     },
     "HEROKU_APP_NAME": {
-      "description": "Add the Heroku app name here. It helps with userbot updates.",
-      "required": false
+      "description": "Set same as Heroku app-name (use lowercase). It helps with userbot updates.",
+      "required": true
     },
     "UPSTREAM_REPO_URL": {
       "description": "In case you maintain a fork, add your repo URL here.",
@@ -54,7 +54,7 @@
       "required": false
     },
     "OPEN_WEATHER_MAP_APPID": {
-      "description": "Get your own APPID (API key)from https://api.openweathermap.org/data/2.5/weather",
+      "description": "Get your own APPID (API key) from https://api.openweathermap.org/data/2.5/weather",
       "required": false
     },
     "BOTLOG": {
@@ -111,11 +111,11 @@
       "required": false
     },
     "LASTFM_USERNAME": {
-      "description": "Last.FM Username",
+      "description": "Your Last.FM Username",
       "required": false
     },
     "LASTFM_PASSWORD": {
-      "description": "Last.FM Password",
+      "description": "Your Last.FM Password",
       "required": false
     },
     "BIO_PREFIX": {
@@ -158,6 +158,7 @@
     },
     "WEATHER_DEFLANG": {
       "description": "Set the default language for the userbot's weather module.",
+      "value": "EN",
       "required": false
     },
     "LOGSPAMMER": {
