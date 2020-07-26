@@ -27,7 +27,6 @@ logging.basicConfig(
     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-
 # setup the gPhotos v1 API
 OAUTH_SCOPE = [
     "https://www.googleapis.com/auth/photoslibrary",
@@ -125,7 +124,7 @@ async def upload_google_photos(event):
     token_file = TOKEN_FILE_NAME
     is_cred_exists, creds = await check_creds(token_file, event)
     if not is_cred_exists:
-        await event.edit("😏 <code>.gpsetup</code> first 😡😒😒", parse_mode="html")
+        await event.edit("Run <code>.gpsetup</code> first 😡😒😒", parse_mode="html")
 
     service = build("photoslibrary", "v1", http=creds.authorize(Http()))
 
@@ -184,19 +183,25 @@ async def upload_google_photos(event):
         # Step 2: Saving the session URL
 
         real_upload_url = step_one_resp_headers.get("X-Goog-Upload-URL")
+        logger.info(real_upload_url)
         upload_granularity = int(
             step_one_resp_headers.get("X-Goog-Upload-Chunk-Granularity")
         )
+        logger.info(upload_granularity)
         number_of_req_s = int((file_size / upload_granularity))
-
+        logger.info(number_of_req_s)
+        c_time = time.time()
+        loop = asyncio.get_event_loop()
         async with aiofiles.open(file_path, mode="rb") as f_d:
             for i in range(number_of_req_s):
                 current_chunk = await f_d.read(upload_granularity)
+                offset = i * upload_granularity
+                part_size = len(current_chunk)
 
                 headers = {
-                    "Content-Length": str(len(current_chunk)),
+                    "Content-Length": str(part_size),
                     "X-Goog-Upload-Command": "upload",
-                    "X-Goog-Upload-Offset": str(i * upload_granularity),
+                    "X-Goog-Upload-Offset": str(offset),
                     "Authorization": "Bearer " + creds.access_token,
                 }
                 logger.info(i)
@@ -204,9 +209,18 @@ async def upload_google_photos(event):
                 response = await session.post(
                     real_upload_url, headers=headers, data=current_chunk
                 )
+                loop.create_task(
+                    progress(
+                        offset + part_size,
+                        file_size,
+                        event,
+                        c_time,
+                        "uploading(gphoto)🧐?",
+                    )
+                )
                 logger.info(response.headers)
 
-                await f_d.seek(upload_granularity)
+                # await f_d.seek(i * upload_granularity)
             # await f_d.seek(upload_granularity)
             current_chunk = await f_d.read(upload_granularity)
 
@@ -254,7 +268,7 @@ async def upload_google_photos(event):
             .get("productUrl")
         )
         # url = print(photo_url)
-        await event.edit(f"`Successfully uploaded!`\n\n[View File]({photo_url})")
+        await event.edit(f"`Successfully uploaded to Google Photos!`\n\n[View File]({photo_url})")
     except Exception as e:
         await event.edit(str(e))
 
