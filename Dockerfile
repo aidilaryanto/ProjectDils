@@ -1,4 +1,5 @@
-FROM aidilaryanto/projectdils:slim-buster
+# Using Ubuntu 20.10
+FROM aidilaryanto/projectdils:groovy
 
 # Clone Repo
 RUN git clone -b master https://github.com/aidilaryanto/ProjectDils /home/ProjectDils/
