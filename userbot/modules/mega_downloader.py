@@ -65,7 +65,7 @@ async def mega_downloader(megadl):
         return await megadl.edit("Usage: `.mega` **<MEGA.nz link>**")
     try:
         link = re.findall(r'\bhttps?://.*mega.*\.nz\S+', link)[0]
-        """ - Mega changed their URL again - """
+        """- Mega changed their URL again -"""
         if "file" in link:
             link = link.replace("#", "!").replace("file/", "#!")
         elif "folder" in link or "#F" in link or "#N" in link:

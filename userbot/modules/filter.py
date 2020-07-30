@@ -3,7 +3,7 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module for filter commands """
+"""Userbot module for filter commands"""
 
 from asyncio import sleep
 from re import search, IGNORECASE, escape
@@ -13,7 +13,7 @@ from userbot.events import register
 
 @register(incoming=True, disable_edited=True, disable_errors=True)
 async def filter_incoming_handler(handler):
-    """ Checks if the incoming message contains handler of a filter """
+    """Checks if the incoming message contains handler of a filter"""
     try:
         if not (await handler.get_sender()).bot:
             try:
@@ -42,14 +42,14 @@ async def filter_incoming_handler(handler):
 
 @register(outgoing=True, pattern=r"^\.filter (.*)")
 async def add_new_filter(new_handler):
-    """ For .filter command, allows adding new filters in a chat """
+    """For .filter command, allows adding new filters in a chat"""
     try:
         from userbot.modules.sql_helper.filter_sql import add_filter
     except AttributeError:
         await new_handler.edit("`Running on Non-SQL mode!`")
         return
     value = new_handler.pattern_match.group(1).split(None, 1)
-    """ - The first words after .filter(space) is the keyword - """
+    """- The first words after .filter(space) is the keyword -"""
     keyword = value[0]
     try:
         string = value[1]
@@ -85,7 +85,7 @@ async def add_new_filter(new_handler):
 
 @register(outgoing=True, pattern=r"^\.stop (.*)")
 async def remove_a_filter(r_handler):
-    """ For .stop command, allows you to remove a filter from a chat. """
+    """For .stop command, allows you to remove a filter from a chat."""
     try:
         from userbot.modules.sql_helper.filter_sql import remove_filter
     except AttributeError:
@@ -100,8 +100,8 @@ async def remove_a_filter(r_handler):
 
 @register(outgoing=True, pattern=r"^\.rmbotfilters (.*)")
 async def kick_marie_filter(event):
-    """ For .rmfilters command, allows you to kick all \
-        Marie(or her clones) filters from a chat. """
+    """For .rmfilters command, allows you to kick all \
+        Marie(or her clones) filters from a chat."""
     event.text[0]
     bot_type = event.pattern_match.group(1).lower()
     if bot_type not in ["marie", "rose"]:
@@ -126,7 +126,7 @@ async def kick_marie_filter(event):
 
 @register(outgoing=True, pattern=r"^\.filters$")
 async def filters_active(event):
-    """ For .filters command, lists all of the active filters in a chat. """
+    """For .filters command, lists all of the active filters in a chat."""
     try:
         from userbot.modules.sql_helper.filter_sql import get_filters
     except AttributeError:

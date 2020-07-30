@@ -3,7 +3,7 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module for keeping control who PM you. """
+"""Userbot module for keeping control who PM you."""
 
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.functions.messages import ReportSpamRequest
@@ -27,8 +27,8 @@ UNAPPROVED_MSG = (
 
 @register(incoming=True, disable_edited=True, disable_errors=True)
 async def permitpm(event):
-    """ Prohibits people from PMing you without approval. \
-        Will block retarded nibbas automatically. """
+    """Prohibits people from PMing you without approval. \
+        Will block retarded nibbas automatically."""
     if not PM_AUTO_BAN:
         return
     self_user = await event.client.get_me()
@@ -101,7 +101,7 @@ async def permitpm(event):
 
 @register(disable_edited=True, outgoing=True, disable_errors=True)
 async def auto_accept(event):
-    """ Will approve automatically if you texted them first. """
+    """Will approve automatically if you texted them first."""
     if not PM_AUTO_BAN:
         return
     self_user = await event.client.get_me()
@@ -136,7 +136,7 @@ async def auto_accept(event):
 
 @register(outgoing=True, pattern=r"^\.notifoff$")
 async def notifoff(noff_event):
-    """ For .notifoff command, stop getting notifications from unapproved PMs. """
+    """For .notifoff command, stop getting notifications from unapproved PMs."""
     try:
         from userbot.modules.sql_helper.globals import addgvar
     except AttributeError:
@@ -147,7 +147,7 @@ async def notifoff(noff_event):
 
 @register(outgoing=True, pattern=r"^\.notifon$")
 async def notifon(non_event):
-    """ For .notifoff command, get notifications from unapproved PMs. """
+    """For .notifoff command, get notifications from unapproved PMs."""
     try:
         from userbot.modules.sql_helper.globals import delgvar
     except AttributeError:
@@ -158,7 +158,7 @@ async def notifon(non_event):
 
 @register(outgoing=True, pattern=r"^\.approve$")
 async def approvepm(apprvpm):
-    """ For .approve command, give someone the permissions to PM you. """
+    """For .approve command, give someone the permissions to PM you."""
     try:
         from userbot.modules.sql_helper.pm_permit_sql import approve
     except AttributeError:
@@ -226,7 +226,7 @@ async def disapprovepm(disapprvpm):
 
 @register(outgoing=True, pattern=r"^\.block$")
 async def blockpm(block):
-    """ For .block command, block people from PMing you! """
+    """For .block command, block people from PMing you!"""
     if block.reply_to_msg_id:
         reply = await block.get_reply_message()
         replied_user = await block.client.get_entity(reply.from_id)
@@ -257,7 +257,7 @@ async def blockpm(block):
 
 @register(outgoing=True, pattern=r"^\.unblock$")
 async def unblockpm(unblock):
-    """ For .unblock command, let people PMing you again! """
+    """For .unblock command, let people PMing you again!"""
     if unblock.reply_to_msg_id:
         reply = await unblock.get_reply_message()
         replied_user = await unblock.client.get_entity(reply.from_id)

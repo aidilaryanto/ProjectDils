@@ -3,7 +3,7 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module for getting information about the server. """
+"""Userbot module for getting information about the server."""
 
 from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
@@ -22,7 +22,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 
 @register(outgoing=True, pattern=r"^\.sysd$")
 async def sysdetails(sysd):
-    """ For .sysd command, get system info using neofetch. """
+    """For .sysd command, get system info using neofetch."""
     if not sysd.text[0].isalpha() and sysd.text[0] not in ("/", "#", "@", "!"):
         try:
             fetch = await asyncrunapp(
@@ -43,7 +43,7 @@ async def sysdetails(sysd):
 
 @register(outgoing=True, pattern=r"^\.botver$")
 async def bot_ver(event):
-    """ For .botver command, get the bot version. """
+    """For .botver command, get the bot version."""
     if event.text[0].isalpha() or event.text[0] in ("/", "#", "@", "!"):
         return
     if which("git") is not None:
@@ -85,7 +85,7 @@ async def bot_ver(event):
 
 @register(outgoing=True, pattern=r"^\.pip(?: |$)(.*)")
 async def pipcheck(pip):
-    """ For .pip command, do a pip search. """
+    """For .pip command, do a pip search."""
     if pip.text[0].isalpha() or pip.text[0] in ("/", "#", "@", "!"):
         return
     pipmodule = pip.pattern_match.group(1)
@@ -130,7 +130,7 @@ async def pipcheck(pip):
 
 @register(outgoing=True, pattern=r"^\.(alive|on)$")
 async def amireallyalive(alive):
-    """ For .alive command, check if the bot is running.  """
+    """For .alive command, check if the bot is running."""
     logo = ALIVE_LOGO
     output = ("`ProjectDils is running...`\n"
               f"`•••••••••••••••••••••••••••••••••••••`\n"
@@ -145,7 +145,7 @@ async def amireallyalive(alive):
 
 @register(outgoing=True, pattern=r"^\.aliveu")
 async def amireallyaliveuser(username):
-    """ For .aliveu command, change the username in the .alive command. """
+    """For .aliveu command, change the username in the .alive command."""
     message = username.text
     output = '.aliveu [new user without brackets] nor can it be empty'
     if message != '.aliveu' and message[7:8] == ' ':
@@ -158,7 +158,7 @@ async def amireallyaliveuser(username):
 
 @register(outgoing=True, pattern=r"^\.resetalive$")
 async def amireallyalivereset(ureset):
-    """ For .resetalive command, reset the username in the .alive command. """
+    """For .resetalive command, reset the username in the .alive command."""
     global DEFAULTUSER
     DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
     await ureset.edit("`" "Successfully reset user for alive!" "`")

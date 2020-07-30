@@ -1,8 +1,6 @@
 # Copyright (C) 2020 Adek Maulana.
 # All rights reserved.
-"""
-   Heroku manager for your userbot
-"""
+"""- Heroku manager for your userbot -"""
 
 import heroku3
 import aiohttp
@@ -155,14 +153,14 @@ async def dyno_usage(dyno):
             quota = result['account_quota']
             quota_used = result['quota_used']
 
-            """ - User Quota Limit and Used - """
+            """- User Quota Limit and Used -"""
             remaining_quota = quota - quota_used
             percentage = math.floor(remaining_quota / quota * 100)
             minutes_remaining = remaining_quota / 60
             hours = math.floor(minutes_remaining / 60)
             minutes = math.floor(minutes_remaining % 60)
 
-            """ - User App Used Quota - """
+            """- User App Used Quota -"""
             Apps = result['apps']
             for apps in Apps:
                 if apps.get('app_uuid') == app.id:

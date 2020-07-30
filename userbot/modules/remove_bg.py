@@ -16,7 +16,7 @@ from userbot import CMD_HELP, REM_BG_API_KEY, TEMP_DOWNLOAD_DIRECTORY
 
 @register(outgoing=True, pattern=r"^\.rbg(?: |$)(.*)")
 async def kbg(remob):
-    """ For .rbg command, Remove Image Background. """
+    """For .rbg command, Remove Image Background."""
     if REM_BG_API_KEY is None:
         return await remob.edit(
             "`Error: Remove.BG API key missing! Add it to environment vars or config.env.`"

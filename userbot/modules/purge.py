@@ -3,7 +3,7 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module for purging unneeded messages(usually spam or ot). """
+"""Userbot module for purging unneeded messages(usually spam or ot)."""
 
 from asyncio import sleep
 
@@ -15,7 +15,7 @@ from userbot.events import register
 
 @register(outgoing=True, pattern=r"^\.purge$")
 async def fastpurger(purg):
-    """ For .purge command, purge all messages starting from the reply. """
+    """For .purge command, purge all messages starting from the reply."""
     chat = await purg.get_input_chat()
     msgs = []
     itermsg = purg.client.iter_messages(chat, min_id=purg.reply_to_msg_id)
@@ -49,7 +49,7 @@ async def fastpurger(purg):
 
 @register(outgoing=True, pattern=r"^\.purgeme")
 async def purgeme(delme):
-    """ For .purgeme, delete x count of your latest message."""
+    """For .purgeme, delete x count of your latest message."""
     message = delme.text
     count = int(message[9:])
     i = 1
@@ -78,7 +78,7 @@ async def purgeme(delme):
 
 @register(outgoing=True, pattern=r"^\.del$")
 async def delete_it(delme):
-    """ For .del command, delete the replied message. """
+    """For .del command, delete the replied message."""
     msg_src = await delme.get_reply_message()
     if delme.reply_to_msg_id:
         try:
@@ -100,7 +100,7 @@ async def delete_it(delme):
 
 @register(outgoing=True, pattern=r"^\.edit")
 async def editer(edit):
-    """ For .editme command, edit your last message. """
+    """For .editme command, edit your last message."""
     message = edit.text
     chat = await edit.get_input_chat()
     self_id = await edit.client.get_peer_id('me')
@@ -121,7 +121,7 @@ async def editer(edit):
 
 @register(outgoing=True, pattern=r"^\.sd")
 async def selfdestruct(destroy):
-    """ For .sd command, make seflf-destructable messages. """
+    """For .sd command, make seflf-destructable messages."""
     message = destroy.text
     counter = int(message[4:6])
     text = str(destroy.text[6:])
