@@ -31,7 +31,7 @@ from youtube_dl.utils import (DownloadError, ContentTooShortError,
                               MaxDownloadsReached, PostProcessingError,
                               UnavailableVideoError, XAttrMetadataError)
 from asyncio import sleep
-from userbot import (bot, CMD_HELP,
+from userbot import (CMD_HELP,
                      BOTLOG, BOTLOG_CHATID,
                      CHROME_DRIVER, GOOGLE_CHROME_BIN,
                      TEMP_DOWNLOAD_DIRECTORY, IMG_LIMIT)
