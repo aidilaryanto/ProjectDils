@@ -67,31 +67,6 @@ async def killdabot(event):
     exit()
 
 
-@register(outgoing=True, pattern=r"^\.community$")
-async def bot_community(community):
-    """For .community command, just returns OG Paperplane's group link."""
-    await community.edit(
-        "Join RaphielGang's awesome userbot community: @userbot_support"
-        "\nDo note that Paperplane Extended is an unoficial fork of their "
-        "Paperplane project and it may get limited or no support for bugs.")
-
-
-@register(outgoing=True, pattern=r"^\.support$")
-async def bot_support(wannahelp):
-    """For .support command, just returns the group link."""
-    await wannahelp.edit(
-        "Join the Userbot Indo Group: @userbotindo"
-    )
-
-
-@register(outgoing=True, pattern=r"^\.creator$")
-async def creator(e):
-    await e.edit(
-        "Created By [Aidil Aryanto](https://t.me/aidilaryanto)"
-        "\nAnd kang from everywhere"
-    )
-
-
 @register(outgoing=True, pattern=r"^\.readme$")
 async def reedme(e):
     await e.edit(
