@@ -200,21 +200,11 @@ async def upstream(event):
             f'**{UPSTREAM_REPO_BRANCH}**\n')
         return repo.__del__()
 
-    if conf is None and not force_update:
-        changelog_str = f'**New UPDATE available for [{ac_br}]:\n\nCHANGELOG:**\n`{changelog}`'
-        if len(changelog_str) > 4096:
-            await event.edit("`Changelog is too big, view the file to see it.`")
-            with open("output.txt", "w+") as file:
-                file.write(changelog_str)
-            await event.client.send_file(
-                event.chat_id,
-                "output.txt",
-                reply_to=event.id,
-            )
-            remove("output.txt")
-        else:
-            await event.edit(changelog_str)
-        return await event.respond('do "`.update now` or `.update deploy`" to update')
+    if conf == '' and not force_update:
+        await print_changelogs(event, ac_br, changelog)
+        await event.delete()
+        return await event.respond(
+            'do "`.update now` or `.update deploy`" to update.')
 
     if force_update:
         await event.edit(
