@@ -428,16 +428,24 @@ async def lastname(steal):
     await steal.edit("```Sit tight while I steal some data from NASA```")
     async with bot.conversation(chat) as conv:
         try:
-            await conv.send_message(id)
-            await conv.get_response()
+            msg = await conv.send_message(id)
+            r = await conv.get_response()
             response = await conv.get_response()
         except YouBlockedUserError:
             await steal.reply("```Please unblock @sangmatainfo_bot and try again```")
             return
         if response.text.startswith("No records"):
             await steal.edit("```No records found for this user```")
+            await steal.client.delete_messages(
+                conv.chat_id,
+                [msg.id, r.id, response.id])
+            return
         else:
+            respond = await conv.get_response()
             await steal.edit(f"{response.message}")
+        await steal.client.delete_messages(
+            conv.chat_id,
+            [msg.id, r.id, response.id, respond.id])
 
 
 @register(outgoing=True, pattern=r"^\.waifu(?: |$)(.*)")
