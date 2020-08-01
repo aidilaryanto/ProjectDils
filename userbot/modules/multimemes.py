@@ -171,8 +171,8 @@ async def quotess(qotli):
             try:
                 response = conv.wait_event(
                     events.NewMessage(
-                    incoming=True,
-                    from_users=1031952739))
+                        incoming=True,
+                        from_users=1031952739))
                 msg = await bot.forward_messages(chat, reply_message)
                 response = await response
                 """don't spam notif"""
@@ -227,7 +227,7 @@ async def hazz(hazmat):
                 elif reply_message.gif:
                     m = f"/hazmat"
                     msg_reply = await conv.send_message(
-                         m,
+                        m,
                         reply_to=msg.id)
                     r = await conv.get_response()
                 response = await conv.get_response()
@@ -330,7 +330,6 @@ async def fryerrr(fry):
         return os.remove(downloaded_file_name)
     except TimeoutError:
         return await event.edit("`Error: `@image_deepfybot` is not responding!.`")
-
 
 
 @register(pattern=r"^\.deepfry(?: |$)(.*)", outgoing=True)
@@ -466,6 +465,7 @@ async def lastname(steal):
             )
     except TimeoutError:
         return await event.edit("`Error: `@SangMataInfo_bot` is not responding!.`")
+
 
 @register(outgoing=True, pattern=r"^\.waifu(?: |$)(.*)")
 async def waifu(animu):
