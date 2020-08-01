@@ -16,6 +16,7 @@ from random import randint, uniform
 from telethon import events
 from PIL import Image, ImageEnhance, ImageOps
 import os
+from asyncio.exceptions import TimeoutError
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.types import (
     DocumentAttributeFilename,
@@ -63,67 +64,70 @@ async def mim(event):
         )
 
     chat = "@MemeAutobot"
-    async with bot.conversation(chat) as bot_conv:
-        try:
-            memeVar = event.pattern_match.group(1)
-            await silently_send_message(bot_conv, "/start")
-            await asyncio.sleep(1)
-            await silently_send_message(bot_conv, memeVar)
-            await bot.send_file(chat, reply_message.media)
-            response = await bot_conv.get_response()
-        except YouBlockedUserError:
-            await event.reply("```Please unblock @MemeAutobot and try again```")
-            return
-        if response.text.startswith("Forward"):
-            await event.edit(
-                "```can you kindly disable your forward privacy settings for good, Nibba?```"
-            )
-        if "Okay..." in response.text:
-            await event.edit(
-                "```🛑 🤨 NANI?! This is not an image! This will take sum tym to convert to image... UwU 🧐 🛑```"
-            )
-            input_str = event.pattern_match.group(1)
-            if event.reply_to_msg_id:
-                file_name = "meme.png"
-                reply_message = await event.get_reply_message()
-                downloaded_file_name = os.path.join(
-                    TEMP_DOWNLOAD_DIRECTORY, file_name)
-                downloaded_file_name = await bot.download_media(
-                    reply_message, downloaded_file_name,
+    try:
+        async with bot.conversation(chat) as bot_conv:
+            try:
+                memeVar = event.pattern_match.group(1)
+                await silently_send_message(bot_conv, "/start")
+                await asyncio.sleep(1)
+                await silently_send_message(bot_conv, memeVar)
+                await bot.send_file(chat, reply_message.media)
+                response = await bot_conv.get_response()
+            except YouBlockedUserError:
+                await event.reply("```Please unblock @MemeAutobot and try again```")
+                return
+            if response.text.startswith("Forward"):
+                await event.edit(
+                    "```can you kindly disable your forward privacy settings for good, Nibba?```"
                 )
-                if os.path.exists(downloaded_file_name):
-                    await bot.send_file(
-                        chat,
-                        downloaded_file_name,
-                        force_document=False,
-                        supports_streaming=False,
-                        allow_cache=False,
+            if "Okay..." in response.text:
+                await event.edit(
+                    "```🛑 🤨 NANI?! This is not an image! This will take sum tym to convert to image... UwU 🧐 🛑```"
+                )
+                input_str = event.pattern_match.group(1)
+                if event.reply_to_msg_id:
+                    file_name = "meme.png"
+                    reply_message = await event.get_reply_message()
+                    downloaded_file_name = os.path.join(
+                        TEMP_DOWNLOAD_DIRECTORY, file_name)
+                    downloaded_file_name = await bot.download_media(
+                        reply_message, downloaded_file_name,
                     )
-                    os.remove(downloaded_file_name)
-                else:
-                    await event.edit("File Not Found {}".format(input_str))
-            response = await bot_conv.get_response()
-            files_name = "memes.webp"
-            download_file_name = os.path.join(
-                TEMP_DOWNLOAD_DIRECTORY, files_name)
-            await bot.download_media(
-                response.media, download_file_name,
-            )
-            await bot.send_file(  # pylint:disable=E0602
-                event.chat_id,
-                download_file_name,
-                supports_streaming=False,
-                caption="Memifyed",
-            )
-            await event.delete()
-        elif not is_message_image(reply_message):
-            await event.edit(
-                "Invalid message type. Plz choose right message type u NIBBA."
-            )
-            return
-        else:
-            await bot.send_file(event.chat_id, response.media)
-            await event.delete()
+                    if os.path.exists(downloaded_file_name):
+                        await bot.send_file(
+                            chat,
+                            downloaded_file_name,
+                            force_document=False,
+                            supports_streaming=False,
+                            allow_cache=False,
+                        )
+                        os.remove(downloaded_file_name)
+                    else:
+                        await event.edit("File Not Found {}".format(input_str))
+                response = await bot_conv.get_response()
+                files_name = "memes.webp"
+                download_file_name = os.path.join(
+                    TEMP_DOWNLOAD_DIRECTORY, files_name)
+                await bot.download_media(
+                    response.media, download_file_name,
+                )
+                await bot.send_file(  # pylint:disable=E0602
+                    event.chat_id,
+                    download_file_name,
+                    supports_streaming=False,
+                    caption="Memifyed",
+                )
+                await event.delete()
+            elif not is_message_image(reply_message):
+                await event.edit(
+                    "Invalid message type. Plz choose right message type u NIBBA."
+                )
+                return
+            else:
+                await bot.send_file(event.chat_id, response.media)
+                await event.delete()
+    except TimeoutError:
+        return await event.edit("`Error: `@MemeAutoBot` is not responding!.`")
 
 
 def is_message_image(message):
@@ -162,28 +166,32 @@ async def quotess(qotli):
         await qotli.edit("```Reply to actual users message.```")
         return
     await qotli.edit("```Making a Quote```")
-    async with bot.conversation(chat) as conv:
-        try:
-            response = conv.wait_event(
-                events.NewMessage(
+    try:
+        async with bot.conversation(chat) as conv:
+            try:
+                response = conv.wait_event(
+                    events.NewMessage(
                     incoming=True,
                     from_users=1031952739))
-            msg = await bot.forward_messages(chat, reply_message)
-            response = await response
-            """don't spam notif"""
-            await bot.send_read_acknowledge(conv.chat_id)
-        except YouBlockedUserError:
-            await qotli.reply("```Please unblock @QuotLyBot and try again```")
-            return
-        if response.text.startswith("Hi!"):
-            await qotli.edit("```Can you kindly disable your forward privacy settings for good?```")
-        else:
-            await qotli.delete()
-            await bot.forward_messages(qotli.chat_id, response.message)
-            await bot.send_read_acknowledge(qotli.chat_id)
-            """ - cleanup chat after completed - """
-            await qotli.client.delete_messages(conv.chat_id,
-                                               [msg.id, response.id])
+                msg = await bot.forward_messages(chat, reply_message)
+                response = await response
+                """don't spam notif"""
+                await bot.send_read_acknowledge(conv.chat_id)
+            except YouBlockedUserError:
+                await qotli.reply("```Please unblock @QuotLyBot and try again```")
+                return
+            if response.text.startswith("Hi!"):
+                await qotli.edit("```Can you kindly disable your forward privacy settings for good?```")
+            else:
+                await qotli.delete()
+                await bot.forward_messages(qotli.chat_id, response.message)
+                await bot.send_read_acknowledge(qotli.chat_id)
+                """ - cleanup chat after completed - """
+                await qotli.client.delete_messages(
+                    conv.chat_id, [msg.id, response.id]
+                )
+    except TimeoutError:
+        return await event.edit("`Error: `@QuotLyBot` is not responding!.`")
 
 
 @register(outgoing=True, pattern=r'^\.hz(:? |$)(.*)?')
@@ -206,54 +214,58 @@ async def hazz(hazmat):
     await hazmat.edit("```Suit Up Capt!, We are going to purge some virus...```")
     message_id_to_reply = hazmat.message.reply_to_msg_id
     msg_reply = None
-    async with hazmat.client.conversation(chat) as conv:
-        try:
-            msg = await conv.send_message(reply_message)
-            if level:
-                m = f"/hazmat {level}"
-                msg_reply = await conv.send_message(
-                    m,
-                    reply_to=msg.id)
-                r = await conv.get_response()
-            elif reply_message.gif:
-                m = f"/hazmat"
-                msg_reply = await conv.send_message(
-                    m,
-                    reply_to=msg.id)
-                r = await conv.get_response()
-            response = await conv.get_response()
-            """don't spam notif"""
-            await bot.send_read_acknowledge(conv.chat_id)
-        except YouBlockedUserError:
-            await hazmat.reply("`Please unblock` @hazmat_suit_bot`...`")
-            return
-        if response.text.startswith("I can't"):
-            await hazmat.edit("`Can't handle this GIF...`")
-            await hazmat.client.delete_messages(
-                conv.chat_id,
-                [msg.id, response.id, r.id, msg_reply.id])
-            return
-        else:
-            downloaded_file_name = await hazmat.client.download_media(
-                response.media,
-                TEMP_DOWNLOAD_DIRECTORY
-            )
-            await hazmat.client.send_file(
-                hazmat.chat_id,
-                downloaded_file_name,
-                force_document=False,
-                reply_to=message_id_to_reply
-            )
-            """cleanup chat after completed"""
-            if msg_reply is not None:
+    try:
+        async with hazmat.client.conversation(chat) as conv:
+            try:
+                msg = await conv.send_message(reply_message)
+                if level:
+                    m = f"/hazmat {level}"
+                    msg_reply = await conv.send_message(
+                        m,
+                        reply_to=msg.id)
+                    r = await conv.get_response()
+                elif reply_message.gif:
+                    m = f"/hazmat"
+                    msg_reply = await conv.send_message(
+                         m,
+                        reply_to=msg.id)
+                    r = await conv.get_response()
+                response = await conv.get_response()
+                """don't spam notif"""
+                await bot.send_read_acknowledge(conv.chat_id)
+            except YouBlockedUserError:
+                await hazmat.reply("`Please unblock` @hazmat_suit_bot`...`")
+                return
+            if response.text.startswith("I can't"):
+                await hazmat.edit("`Can't handle this GIF...`")
                 await hazmat.client.delete_messages(
-                    conv.chat_id,
-                    [msg.id, msg_reply.id, r.id, response.id])
+                    conv.chat_id, [msg.id, response.id, r.id, msg_reply.id]
+                )
+                return
             else:
-                await hazmat.client.delete_messages(conv.chat_id,
-                                                    [msg.id, response.id])
-    await hazmat.delete()
-    return os.remove(downloaded_file_name)
+                downloaded_file_name = await hazmat.client.download_media(
+                    response.media,
+                    TEMP_DOWNLOAD_DIRECTORY
+                )
+                await hazmat.client.send_file(
+                    hazmat.chat_id,
+                    downloaded_file_name,
+                    force_document=False,
+                    reply_to=message_id_to_reply
+                )
+                """cleanup chat after completed"""
+                if msg_reply is not None:
+                    await hazmat.client.delete_messages(
+                        conv.chat_id, [msg.id, msg_reply.id, r.id, response.id]
+                    )
+                else:
+                    await hazmat.client.delete_messages(
+                        conv.chat_id, [msg.id, response.id]
+                    )
+        await hazmat.delete()
+        return os.remove(downloaded_file_name)
+    except TimeoutError:
+        return await event.edit("`Error: `@hazmat_suit_bot` is not responding!.`")
 
 
 @register(outgoing=True, pattern=r'^\.df(:? |$)([1-8])?')
@@ -274,46 +286,51 @@ async def fryerrr(fry):
         return
     chat = "@image_deepfrybot"
     message_id_to_reply = fry.message.reply_to_msg_id
-    async with fry.client.conversation(chat) as conv:
-        try:
-            msg = await conv.send_message(reply_message)
-            if level:
-                m = f"/deepfry {level}"
-                msg_level = await conv.send_message(
-                    m,
-                    reply_to=msg.id)
-                r = await conv.get_response()
-            response = await conv.get_response()
-            """don't spam notif"""
-            await bot.send_read_acknowledge(conv.chat_id)
-        except YouBlockedUserError:
-            await fry.reply("`Please unblock` @image_deepfrybot`...`")
-            return
-        if response.text.startswith("Forward"):
-            await fry.edit("`Please disable your forward privacy setting...`")
-        else:
-            downloaded_file_name = await fry.client.download_media(
-                response.media,
-                TEMP_DOWNLOAD_DIRECTORY
-            )
-            await fry.client.send_file(
-                fry.chat_id,
-                downloaded_file_name,
-                force_document=False,
-                reply_to=message_id_to_reply
-            )
-            """cleanup chat after completed"""
+    try:
+        async with fry.client.conversation(chat) as conv:
             try:
-                msg_level
-            except NameError:
-                await fry.client.delete_messages(conv.chat_id,
-                                                 [msg.id, response.id])
+                msg = await conv.send_message(reply_message)
+                if level:
+                    m = f"/deepfry {level}"
+                    msg_level = await conv.send_message(
+                        m,
+                        reply_to=msg.id)
+                    r = await conv.get_response()
+                response = await conv.get_response()
+                """don't spam notif"""
+                await bot.send_read_acknowledge(conv.chat_id)
+            except YouBlockedUserError:
+                await fry.reply("`Please unblock` @image_deepfrybot`...`")
+                return
+            if response.text.startswith("Forward"):
+                await fry.edit("`Please disable your forward privacy setting...`")
             else:
-                await fry.client.delete_messages(
-                    conv.chat_id,
-                    [msg.id, response.id, r.id, msg_level.id])
-    await fry.delete()
-    return os.remove(downloaded_file_name)
+                downloaded_file_name = await fry.client.download_media(
+                    response.media,
+                    TEMP_DOWNLOAD_DIRECTORY
+                )
+                await fry.client.send_file(
+                    fry.chat_id,
+                    downloaded_file_name,
+                    force_document=False,
+                    reply_to=message_id_to_reply
+                )
+                """cleanup chat after completed"""
+                try:
+                    msg_level
+                except NameError:
+                    await fry.client.delete_messages(
+                        conv.chat_id, [msg.id, response.id]
+                    )
+                else:
+                    await fry.client.delete_messages(
+                        conv.chat_id, [msg.id, response.id, r.id, msg_level.id]
+                    )
+        await fry.delete()
+        return os.remove(downloaded_file_name)
+    except TimeoutError:
+        return await event.edit("`Error: `@image_deepfybot` is not responding!.`")
+
 
 
 @register(pattern=r"^\.deepfry(?: |$)(.*)", outgoing=True)
@@ -426,27 +443,29 @@ async def lastname(steal):
         await steal.edit("```Reply to actual users message.```")
         return
     await steal.edit("```Sit tight while I steal some data from NASA```")
-    async with bot.conversation(chat) as conv:
-        try:
-            msg = await conv.send_message(id)
-            r = await conv.get_response()
-            response = await conv.get_response()
-        except YouBlockedUserError:
-            await steal.reply("```Please unblock @sangmatainfo_bot and try again```")
-            return
-        if response.text.startswith("No records"):
-            await steal.edit("```No records found for this user```")
+    try:
+        async with bot.conversation(chat) as conv:
+            try:
+                msg = await conv.send_message(id)
+                r = await conv.get_response()
+                response = await conv.get_response()
+            except YouBlockedUserError:
+                await steal.reply("```Please unblock @sangmatainfo_bot and try again```")
+                return
+            if response.text.startswith("No records"):
+                await steal.edit("```No records found for this user```")
+                await steal.client.delete_messages(
+                    conv.chat_id, [msg.id, r.id, response.id]
+                )
+                return
+            else:
+                respond = await conv.get_response()
+                await steal.edit(f"{response.message}")
             await steal.client.delete_messages(
-                conv.chat_id,
-                [msg.id, r.id, response.id])
-            return
-        else:
-            respond = await conv.get_response()
-            await steal.edit(f"{response.message}")
-        await steal.client.delete_messages(
-            conv.chat_id,
-            [msg.id, r.id, response.id, respond.id])
-
+                conv.chat_id, [msg.id, r.id, response.id, respond.id]
+            )
+    except TimeoutError:
+        return await event.edit("`Error: `@SangMataInfo_bot` is not responding!.`")
 
 @register(outgoing=True, pattern=r"^\.waifu(?: |$)(.*)")
 async def waifu(animu):
