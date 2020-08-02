@@ -9,7 +9,7 @@ from userbot import CMD_HELP, GITHUB_ACCESS_TOKEN, GIT_REPO_NAME, bot
 GIT_TEMP_DIR = "/projectdils/temp/"
 
 
-@register(pattern=r"^\.git (.*)", outgoing=True)
+@register(outgoing=True, pattern=r"\.git(?: |$)(.*)")
 async def github(event):
     URL = f"https://api.github.com/users/{event.pattern_match.group(1)}"
     await event.get_chat()
