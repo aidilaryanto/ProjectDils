@@ -38,9 +38,6 @@ async def ddl(event):
         await event.client.send_message(
             event.chat_id, response.message, reply_to=event.message.reply_to_msg_id
         )
-        await event.client.delete_messages(
-            conv.chat_id, [msg.id, response.id]
-        )
     except TimeoutError:
         return await event.edit("`Error: `@jnckbot` is not responding!.`")
 
