@@ -57,7 +57,7 @@ async def fban(event):
 
                 if "New FedBan" not in reply.text:
                     failed.append(i.fed_name)
-        except:
+        except BaseException:
             failed.append(i.fed_name)
 
     reason = reason if reason else "Not specified."
@@ -123,7 +123,7 @@ async def unfban(event):
 
                 if "New un-FedBan" not in reply.text:
                     failed.append(i.fed_name)
-        except:
+        except BaseException:
             failed.append(i.fed_name)
 
     reason = reason if reason else "Not specified."
