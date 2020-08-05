@@ -104,7 +104,7 @@ async def set_var(var):
                 "**Change ConfigVar**:\n"
                 f"`{variable}` = `{value}`"
             )
-        await var.edit("`Information sets...`")
+        await var.edit("`Information successfully sets. Check your Botlog for more details...`")
     else:
         if BOTLOG:
             await var.client.send_message(
@@ -112,7 +112,7 @@ async def set_var(var):
                 "**Add ConfigVar**:\n"
                 f"`{variable}` = `{value}`"
             )
-        await var.edit("`Information added...`")
+        await var.edit("`Information successfully added. Check your Botlog for more details...`")
     heroku_var[variable] = value
 
 

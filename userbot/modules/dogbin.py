@@ -21,7 +21,7 @@ async def paste(pstl):
     reply_id = pstl.reply_to_msg_id
 
     if not match and not reply_id:
-        return await pstl.edit("`Elon Musk said I cannot paste void.`")
+        return await pstl.edit("`Cannot paste text.`")
 
     if match:
         message = match

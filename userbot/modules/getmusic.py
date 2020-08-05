@@ -1,4 +1,5 @@
 # Copyright (C) 2020 Aidil Aryanto.
+# Vsong ported by AnggaR69S
 # All rights reserved.
 
 import glob

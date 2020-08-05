@@ -19,7 +19,7 @@ async def lst(event):
     path = cat if cat else os.getcwd()
     if not exists(path):
         await event.edit(
-            f"There is no such directory or file with the name `{cat}` check again!"
+            f"There is no such directory or file with the name `{cat}`.\n Pleasecheck again!"
         )
         return
     if isdir(path):

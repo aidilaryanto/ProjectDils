@@ -26,7 +26,7 @@ async def fban(event):
 
     if fban_id == self_user.id or fban_id == "@" + self_user.username:
         return await event.edit(
-            "`Error: This action has been prevented by KensurBot self preservation protocols.`"
+            "`Error: This action has been prevented by ProjectDils  self preservation protocols.`"
         )
 
     if isinstance(fban_id, int):

@@ -61,7 +61,7 @@ async def setup_google_photos(event):
     is_cred_exists, _ = await check_creds(token_file, event)
     if not is_cred_exists:
         await create_token_file(token_file, event)
-    await event.edit("CREDS created. 😕😖😖")
+    await event.edit("CREDS successfully created. 😕😖😖")
 
 
 async def create_token_file(token_file, event):
