@@ -32,28 +32,28 @@ A modular Telegram userbot running on Python3 with sqlalchemy database.
 
 Based on RaphielGang's [Telegram-Paperplane](https://github.com/RaphielGang/Telegram-Paperplane) userbot with a lot of changes, features and module.
 
-
 ## How To Host
 Deploy ProjectDils to Heroku:
 
 <p align="center"><a href="https://heroku.com/deploy?template=https://github.com/aidilaryanto/ProjectDils/tree/master"> <img src="https://telegra.ph/file/3d5baaff9cbb43c5a525e.png" alt="Deploy to Heroku" width="200" height="33.33"/></a></p>
-
 
 ## Generate String Session
 Generate string session on Repl.it:
 
 <p align="center"><a href="http://string.projectdils.repl.run"> <img src="https://telegra.ph/file/3ef54caa322b1c5feadb9.png" alt="Generate String Session" width="200" height="33.33"/></a></p>
 
+### or Run on your terminal
+```
+wget https://raw.githubusercontent.com/aidilaryanto/ProjectDils/master/terminal_getstring.sh && bash terminal_getstring.sh
+```
 
 ## Google Drive Setup
 Google Drive setup tutorial:
 
 <p align="center"><a href="https://telegra.ph/How-To-Setup-Google-Drive-04-03"> <img src="https://telegra.ph/file/9a6727fa0a8c631caf294.png" alt="Google Drive Setup" width="200" height="33.33"/></a></p>
 
-
 ## Groups and Support
 Join [Userbotindo Support Group](https://t.me/userbotindo) for discussion, bug reporting, and help.
-
 
 ## Credits
 * [RaphielGang](https://github.com/RaphielGang) - Telegram-Paperplane
