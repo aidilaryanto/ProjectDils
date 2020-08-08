@@ -194,7 +194,6 @@ async def pipcheck(pip):
 @register(outgoing=True, pattern=r"^\.(alive|on)$")
 async def amireallyalive(alive):
     """For .alive command, check if the bot is running."""
-    logo = ALIVE_LOGO
     output = ("`ProjectDils is running...`\n"
               f"`•••••••••••••••••••••••••••••••••••••`\n"
               f"👤 `User        :`  {DEFAULTUSER}\n"
@@ -203,11 +202,19 @@ async def amireallyalive(alive):
               f"🤖 `ProjectDils : v{PROJECTDILS_VERSION}`\n"
               f"🧩 `Modules     :`  {len(modules)} `modules loaded`\n"
               f"`•••••••••••••••••••••••••••••••••••••`\n")
-    await bot.send_file(alive.chat_id, logo, caption=output)
-    await alive.delete()
+    if ALIVE_LOGO:
+        try:
+            logo = ALIVE_LOGO
+            await bot.send_file(alive.chat_id, logo, caption=output)
+            await alive.delete()
+        except BaseException:
+            await alive.edit(output + "\n\n *`The provided logo is invalid."
+                             "\nMake sure the link is directed to the logo picture`")
+    else:
+        await alive.edit(output)
 
 
-@register(outgoing=True, pattern=r"^\.aliveu")
+@register(outgoing=True, pattern="^.aliveu")
 async def amireallyaliveuser(username):
     """For .aliveu command, change the username in the .alive command."""
     message = username.text
