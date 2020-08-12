@@ -50,7 +50,7 @@ async def killthebot(shut):
     await shut.edit("`Goodbye...`")
     if BOTLOG:
         await shut.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
-                                        "Bot shut down")
+                                       "Bot shut down")
     await bot.disconnect()
 
 
@@ -59,7 +59,7 @@ async def killdabot(reboot):
     await reboot.edit("`*i would be back in a moment*`")
     if BOTLOG:
         await reboot.client.send_message(BOTLOG_CHATID, "#RESTART \n"
-                                        "Bot Restarted")
+                                         "Bot Restarted")
     await bot.disconnect()
     # Spin a new instance of bot
     execl(sys.executable, sys.executable, *sys.argv)

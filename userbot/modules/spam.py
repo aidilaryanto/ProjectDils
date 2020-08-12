@@ -44,7 +44,7 @@ async def spammers(spammer):
     await asyncio.wait([spammer.respond(spam_message) for i in range(counter)])
     if BOTLOG:
         await spammer.client.send_message(BOTLOG_CHATID, "#SPAM\n"
-                                    "Spam was executed successfully")
+                                          "Spam was executed successfully")
 
 
 @register(outgoing=True, pattern=r"^\.picspam")
