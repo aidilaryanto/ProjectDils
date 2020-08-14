@@ -17,6 +17,7 @@
 from .chrome import chrome, options
 from .google_images_download import googleimagesdownload
 from .progress import progress
+from .google_images_download import googleimagesdownload
 
 from .tools import (
     humanbytes,
