@@ -29,7 +29,7 @@ async def fban(event):
             "**Error: This action has been prevented by KensurBot self preservation protocols.**"
         )
 
-    if isinstance(fban_id, int):
+    if fban_id.isdigit():
         user_link = f"[{fban_id}](tg://user?id={fban_id})"
     else:
         user_link = fban_id
@@ -95,7 +95,7 @@ async def unfban(event):
     if unfban_id == self_user.id or unfban_id == "@" + self_user.username:
         return await event.edit("**Wait, that's illegal**")
 
-    if isinstance(unfban_id, int):
+    if unfban_id.isdigit():
         user_link = f"[{unfban_id}](tg://user?id={unfban_id})"
     else:
         user_link = unfban_id
