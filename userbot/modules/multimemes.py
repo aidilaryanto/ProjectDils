@@ -478,6 +478,7 @@ async def lastname(steal):
 @register(outgoing=True, pattern=r"^\.waifu(?: |$)(.*)")
 async def waifu(animu):
     text = animu.pattern_match.group(1)
+    await animu.edit("`Finding your waifu...`")
     if not text:
         if animu.is_reply:
             text = (await animu.get_reply_message()).message
