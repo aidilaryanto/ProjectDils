@@ -174,11 +174,10 @@ async def terminal_runner(term):
         )
 
 
-CMD_HELP.update(
-    {
-        "eval": ">`.eval 2 + 3`" "\nUsage: Evalute mini-expressions.",
-        "exec": ">`.exec print('hello')`" "\nUsage: Execute small python scripts.",
-        "term": ">`.term <cmd>`"
-        "\nUsage: Run bash commands and scripts on your server.",
-    }
-)
+CMD_HELP.update({"eval": ">`.eval 2 + 3`"
+                 "\nUsage: Evalute mini-expressions.",
+                 "exec": ">`.exec print('hello')`"
+                 "\nUsage: Execute small python scripts.",
+                 "term": ">`.term <cmd>`"
+                 "\nUsage: Run bash commands and scripts on your server.",
+                 })
