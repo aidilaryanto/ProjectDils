@@ -42,7 +42,4 @@ async def ddl(event):
         return await event.edit("`Error: `@jnckbot` is not responding!.`")
 
 
-CMD_HELP.update({
-    "ddl": ">`.ddl`"
-    "\nUsage: Reply to a media to get direct link."
-})
+CMD_HELP.update({"ddl": ">`.ddl`" "\nUsage: Reply to a media to get direct link."})

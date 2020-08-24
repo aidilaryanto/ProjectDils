@@ -4,8 +4,10 @@
 import codecs
 import json
 import os
+
 import requests
 from bs4 import BeautifulSoup as bs
+
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 
@@ -15,7 +17,8 @@ async def torrent(event):
     await event.edit("`Searching...`")
     query = event.pattern_match.group(1)
     response = requests.get(
-        f"https://sjprojectsapi.herokuapp.com/torrent/?query={query}")
+        f"https://sjprojectsapi.herokuapp.com/torrent/?query={query}"
+    )
     ts = json.loads(response.text)
     if ts != response.json():
         await event.edit("`Error: Try again later.`")
@@ -27,7 +30,8 @@ async def torrent(event):
             run += 1
             r1 = ts[run]
             list1 = "<-----{}----->\nName: {}\nSeeders: {}\nSize: {}\nAge: {}\n<--Magnet Below-->\n{}\n\n\n".format(
-                run, r1['name'], r1['seeder'], r1['size'], r1['age'], r1['magnet'])
+                run, r1["name"], r1["seeder"], r1["size"], r1["age"], r1["magnet"]
+            )
             listdata += list1
         except BaseException:
             break
@@ -41,10 +45,16 @@ async def torrent(event):
         out_file.write(str(listdata))
     fd = codecs.open(tsfileloc, "r", encoding="utf-8")
     data = fd.read()
-    key = (requests.post("https://nekobin.com/api/documents",
-                         json={"content": data}) .json() .get("result") .get("key"))
+    key = (
+        requests.post("https://nekobin.com/api/documents", json={"content": data})
+        .json()
+        .get("result")
+        .get("key")
+    )
     url = f"https://nekobin.com/raw/{key}"
-    caption = f"`Here the results for the query: {query}`\n\nPasted to: [Nekobin]({url})"
+    caption = (
+        f"`Here the results for the query: {query}`\n\nPasted to: [Nekobin]({url})"
+    )
     os.remove(tsfileloc)
     await event.edit(caption, link_preview=False)
 
@@ -67,7 +77,8 @@ async def tor_search(event):
     if event.fwd_from:
         return
     headers = {
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'}
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36"
+    }
 
     search_str = event.pattern_match.group(1)
 
@@ -77,28 +88,28 @@ async def tor_search(event):
         search_str = search_str.replace(" ", "+")
         print(search_str)
         res = requests.get(
-            "https://www.torrentdownloads.me/search/?new=1&s_cat=0&search=" +
-            search_str,
-            headers)
+            "https://www.torrentdownloads.me/search/?new=1&s_cat=0&search="
+            + search_str,
+            headers,
+        )
 
     else:
         res = requests.get(
-            "https://www.torrentdownloads.me/search/?search=" +
-            search_str,
-            headers)
+            "https://www.torrentdownloads.me/search/?search=" + search_str, headers
+        )
 
-    source = bs(res.text, 'lxml')
+    source = bs(res.text, "lxml")
     urls = []
     magnets = []
     titles = []
     counter = 0
-    for div in source.find_all('div', {'class': 'grey_bar3 back_none'}):
+    for div in source.find_all("div", {"class": "grey_bar3 back_none"}):
         # print("https://www.torrentdownloads.me"+a['href'])
         try:
-            title = div.p.a['title']
+            title = div.p.a["title"]
             title = title[20:]
             titles.append(title)
-            urls.append("https://www.torrentdownloads.me" + div.p.a['href'])
+            urls.append("https://www.torrentdownloads.me" + div.p.a["href"])
         except KeyError:
             pass
         except TypeError:
@@ -116,10 +127,10 @@ async def tor_search(event):
     for url in urls:
         res = requests.get(url, headers)
         # print("URl: "+url)
-        source = bs(res.text, 'lxml')
-        for div in source.find_all('div', {'class': 'grey_bar1 back_none'}):
+        source = bs(res.text, "lxml")
+        for div in source.find_all("div", {"class": "grey_bar1 back_none"}):
             try:
-                mg = div.p.a['href']
+                mg = div.p.a["href"]
                 magnets.append(mg)
             except Exception:
                 pass
@@ -131,12 +142,15 @@ async def tor_search(event):
         search_str = search_str.replace("+", " ")
     except BaseException:
         pass
-    msg = "**Torrent Search Query**\n`{}`".format(
-        search_str) + "\n**Results**\n"
+    msg = "**Torrent Search Query**\n`{}`".format(search_str) + "\n**Results**\n"
     counter = 0
     while counter != len(titles):
-        msg = msg + "⁍ [{}]".format(titles[counter]) + \
-            "({})".format(shorted_links[counter]) + "\n\n"
+        msg = (
+            msg
+            + "⁍ [{}]".format(titles[counter])
+            + "({})".format(shorted_links[counter])
+            + "\n\n"
+        )
         counter += 1
     await event.edit(msg, link_preview=False)
 

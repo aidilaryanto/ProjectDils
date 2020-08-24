@@ -36,8 +36,8 @@ from userbot.events import register
 from userbot.utils import progress
 
 logging.basicConfig(
-    format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s",
-    level=logging.WARNING)
+    format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.WARNING
+)
 logger = logging.getLogger(__name__)
 
 # setup the gPhotos v1 API
@@ -281,7 +281,9 @@ async def upload_google_photos(event):
             .get("productUrl")
         )
         # url = print(photo_url)
-        await event.edit(f"`Successfully uploaded to Google Photos!`\n\n[View File]({photo_url})")
+        await event.edit(
+            f"`Successfully uploaded to Google Photos!`\n\n[View File]({photo_url})"
+        )
     except Exception as e:
         await event.edit(str(e))
 

@@ -41,8 +41,7 @@ async def get_tz(con):
         return
 
 
-@register(outgoing=True,
-          pattern=r"^\.time(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
+@register(outgoing=True, pattern=r"^\.time(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
 async def time_func(tdata):
     """For .time command, return the time of
         1. The country passed as an argument,
@@ -93,14 +92,15 @@ async def time_func(tdata):
 
     if c_name != COUNTRY:
         return await tdata.edit(
-            f"`It's`  **{dtnow}**  `in {c_name}({time_zone} timezone).`")
+            f"`It's`  **{dtnow}**  `in {c_name}({time_zone} timezone).`"
+        )
     elif COUNTRY:
-        return await tdata.edit(f"`It's`  **{dtnow}**  `here, in {COUNTRY}"
-                                f"({time_zone} timezone).`")
+        return await tdata.edit(
+            f"`It's`  **{dtnow}**  `here, in {COUNTRY}" f"({time_zone} timezone).`"
+        )
 
 
-@register(outgoing=True,
-          pattern=r"^\.date(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
+@register(outgoing=True, pattern=r"^\.date(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
 async def date_func(dat):
     """For .date command, return the date of
         1. The country passed as an argument,
@@ -111,7 +111,7 @@ async def date_func(dat):
     tz_num = dat.pattern_match.group(2)
 
     d_form = "%d/%m/%y - %A"
-    c_name = ''
+    c_name = ""
 
     if len(con) > 4:
         try:
@@ -151,19 +151,21 @@ async def date_func(dat):
 
     if c_name != COUNTRY:
         return await dat.edit(
-            f"`It's`  **{dtnow}**  `in {c_name}({time_zone} timezone).`")
+            f"`It's`  **{dtnow}**  `in {c_name}({time_zone} timezone).`"
+        )
     elif COUNTRY:
-        return await dat.edit(f"`It's`  **{dtnow}**  `here, in {COUNTRY}"
-                              f"({time_zone} timezone).`")
+        return await dat.edit(
+            f"`It's`  **{dtnow}**  `here, in {COUNTRY}" f"({time_zone} timezone).`"
+        )
 
 
-CMD_HELP.update({
-    "time":
-    ">`.time <country name/code> <timezone number>`"
-    "\nUsage: Get the time of a country. If a country has "
-    "multiple timezones, it will list all of them and let you select one.",
-    "date":
-    ">`.date <country name/code> <timezone number>`"
-    "\nUsage: Get the date of a country. If a country has "
-    "multiple timezones, it will list all of them and let you select one."
-})
+CMD_HELP.update(
+    {
+        "time": ">`.time <country name/code> <timezone number>`"
+        "\nUsage: Get the time of a country. If a country has "
+        "multiple timezones, it will list all of them and let you select one.",
+        "date": ">`.date <country name/code> <timezone number>`"
+        "\nUsage: Get the date of a country. If a country has "
+        "multiple timezones, it will list all of them and let you select one.",
+    }
+)

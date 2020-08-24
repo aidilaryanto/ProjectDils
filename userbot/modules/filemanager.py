@@ -23,8 +23,7 @@ async def lst(event):
         )
         return
     if isdir(path):
-        msg = "**PATH:** `{}`\n\n".format(
-            path) if cat else "• **File Manager** •\n\n"
+        msg = "**PATH:** `{}`\n\n".format(path) if cat else "• **File Manager** •\n\n"
         lists = os.listdir(path)
         files = ""
         folders = ""
