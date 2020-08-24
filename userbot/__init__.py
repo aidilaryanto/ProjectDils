@@ -235,16 +235,6 @@ async def check_botlog_chatid():
         quit(1)
 
 
-# Global Variables
-COUNT_MSG = 0
-USERS = {}
-COUNT_PM = {}
-LASTMSG = {}
-CMD_HELP = {}
-ISAFK = False
-AFKREASON = None
-
-
 def paginate_help(page_number, loaded_modules, prefix):
     number_of_rows = 5
     number_of_cols = 2
@@ -413,3 +403,13 @@ with bot:
             "valid entity. Check your environment variables/config.env file."
         )
         quit(1)
+
+
+# Global Variables
+COUNT_MSG = 0
+USERS = {}
+COUNT_PM = {}
+LASTMSG = {}
+CMD_HELP = {}
+ISAFK = False
+AFKREASON = None
