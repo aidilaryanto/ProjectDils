@@ -1,6 +1,6 @@
 name: pylint
 
-on: [push, pull_request]
+on: push
 
 jobs:
   PEP8:
@@ -41,7 +41,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: 'pylint: auto fixes'
-          commit_options: '--no-verify'
+          commit_options: '--no-verify --signoff'
           repository: .
           commit_user_name: aidilaryanto
           commit_user_email: aidilaryanto18@gmail.com
