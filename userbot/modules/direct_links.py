@@ -20,6 +20,7 @@ from humanize import naturalsize
 
 from userbot import CMD_HELP, USR_TOKEN
 from userbot.events import register
+from userbot.utils import time_formatter
 
 
 async def subprocess_run(cmd):
@@ -329,7 +330,7 @@ async def uptobox(request, url: str) -> str:
             if status == "Waiting needed":
                 wait = result.get("data").get("waiting")
                 waitingToken = result.get("data").get("waitingToken")
-                await request.edit(f"`Waiting for about {wait} seconds.`")
+                await request.edit(f"`Waiting for about {time_formatter(wait)}.`")
                 await asyncio.sleep(wait + 15)
                 uri += f"&waitingToken={waitingToken}"
                 async with session.get(uri) as response:
