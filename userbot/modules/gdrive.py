@@ -782,13 +782,17 @@ async def lists(gdrive):
             if len(result) >= page_size:
                 break
 
-            file_name = files.get("name")
-            if files.get("mimeType") == "application/vnd.google-apps.folder":
-                link = files.get("webViewLink")
-                message += f"`[FOLDER]`\n" f"[{file_name}]({link})\n\n"
+            file_name = files.get('name')
+            if files.get('mimeType') == 'application/vnd.google-apps.folder':
+                link = files.get('webViewLink')
+                message += (
+                    f"📁️ • [{file_name}]({link})\n"
+                )
             else:
-                link = files.get("webContentLink")
-                message += f"`[FILE]`\n" f"[{file_name}]({link})\n\n"
+                link = files.get('webContentLink')
+                message += (
+                    f"📄️ • [{file_name}]({link})\n"
+                )
             result.append(files)
         if len(result) >= page_size:
             break
