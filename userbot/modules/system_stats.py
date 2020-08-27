@@ -123,7 +123,10 @@ async def sysdetails(sysd):
     if not sysd.text[0].isalpha() and sysd.text[0] not in ("/", "#", "@", "!"):
         try:
             fetch = await asyncrunapp(
-                "neofetch", "--stdout", stdout=asyncPIPE, stderr=asyncPIPE,
+                "neofetch",
+                "--stdout",
+                stdout=asyncPIPE,
+                stderr=asyncPIPE,
             )
 
             stdout, stderr = await fetch.communicate()
@@ -141,13 +144,23 @@ async def bot_ver(event):
         return
     if which("git") is not None:
         ver = await asyncrunapp(
-            "git", "describe", "--all", "--long", stdout=asyncPIPE, stderr=asyncPIPE,
+            "git",
+            "describe",
+            "--all",
+            "--long",
+            stdout=asyncPIPE,
+            stderr=asyncPIPE,
         )
         stdout, stderr = await ver.communicate()
         verout = str(stdout.decode().strip()) + str(stderr.decode().strip())
 
         rev = await asyncrunapp(
-            "git", "rev-list", "--all", "--count", stdout=asyncPIPE, stderr=asyncPIPE,
+            "git",
+            "rev-list",
+            "--all",
+            "--count",
+            stdout=asyncPIPE,
+            stderr=asyncPIPE,
         )
         stdout, stderr = await rev.communicate()
         revout = str(stdout.decode().strip()) + str(stderr.decode().strip())
@@ -183,7 +196,11 @@ async def pipcheck(pip):
     if pipmodule:
         await pip.edit("`Searching . . .`")
         pipc = await asyncrunapp(
-            "pip3", "search", pipmodule, stdout=asyncPIPE, stderr=asyncPIPE,
+            "pip3",
+            "search",
+            pipmodule,
+            stdout=asyncPIPE,
+            stderr=asyncPIPE,
         )
 
         stdout, stderr = await pipc.communicate()
@@ -195,7 +212,9 @@ async def pipcheck(pip):
                 with open("output.txt", "w+") as file:
                     file.write(pipout)
                 await pip.client.send_file(
-                    pip.chat_id, "output.txt", reply_to=pip.id,
+                    pip.chat_id,
+                    "output.txt",
+                    reply_to=pip.id,
                 )
                 remove("output.txt")
                 return

@@ -119,7 +119,7 @@ async def set_var(var):
 @register(outgoing=True, pattern=r"^\.usage(?: |$)")
 async def dyno_usage(dyno):
     """
-        Get your account Dyno Usage
+    Get your account Dyno Usage
     """
     await dyno.edit("`Getting Information...`")
     user_id = Heroku.account().id

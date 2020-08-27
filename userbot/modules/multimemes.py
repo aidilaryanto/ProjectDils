@@ -91,7 +91,8 @@ async def mim(event):
                         TEMP_DOWNLOAD_DIRECTORY, file_name
                     )
                     downloaded_file_name = await bot.download_media(
-                        reply_message, downloaded_file_name,
+                        reply_message,
+                        downloaded_file_name,
                     )
                     if os.path.exists(downloaded_file_name):
                         await bot.send_file(
@@ -108,7 +109,8 @@ async def mim(event):
                 files_name = "memes.webp"
                 download_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, files_name)
                 await bot.download_media(
-                    response.media, download_file_name,
+                    response.media,
+                    download_file_name,
                 )
                 await bot.send_file(  # pylint:disable=E0602
                     event.chat_id,

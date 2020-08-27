@@ -31,7 +31,8 @@ async def paste(pstl):
         message = await pstl.get_reply_message()
         if message.media:
             downloaded_file_name = await pstl.client.download_media(
-                message, TEMP_DOWNLOAD_DIRECTORY,
+                message,
+                TEMP_DOWNLOAD_DIRECTORY,
             )
             m_list = None
             with open(downloaded_file_name, "rb") as fd:
@@ -72,7 +73,8 @@ async def paste(pstl):
     await pstl.edit(reply_text)
     if BOTLOG:
         await pstl.client.send_message(
-            BOTLOG_CHATID, "Paste query was executed successfully",
+            BOTLOG_CHATID,
+            "Paste query was executed successfully",
         )
 
 
@@ -124,7 +126,8 @@ async def get_dogbin_content(dog_url):
     await dog_url.edit(reply_text)
     if BOTLOG:
         await dog_url.client.send_message(
-            BOTLOG_CHATID, "Get dogbin content query was executed successfully",
+            BOTLOG_CHATID,
+            "Get dogbin content query was executed successfully",
         )
 
 

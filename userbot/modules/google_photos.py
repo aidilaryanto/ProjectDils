@@ -184,7 +184,8 @@ async def upload_google_photos(event):
         }
         # Step 1: Initiating an upload session
         step_one_response = await session.post(
-            f"{PHOTOS_BASE_URI}/v1/uploads", headers=headers,
+            f"{PHOTOS_BASE_URI}/v1/uploads",
+            headers=headers,
         )
 
         if step_one_response.status != 200:

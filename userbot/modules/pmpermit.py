@@ -210,7 +210,8 @@ async def approvepm(apprvpm):
 
     if BOTLOG:
         await apprvpm.client.send_message(
-            BOTLOG_CHATID, "#APPROVED\n" + "User: " + f"[{name0}](tg://user?id={uid})",
+            BOTLOG_CHATID,
+            "#APPROVED\n" + "User: " + f"[{name0}](tg://user?id={uid})",
         )
 
 
@@ -271,7 +272,8 @@ async def blockpm(block):
 
     if BOTLOG:
         await block.client.send_message(
-            BOTLOG_CHATID, "#BLOCKED\n" + "User: " + f"[{name0}](tg://user?id={uid})",
+            BOTLOG_CHATID,
+            "#BLOCKED\n" + "User: " + f"[{name0}](tg://user?id={uid})",
         )
 
 

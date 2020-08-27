@@ -28,7 +28,9 @@ async def telegraphs(grop):
             )
             created_chat_id = result.chats[0].id
             result = await grop.client(
-                functions.messages.ExportChatInviteRequest(peer=created_chat_id,)
+                functions.messages.ExportChatInviteRequest(
+                    peer=created_chat_id,
+                )
             )
             await grop.edit(
                 "Your {0} Group Created Successfully. Click [{0}]({1}) to join".format(
@@ -48,7 +50,9 @@ async def telegraphs(grop):
             )
             created_chat_id = r.chats[0].id
             result = await grop.client(
-                functions.messages.ExportChatInviteRequest(peer=created_chat_id,)
+                functions.messages.ExportChatInviteRequest(
+                    peer=created_chat_id,
+                )
             )
             await grop.edit(
                 "Your {0} Group/Channel Created Successfully. Click [{0}]({1}) to join".format(

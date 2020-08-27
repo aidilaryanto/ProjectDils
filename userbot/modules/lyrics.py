@@ -43,7 +43,9 @@ async def lyrics(lyric):
         with open("lyrics.txt", "w+") as f:
             f.write(f"Search query: \n{artist} - {song}\n\n{songs.lyrics}")
         await lyric.client.send_file(
-            lyric.chat_id, "lyrics.txt", reply_to=lyric.id,
+            lyric.chat_id,
+            "lyrics.txt",
+            reply_to=lyric.id,
         )
         os.remove("lyrics.txt")
     else:

@@ -176,7 +176,8 @@ async def terminal_runner(term):
 
     if BOTLOG:
         await term.client.send_message(
-            BOTLOG_CHATID, "Terminal command " + command + " was executed sucessfully.",
+            BOTLOG_CHATID,
+            "Terminal command " + command + " was executed sucessfully.",
         )
 
 

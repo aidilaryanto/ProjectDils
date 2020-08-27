@@ -39,7 +39,8 @@ async def sleepybot(time):
     if BOTLOG:
         str_counter = time_formatter(counter)
         await time.client.send_message(
-            BOTLOG_CHATID, f"You put the bot to sleep for {str_counter}.",
+            BOTLOG_CHATID,
+            f"You put the bot to sleep for {str_counter}.",
         )
     sleep(counter)
     await time.edit("`OK, I'm awake now.`")
