@@ -56,11 +56,16 @@ async def print_changelogs(event, ac_br, changelog):
         )
         remove("output.txt")
     else:
-        await event.client.send_message(
+        cl = await event.client.send_message(
             event.chat_id,
             changelog_str,
             reply_to=event.id,
         )
+        await event.delete()
+        msg = await event.respond('do "`.update now` or `.update deploy`" to update.')
+        await asyncio.sleep(15)
+        await cl.delete()
+        await msg.delete()
     return True
 
 
@@ -126,6 +131,8 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             return await event.delete()
         else:
             await event.edit("`Successfully deployed!\n" "Restarting, please wait...`")
+            await asyncio.sleep(15)
+            await event.delete()
     else:
         await event.edit("`Please set up HEROKU_API_KEY variable...`")
     return
@@ -140,6 +147,8 @@ async def update(event, repo, ups_rem, ac_br):
     await event.edit(
         "`Successfully Updated!\n" "ProjectDils is restarting... Wait for a second!`"
     )
+    await asyncio.sleep(15)
+    await event.delete()
     # Spin a new instance of bot
     args = [sys.executable, "-m", "userbot"]
     execle(sys.executable, *args, environ)
@@ -202,6 +211,8 @@ async def upstream(event):
     if conf == "deploy":
         await event.edit("`Deploying userbot, please wait....`")
         await deploy(event, repo, ups_rem, ac_br, txt)
+        await asyncio.sleep(15)
+        await event.delete()
         return
 
     if changelog == "" and not force_update:
@@ -209,12 +220,13 @@ async def upstream(event):
             "\n`ProjectDils is`  **up-to-date**  `with`  "
             f"**{UPSTREAM_REPO_BRANCH}**\n"
         )
+        await asyncio.sleep(15)
+        await event.delete()
         return repo.__del__()
 
     if conf == "" and not force_update:
         await print_changelogs(event, ac_br, changelog)
-        await event.delete()
-        return await event.respond('do "`.update now` or `.update deploy`" to update.')
+        return
 
     if force_update:
         await event.edit(
@@ -223,6 +235,8 @@ async def upstream(event):
     if conf == "now":
         await event.edit("`Updating ProjectDils, please wait....`")
         await update(event, repo, ups_rem, ac_br)
+        await asyncio.sleep(15)
+        await event.delete()
     return
 
 
