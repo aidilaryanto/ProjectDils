@@ -191,7 +191,7 @@ async def quotess(qotli):
                 """ - cleanup chat after completed - """
                 await qotli.client.delete_messages(conv.chat_id, [msg.id, response.id])
     except TimeoutError:
-        return await event.edit("`Error: `@QuotLyBot` is not responding!.`")
+        return await qotli.edit("`Error: `@QuotLyBot` is not responding!.`")
 
 
 @register(outgoing=True, pattern=r"^\.hz(:? |$)(.*)?")
@@ -260,7 +260,7 @@ async def hazz(hazmat):
         await hazmat.delete()
         return os.remove(downloaded_file_name)
     except TimeoutError:
-        return await event.edit("`Error: `@hazmat_suit_bot` is not responding!.`")
+        return await hazmat.edit("`Error: `@hazmat_suit_bot` is not responding!.`")
 
 
 @register(outgoing=True, pattern=r"^\.df(:? |$)([1-8])?")
@@ -321,7 +321,7 @@ async def fryerrr(fry):
         await fry.delete()
         return os.remove(downloaded_file_name)
     except TimeoutError:
-        return await event.edit("`Error: `@image_deepfybot` is not responding!.`")
+        return await fry.edit("`Error: `@image_deepfybot` is not responding!.`")
 
 
 @register(pattern=r"^\.deepfry(?: |$)(.*)", outgoing=True)
@@ -480,7 +480,7 @@ async def lastname(steal):
                 conv.chat_id, [msg.id, r.id, response.id, respond.id]
             )
     except TimeoutError:
-        return await event.edit("`Error: `@SangMataInfo_bot` is not responding!.`")
+        return await steal.edit("`Error: `@SangMataInfo_bot` is not responding!.`")
 
 
 @register(outgoing=True, pattern=r"^\.waifu(?: |$)(.*)")
