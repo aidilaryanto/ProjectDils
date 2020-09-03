@@ -22,9 +22,7 @@ async def github(event):
     async with aiohttp.ClientSession() as session:
         async with session.get(URL) as request:
             if request.status == 404:
-                return await event.edit(
-                    "`" + username + " not found`"
-                )
+                return await event.edit("`" + username + " not found`")
 
             result = await request.json()
 
