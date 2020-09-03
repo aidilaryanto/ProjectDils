@@ -11,15 +11,19 @@ from userbot.events import register
 GIT_TEMP_DIR = "/projectdils/temp/"
 
 
-@register(outgoing=True, pattern=r"\.git(?: |$)(.*)")
+@register(outgoing=True, disable_errors=True, pattern=r"^\.git(?: |$)(.*)")
 async def github(event):
-    URL = f"https://api.github.com/users/{event.pattern_match.group(1)}"
+    username = event.pattern_match.group(1)
+    if not username:
+        await event.edit(f"`Please pass github's username`")
+        return
+    URL = f"https://api.github.com/users/{username}"
     await event.get_chat()
     async with aiohttp.ClientSession() as session:
         async with session.get(URL) as request:
             if request.status == 404:
-                return await event.reply(
-                    "`" + event.pattern_match.group(1) + " not found`"
+                return await event.edit(
+                    "`" + username + " not found`"
                 )
 
             result = await request.json()
