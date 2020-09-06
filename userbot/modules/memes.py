@@ -949,6 +949,7 @@ async def iwi(ii):
     reply_text = sub(r"(A|I|U|E|O)", "I", reply_text)
     reply_text = sub(r"\!+", " " + choice(HILIH), reply_text)
     reply_text += " " + choice(HILIH)
+    await ii.edit(reply_text)
 
 
 @register(outgoing=True, pattern=r"^\.hi$")
