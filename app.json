@@ -36,8 +36,8 @@
       "value": ""
     },
     "HEROKU_APP_NAME": {
-      "description": "Set same as Heroku app-name (use lowercase). It helps with userbot updates.",
-      "required": true
+      "description": "Enter the Heroku app name here (Must an exact same name with your input above). It helps with userbot updates.",
+      "required": false
     },
     "UPSTREAM_REPO_URL": {
       "description": "In case you maintain a fork, add your repo URL here.",
