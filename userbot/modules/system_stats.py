@@ -17,8 +17,8 @@ from shutil import which
 
 import psutil
 from telethon import __version__, version
-
 from telethon.errors.rpcerrorlist import MediaEmptyError
+
 from userbot import (
     ALIVE_LOGO,
     ALIVE_NAME,
@@ -258,8 +258,10 @@ async def amireallyalive(alive):
             await alive.delete()
             msg = await bot.send_file(alive.chat_id, logo, caption=output)
         except MediaEmptyError:
-            msg = await alive.edit(output + "\n\n *`The provided logo is invalid."
-                                   "\nMake sure the link is directed to the logo picture`")
+            msg = await alive.edit(
+                output + "\n\n *`The provided logo is invalid."
+                "\nMake sure the link is directed to the logo picture`"
+            )
     else:
         msg = await alive.edit(output)
     await asyncio.sleep(45)
@@ -267,6 +269,7 @@ async def amireallyalive(alive):
         await msg.delete()
     except BaseException:
         return
+
 
 @register(outgoing=True, pattern="^.aliveu")
 async def amireallyaliveuser(username):
