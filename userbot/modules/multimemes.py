@@ -287,8 +287,8 @@ async def quotess(qotli):
     if reply_message.sender.bot:
         await qotli.edit("```Reply to actual users message.```")
         return
-    await qotli.edit("```Making a Quote```")
     try:
+        await qotli.edit("`Processing..`")
         async with bot.conversation(chat) as conv:
             try:
                 response = conv.wait_event(
@@ -306,11 +306,17 @@ async def quotess(qotli):
                     "```Can you kindly disable your forward privacy settings for good?```"
                 )
             else:
+                downloaded_file_name = await qotli.client.download_media(
+                    response.media, TEMP_DOWNLOAD_DIRECTORY
+                )
+                await qotli.client.send_file(
+                    qotli.chat_id, downloaded_file_name, reply_to=qotli.reply_to_msg_id
+                )
                 await qotli.delete()
-                await bot.forward_messages(qotli.chat_id, response.message)
                 await bot.send_read_acknowledge(qotli.chat_id)
                 """ - cleanup chat after completed - """
                 await qotli.client.delete_messages(conv.chat_id, [msg.id, response.id])
+                os.remove(downloaded_file_name)
     except TimeoutError:
         return await qotli.edit("`Error: `@QuotLyBot` is not responding!.`")
 
