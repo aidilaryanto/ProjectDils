@@ -160,7 +160,6 @@ async def mim(event):
         )
         await event.delete()
         os.remove(webp_file)
-        os.remove(dls_loc)
 
 
 async def draw_meme_text(image_path, text):
