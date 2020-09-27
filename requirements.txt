@@ -58,6 +58,7 @@ telethon-session-sqlalchemy
 telegraph
 urbandict
 validators
+vcsi
 wget
 wikipedia
 youtube_search
