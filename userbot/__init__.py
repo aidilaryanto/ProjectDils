@@ -75,8 +75,7 @@ LOGSPAMMER = sb(os.environ.get("LOGSPAMMER") or "False") if BOTLOG else False
 ALIVE_NAME = os.environ.get("ALIVE_NAME") or None
 
 # Default .alive logo
-ALIVE_LOGO = (os.environ.get("ALIVE_LOGO")
-              or "https://telegra.ph/file/36df725e1554826a2dfda.png")
+ALIVE_LOGO = os.environ.get("ALIVE_LOGO") or None
 
 # ProjectDils Version
 PROJECTDILS_VERSION = os.environ.get("PROJECTDILS_VERSION") or "2.9"

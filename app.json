@@ -128,8 +128,13 @@
       "required": false
     },
     "ALIVE_NAME": {
-      "description": "Name to show in .alive message",
+      "description": "Name to show in .alive/oj message",
       "required": false
+    },
+    "ALIVE_LOGO": {
+      "description": "Show image/logo in .alive/on message",
+      "required": false
+      "value": "https://telegra.ph/file/36df725e1554826a2dfda.png"
     },
     "G_DRIVE_DATA": {
       "description": "Your client_secret.json.",
