@@ -91,7 +91,7 @@ async def _(event):
         await event.edit("`Enter a valid link to download from`")
     else:
         await event.edit("`Downloading...`")
-    chat = "@MusicHuntersBot"
+    chat = "@MusicsHunterBot"
     try:
         async with bot.conversation(chat) as conv:
             try:
@@ -103,7 +103,7 @@ async def _(event):
                 """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
-                await event.edit("`Unblock `@MusicHuntersBot` and retry`")
+                await event.edit("`Unblock `@MusicsHunterBot` and retry`")
                 return
             await bot.send_file(event.chat_id, song, caption=details.text)
             await event.client.delete_messages(
@@ -111,7 +111,7 @@ async def _(event):
             )
             await event.delete()
     except TimeoutError:
-        return await event.edit("`Error: `@MusicHuntersBot` is not responding!.`")
+        return await event.edit("`Error: `@MusicsHunterBot` is not responding!.`")
 
 
 @register(outgoing=True, pattern=r"^\.songf (?:(now)|(.*) - (.*))")
@@ -236,7 +236,7 @@ CMD_HELP.update(
         "getmusic": ">`.songn <Artist - Song Title>`"
         "\nUsage: Download music by name (@WooMaiBot)"
         "\n\n>`.songl <Spotify/Deezer Link>`"
-        "\nUsage: Download music by link (@MusicHuntersBot)"
+        "\nUsage: Download music by link (@MusicsHunterBot)"
         "\n\n>`.songf <Artist - Song Title>`"
         "\nUsage: Download music by name (@SpotifyMusicDownloaderBot)"
         "\n\n>`.songn now`"
