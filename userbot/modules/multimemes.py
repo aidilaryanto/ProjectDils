@@ -18,13 +18,16 @@ from asyncio.exceptions import TimeoutError
 from random import randint, uniform
 
 from glitch_this import ImageGlitcher
+from hachoir.metadata import extractMetadata
+from hachoir.parser import createParser
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 from telethon import events, functions, types
 from telethon.errors.rpcerrorlist import YouBlockedUserError
+from telethon.tl.types import DocumentAttributeFilename
 
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
 from userbot.events import register
-from userbot.utils import check_media, progress
+from userbot.utils import progress
 
 Glitched = TEMP_DOWNLOAD_DIRECTORY + "glitch.gif"
 
@@ -54,24 +57,37 @@ async def glitch(event):
     if not reply_message.media:
         await event.edit("`reply to a image/sticker`")
         return
-    if event.is_reply:
-        data = await check_media(reply_message)
-        if isinstance(data, bool):
-            await event.edit("`Unsupported Files...`")
-            return
     await event.edit("`Downloading Media..`")
-    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "glitch.png")
-    glitch_file = await bot.download_media(
-        reply_message,
-        downloaded_file_name,
-    )
+    if (
+        DocumentAttributeFilename(file_name="AnimatedSticker.tgs")
+        in reply_message.media.document.attributes
+    ):
+        await bot.download_media(
+            reply_message,
+            "anim.tgs",
+        )
+        os.system("lottie_convert.py anim.tgs anim.png")
+        glitch_file = "anim.png"
+    elif reply_message.video:
+        video = await bot.download_media(
+            reply_message,
+            "glitch.mp4",
+        )
+        extractMetadata(createParser(video))
+        os.system("ffmpeg -i glitch.mp4 -vframes 1 -an -s 480x360 -ss 1 glitch.png")
+        glitch_file = "glitch.png"
+    else:
+        glitch_file = await bot.download_media(
+            reply_message,
+            "glitch.png",
+        )
     try:
         value = int(event.pattern_match.group(1))
         if value > 8:
             raise ValueError
     except ValueError:
         value = 2
-    await event.edit("```Glitching This Media```")
+    await event.edit("```Glitching This Media..```")
     await asyncio.sleep(2)
     glitcher = ImageGlitcher()
     img = Image.open(glitch_file)
@@ -86,7 +102,7 @@ async def glitch(event):
         duration=DURATION,
         loop=LOOP,
     )
-    await event.edit("`Uploading Glitched Media...`")
+    await event.edit("`Uploading Glitched Media..`")
     c_time = time.time()
     nosave = await event.client.send_file(
         event.chat_id,
@@ -110,6 +126,8 @@ async def glitch(event):
     )
     os.remove(Glitched)
     os.remove(glitch_file)
+    os.system("rm -rf *.tgs")
+    os.system("rm -rf *.mp4")
 
 
 @register(outgoing=True, pattern=r"^\.mmf(?: |$)(.*)")
@@ -124,17 +142,31 @@ async def mim(event):
     if not reply_message.media:
         await event.edit("```reply to a image/sticker/gif```")
         return
-    if event.is_reply:
-        data = await check_media(reply_message)
-        if isinstance(data, bool):
-            await event.edit("`Unsupported Files...`")
-            return
-    await event.edit("`Downloading media..`")
-    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "meme.jpg")
-    dls_loc = await bot.download_media(
-        reply_message,
-        downloaded_file_name,
-    )
+    await event.edit("`Downloading Media..`")
+    if (
+        DocumentAttributeFilename(file_name="AnimatedSticker.tgs")
+        in reply_message.media.document.attributes
+    ):
+        await bot.download_media(
+            reply_message,
+            "meme.tgs",
+        )
+        os.system("lottie_convert.py meme.tgs meme.png")
+        dls_loc = "meme.png"
+    elif reply_message.video:
+        video = await bot.download_media(
+            reply_message,
+            "meme.mp4",
+        )
+        extractMetadata(createParser(video))
+        os.system("ffmpeg -i meme.mp4 -vframes 1 -an -s 480x360 -ss 1 meme.png")
+        dls_loc = "meme.png"
+    else:
+        downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "meme.png")
+        dls_loc = await bot.download_media(
+            reply_message,
+            downloaded_file_name,
+        )
     await event.edit(
         "```Transfiguration Time! Mwahaha Memifying this image! (」ﾟﾛﾟ)｣ ```"
     )
@@ -145,6 +177,8 @@ async def mim(event):
         event.chat_id, webp_file, reply_to=event.reply_to_msg_id
     )
     await event.delete()
+    os.system("rm -rf *.tgs")
+    os.system("rm -rf *.mp4")
     os.remove(webp_file)
     os.remove(downloaded_file_name)
 
@@ -445,22 +479,32 @@ async def deepfryer(event):
             raise ValueError
     except ValueError:
         frycount = 1
-
-    if event.is_reply:
-        reply_message = await event.get_reply_message()
-        data = await check_media(reply_message)
-
-        if isinstance(data, bool):
-            await event.edit("`I can't deep fry that!`")
-            return
-    else:
-        await event.edit("`Reply to an image or sticker to deep fry it!`")
-        return
-
-    # download last photo (highres) as byte array
-    await event.edit("`Downloading media…`")
+    reply_message = await event.get_reply_message()
     image = io.BytesIO()
-    await event.client.download_media(data, image)
+    await event.edit("`Downloading media..`")
+    if (
+        DocumentAttributeFilename(file_name="AnimatedSticker.tgs")
+        in reply_message.media.document.attributes
+    ):
+        await bot.download_media(
+            reply_message,
+            "df.tgs",
+        )
+        os.system("lottie_convert.py df.tgs df.png")
+        image = "df.png"
+    elif reply_message.video:
+        video = await bot.download_media(
+            reply_message,
+            "df.mp4",
+        )
+        extractMetadata(createParser(video))
+        os.system("ffmpeg -i df.mp4 -vframes 1 -an -s 480x360 -ss 1 df.png")
+        image = "df.png"
+    else:
+        image = await bot.download_media(
+            reply_message,
+            "df.png",
+        )
     image = Image.open(image)
 
     # fry the image
@@ -474,6 +518,9 @@ async def deepfryer(event):
     fried_io.seek(0)
 
     await event.reply(file=fried_io)
+    os.system("rm -rf *.mp4")
+    os.system("rm -rf *.tgs")
+    os.system("rm -rf *.png")
 
 
 async def deepfry(img: Image) -> Image:

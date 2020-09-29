@@ -3,6 +3,7 @@ aiohttp
 aria2p
 async_generator
 bs4
+cairosvg
 cowpy
 cffi
 covid
@@ -28,6 +29,7 @@ html_telegraph_poster
 humanize
 jikanpy
 justwatch
+lottie
 lyricsgenius
 lxml
 oauth2client
