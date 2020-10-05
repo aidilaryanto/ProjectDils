@@ -4,6 +4,7 @@ aria2p
 async_generator
 bs4
 cairosvg
+colour
 cowpy
 cffi
 covid
