@@ -65,7 +65,7 @@ def register(**args):
                 # Ignore edits that take place in channels.
                 return
             if not LOGSPAMMER:
-                send_to = check.chat_id
+                send_to = BOTLOG_CHATID
             else:
                 send_to = BOTLOG_CHATID
 
