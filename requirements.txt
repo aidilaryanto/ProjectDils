@@ -53,6 +53,7 @@ qrcode
 redis
 requests
 search-engine-parser
+scipy
 speedtest-cli
 sqlalchemy
 TgCrypto
@@ -64,4 +65,5 @@ validators
 vcsi
 wget
 wikipedia
+wordcloud
 youtube_search
