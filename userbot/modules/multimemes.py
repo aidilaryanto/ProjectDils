@@ -124,7 +124,6 @@ async def glitch(event):
             unsave=True,
         )
     )
-    os.remove(Glitched)
     os.remove(glitch_file)
     os.system("rm *.tgs *.mp4")
 
@@ -142,7 +141,12 @@ async def mim(event):
         await event.edit("```reply to a image/sticker/gif```")
         return
     await event.edit("`Downloading Media..`")
-    if (
+    if reply_message.photo:
+        dls_loc = await bot.download_media(
+            reply_message,
+            "meme.png",
+        )
+    elif (
         DocumentAttributeFilename(file_name="AnimatedSticker.tgs")
         in reply_message.media.document.attributes
     ):
@@ -178,7 +182,6 @@ async def mim(event):
     await event.delete()
     os.system("rm *.tgs *.mp4 *.png")
     os.remove(webp_file)
-    os.remove(downloaded_file_name)
 
 
 async def draw_meme_text(image_path, text):
