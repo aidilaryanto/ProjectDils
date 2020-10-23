@@ -841,9 +841,8 @@ async def get_usersdel(show):
         await show.edit(mentions)
     except MessageTooLongError:
         await show.edit(
-            "Damn, this is a huge group. Uploading deletedusers lists as file."
-        )
-        with open("userslist.txt", "w+") as file:
+            "Damn, this is a huge group. Uploading deletedusers lists as file.")
+        with open("deleteduserslist.txt", "w+") as file:
             file.write(mentions)
         await show.client.send_file(
             show.chat_id,
