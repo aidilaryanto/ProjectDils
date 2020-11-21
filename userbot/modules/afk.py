@@ -61,9 +61,10 @@ async def mention_afk(mention):
     global afk_time
     global afk_start
     global afk_end
-    not_afk = datetime.now()
-    afk_end = not_afk.replace(microsecond=0)
-    if mention.message.mentioned and not (await mention.get_sender()).bot and ISAFK:
+    back_alivee = datetime.now()
+    afk_end = back_alivee.replace(microsecond=0)
+    afk_since = "a while ago"
+    if ISAFK and mention.message.mentioned:
         now = datetime.now()
         afk_since = now - afk_time
         day = float(afk_since.seconds) // (24 * 3600)
@@ -89,8 +90,12 @@ async def mention_afk(mention):
         elif minutes > 0:
             afk_str = f"`{int(minutes)}m{int(seconds)}s` ago"
         else:
-            afk_str = f"`{int(seconds)}s` ago"
-        if mention.sender_id not in USERS:
+            afk_since = f"`{int(seconds)}s` ago"
+
+        is_bot = False
+        if (sender := await mention.get_sender()):
+            is_bot = sender.bot
+        if not is_bot and mention.sender_id not in USERS:
             if AFKREASON:
                 await mention.reply(
                     "I'm AFK right now."
@@ -100,7 +105,7 @@ async def mention_afk(mention):
             else:
                 await mention.reply(str(choice(AFKSTR)))
             USERS.update({mention.sender_id: 1})
-        else:
+        elif not is_bot and sender:
             if USERS[mention.sender_id] % randint(2, 4) == 0:
                 if AFKREASON:
                     await mention.reply(
