@@ -449,13 +449,13 @@ async def translateme(trans):
 
     if not message:
         return await trans.edit(
-            "**Give some text or reply to a message to translate!**")
+            "**Give some text or reply to a message to translate!**"
+        )
 
     await trans.edit("**Processing...**")
     translator = google_translator()
     try:
-        reply_text = translator.translate(deEmojify(message),
-                                          lang_tgt=TRT_LANG)
+        reply_text = translator.translate(deEmojify(message), lang_tgt=TRT_LANG)
     except ValueError:
         return await trans.edit(
             "**Invalid language selected, use **`.lang tts <language code>`**.**"
@@ -463,7 +463,7 @@ async def translateme(trans):
 
     try:
         source_lan = translator.detect(deEmojify(message))[1].title()
-    except:
+    except BaseException:
         source_lan = "(Google didn't provide this info)"
 
     reply_text = f"From: **{source_lan}**\nTo: **{LANGUAGES.get(TRT_LANG).title()}**\n\n{reply_text}"

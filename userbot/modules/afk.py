@@ -93,9 +93,10 @@ async def mention_afk(mention):
             afk_since = f"`{int(seconds)}s` ago"
 
         is_bot = False
-        if (sender := await mention.get_sender()):
+        if (sender := await mention.get_sender()) :
             is_bot = sender.bot
-            if is_bot: return  # ignore bot
+            if is_bot:
+                return  # ignore bot
 
         chat_obj = await mention.client.get_entity(mention.chat_id)
         chat_title = chat_obj.title
@@ -266,14 +267,25 @@ async def type_afk_is_not_true(notafk):
                     name0 = str(name.first_name)
                     await notafk.client.send_message(
                         BOTLOG_CHATID,
-                        "[" + name0 + "](tg://user?id=" + str(i) + ")" +
-                        " sent you " + "`" + str(USERS[i]) + " message(s)`",
+                        "["
+                        + name0
+                        + "](tg://user?id="
+                        + str(i)
+                        + ")"
+                        + " sent you "
+                        + "`"
+                        + str(USERS[i])
+                        + " message(s)`",
                     )
                 else:  # anon admin
                     await notafk.client.send_message(
                         BOTLOG_CHATID,
-                        "Anonymous admin in `" + i + "` sent you " + "`" +
-                        str(USERS[i]) + " message(s)`",
+                        "Anonymous admin in `"
+                        + i
+                        + "` sent you "
+                        + "`"
+                        + str(USERS[i])
+                        + " message(s)`",
                     )
         COUNT_MSG = 0
         USERS = {}
