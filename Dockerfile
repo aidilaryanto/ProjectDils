@@ -8,5 +8,12 @@ RUN git clone -b master https://github.com/aidilaryanto/ProjectDils /home/Projec
 RUN mkdir /home/ProjectDils/bin/
 WORKDIR /home/ProjectDils/
 
+#
+# Make open port TCP
+#
+EXPOSE 80 443
+
+#
 # Finalization
+#
 CMD ["python3","-m","userbot"]
